@@ -30,12 +30,12 @@ const Navigation: React.FC = () => {
     <nav className="bg-white shadow-lg fixed left-0 top-0 h-full w-64 z-20">
       <div className="p-6">
         <div className="flex items-center space-x-3 mb-8">
-          <div className="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">M</span>
+          <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">P</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-800">Mocktail</h1>
-            <p className="text-sm text-gray-500">Academy</p>
+            <h1 className="text-xl font-bold text-gray-800">PlanPrep4u</h1>
+            <p className="text-sm text-gray-500">Test Series for Toppers</p>
           </div>
         </div>
         

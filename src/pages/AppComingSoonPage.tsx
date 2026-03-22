@@ -8,7 +8,7 @@ import {
   EnvelopeIcon,
   ArrowRightIcon
 } from '@heroicons/react/24/outline';
-import MockTaleLogoPng from './../assets/MockTale.png';
+import MockTaleLogoPng from './../assets/planprep4u-logo.png';
 
 const AppComingSoonPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -82,7 +82,7 @@ const AppComingSoonPage: React.FC = () => {
             <Link to="/" className="flex items-center group bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl group-hover:opacity-30 transition-opacity">
               <img
                 src={MockTaleLogoPng}
-                alt="MockTale Academy"
+                alt="PlanPrep4u"
                 className="h-16 w-auto drop-shadow-lg transition-transform group-hover:scale-105"
               />
             </Link>
@@ -107,7 +107,7 @@ const AppComingSoonPage: React.FC = () => {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-            MockTale Academy
+            PlanPrep4u
             <br />
             <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
               Mobile App
@@ -316,11 +316,11 @@ const AppComingSoonPage: React.FC = () => {
           <div className="mt-12 text-center">
             <p className="text-blue-100 mb-4">Have questions or suggestions?</p>
             <a
-              href="mailto:mocktaleacademy@gmail.com"
+              href="mailto:admin@planprep4u.com"
               className="inline-flex items-center text-white hover:text-blue-200 transition-colors"
             >
               <EnvelopeIcon className="w-5 h-5 mr-2" />
-              <span className="font-semibold">mocktaleacademy@gmail.com</span>
+              <span className="font-semibold">admin@planprep4u.com</span>
             </a>
           </div>
         </div>
@@ -330,7 +330,7 @@ const AppComingSoonPage: React.FC = () => {
       <footer className="relative z-10 bg-white/5 backdrop-blur-md border-t border-white/10 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-blue-100 text-sm">
-            © 2025 MockTale Academy. All rights reserved.
+            © 2025 PlanPrep4u. All rights reserved.
           </p>
         </div>
       </footer>

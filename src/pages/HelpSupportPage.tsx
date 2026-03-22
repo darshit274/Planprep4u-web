@@ -38,14 +38,14 @@ const HelpSupportPage: React.FC = () => {
     },
     {
       id: 2,
-      question: 'What exams does MockTale Academy cover?',
+      question: 'What exams does PlanPrep4u cover?',
       answer: 'We provide comprehensive preparation for Gujarat competitive Exams including GPSC (Gujarat Public Service Commission), GSSSB (Gujarat Subordinate Service Selection Board), GPSSB (Gujarat Panchayat Service Selection Board), Police Constable Bharti, PSI (Police Sub Inspector), Talati, and Junior Clerk examinations.',
       category: 'general',
     },
     {
       id: 3,
       question: 'Can I switch between English and Gujarati during tests?',
-      answer: 'Yes! MockTale Academy offers bilingual support. You can switch between English and Gujarati at any time during the test using the language toggle button. Your progress is automatically saved, and all questions, options, and explanations are available in both languages.',
+      answer: 'Yes! PlanPrep4u offers bilingual support. You can switch between English and Gujarati at any time during the test using the language toggle button. Your progress is automatically saved, and all questions, options, and explanations are available in both languages.',
       category: 'features',
     },
     {
@@ -69,7 +69,7 @@ const HelpSupportPage: React.FC = () => {
     {
       id: 7,
       question: 'Are there really free tests available?',
-      answer: 'Yes! MockTale Academy offers numerous free resources including: free practice quizzes (especially for Maths and Reasoning), free Previous Year Question Papers (PYQPs) for all major Gujarat exams, free topic-wise tests, and sample full-length mock tests. Premium test series require a subscription for complete access.',
+      answer: 'Yes! PlanPrep4u offers numerous free resources including: free practice quizzes (especially for Maths and Reasoning), free Previous Year Question Papers (PYQPs) for all major Gujarat exams, free topic-wise tests, and sample full-length mock tests. Premium test series require a subscription for complete access.',
       category: 'general',
     },
     {
@@ -81,7 +81,7 @@ const HelpSupportPage: React.FC = () => {
     {
       id: 9,
       question: 'How do test analytics and performance tracking work?',
-      answer: 'MockTale Academy provides detailed analytics including: overall accuracy percentage, subject-wise performance breakdown, time management analysis, comparison with top performers, strength and weakness identification, and progress tracking over time. Access your analytics from the Dashboard or Profile sections.',
+      answer: 'PlanPrep4u provides detailed analytics including: overall accuracy percentage, subject-wise performance breakdown, time management analysis, comparison with top performers, strength and weakness identification, and progress tracking over time. Access your analytics from the Dashboard or Profile sections.',
       category: 'features',
     },
     {
@@ -139,7 +139,7 @@ const HelpSupportPage: React.FC = () => {
             </div>
             <h1 className="text-5xl font-bold mb-4">Help & Support Center</h1>
             <p className="text-white/90 text-xl max-w-2xl mx-auto">
-              Find answers, get help, and learn everything about MockTale Academy
+              Find answers, get help, and learn everything about PlanPrep4u
             </p>
           </div>
         </div>
@@ -151,7 +151,7 @@ const HelpSupportPage: React.FC = () => {
         {/* Quick Contact Cards */}
         <div className="grid gap-6 mb-12">
           <a
-            href="mailto:mocktaleacademy@gmail.com"
+            href="mailto:admin@planprep4u.com"
             className="group bg-gradient-to-br from-primary-500 to-cyan-500 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all hover:scale-105"
           >
             <div className="flex items-start gap-4">
@@ -161,7 +161,7 @@ const HelpSupportPage: React.FC = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-2">Email Support</h3>
                 <p className="text-white/90 mb-2">Get detailed help via email</p>
-                <p className="text-lg font-semibold">mocktaleacademy@gmail.com</p>
+                <p className="text-lg font-semibold">admin@planprep4u.com</p>
                 <p className="text-sm text-white/70 mt-2">Response time: 24-48 hours</p>
               </div>
             </div>
@@ -387,7 +387,7 @@ const HelpSupportPage: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="mailto:mocktaleacademy@gmail.com"
+                href="mailto:admin@planprep4u.com"
                 className="inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
               >
                 <EnvelopeIcon className="h-6 w-6" />
@@ -402,7 +402,7 @@ const HelpSupportPage: React.FC = () => {
 
         {/* Footer Note */}
         <div className="mt-12 text-center text-gray-600">
-          <p className="text-lg">© 2025 MockTale Academy. All rights reserved.</p>
+          <p className="text-lg">© 2025 PlanPrep4u. All rights reserved.</p>
           <p className="mt-2">Practice Relentlessly. Perform Flawlessly.</p>
         </div>
 

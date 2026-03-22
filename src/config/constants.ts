@@ -1,6 +1,6 @@
 // API Configuration
 export const API_CONFIG = {
-  // BASE_URL: 'https://mocktaleacademy.com/backend',
+  // BASE_URL: 'https://planprep4u.com/backend',
   BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:3000', // For local development
   ENDPOINTS: {
     AUTH: {
@@ -36,14 +36,14 @@ export const API_CONFIG = {
 
 // Auth Configuration
 export const AUTH_CONFIG = {
-  TOKEN_KEY: 'mocktail_token',
-  USER_KEY: 'mocktail_user',
+  TOKEN_KEY: 'planprep4u_token',
+  USER_KEY: 'planprep4u_user',
   TOKEN_EXPIRY_BUFFER: 60, // 1 minute buffer before actual expiry
 };
 
 // App Configuration
 export const APP_CONFIG = {
-  APP_NAME: 'Mocktail Academy',
+  APP_NAME: 'PlanPrep4u',
   VERSION: '1.0.0',
   IS_DEVELOPMENT: import.meta.env.DEV,
   PAGINATION: {
@@ -52,7 +52,7 @@ export const APP_CONFIG = {
   },
   THEME: {
     DEFAULT: 'light',
-    STORAGE_KEY: 'mocktail_theme',
+    STORAGE_KEY: 'planprep4u_theme',
   }
 };
 

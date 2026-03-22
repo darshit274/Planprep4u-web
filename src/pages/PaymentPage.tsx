@@ -178,7 +178,7 @@ const PaymentPage: React.FC = () => {
         amount: orderData.data.amount,
         currency: orderData.data.currency,
         order_id: orderData.data.orderId,
-        name: 'MockTale',
+        name: 'PlanPrep4u',
         description: `Payment for ${orderData.data.itemDetails.name}`,
         image: '/favicon.ico',
         handler: async function (response: any) {

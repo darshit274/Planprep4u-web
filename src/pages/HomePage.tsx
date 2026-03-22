@@ -20,8 +20,8 @@ import {
   ChatBubbleLeftRightIcon,
   QuestionMarkCircleIcon
 } from '@heroicons/react/24/outline';
-import MockTaleLogoPng from './../assets/MockTale.png';
-import MockTaleLogoJpg from './../assets/MockTale.jpg';
+import MockTaleLogoPng from './../assets/planprep4u-logo.png';
+import MockTaleLogoJpg from './../assets/planprep4u-logo.jpg';
 import ContactQueryForm from '../components/ContactQueryForm';
 
 const HomePage: React.FC = () => {
@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
               <div className="absolute bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl group-hover:opacity-30 transition-opacity p-0 w-full h-3/4"></div>
               <img
                 src={MockTaleLogoPng}
-                alt="MockTale Academy"
+                alt="PlanPrep4u"
                 className="relative h-20 sm:h-24 w-auto drop-shadow-lg transition-transform group-hover:scale-105"
               />
             </Link>
@@ -107,7 +107,7 @@ const HomePage: React.FC = () => {
 
             {/* Main Heading */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 animate-slide-up leading-tight">
-              MockTale Academy
+              PlanPrep4u
             </h1>
 
             <p className="text-2xl md:text-3xl font-bold mb-6 animate-slide-up">
@@ -177,13 +177,13 @@ const HomePage: React.FC = () => {
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 What is{' '}
-                <span className="gradient-text">MockTale Academy</span>?
+                <span className="gradient-text">PlanPrep4u</span>?
               </h2>
             </div>
 
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12 shadow-lg">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                MockTale Academy is a powerful <strong className="text-blue-600">mock test platform</strong> built for aspirants preparing for various{' '}
+                PlanPrep4u is a powerful <strong className="text-blue-600">mock test platform</strong> built for aspirants preparing for various{' '}
                 <strong className="text-purple-600">Gujarat competitive Exams</strong> like GPSC, GSSSB, GPSSB, Police-constable Bharti, PSI, Talati, Junior Clerk and more.
               </p>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -202,7 +202,7 @@ const HomePage: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Why Choose{' '}
-              <span className="gradient-text">MockTale Academy</span>?
+              <span className="gradient-text">PlanPrep4u</span>?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Comprehensive features designed to give you the edge in your exam preparation
@@ -309,7 +309,7 @@ const HomePage: React.FC = () => {
               Frequently Asked{' '}
               <span className="gradient-text">Questions</span>
             </h2>
-            <p className="text-xl text-gray-600">Everything you need to know about MockTale Academy</p>
+            <p className="text-xl text-gray-600">Everything you need to know about PlanPrep4u</p>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-4">
@@ -376,11 +376,11 @@ const HomePage: React.FC = () => {
             Prepare Anytime, Anywhere
           </h2>
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-2xl mx-auto">
-            Download MockTale Academy on your phone or access it on your computer - study at your own pace, on your own schedule.
+            Download PlanPrep4u on your phone or access it on your computer - study at your own pace, on your own schedule.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="https://play.google.com/store/apps/details?id=com.mocktale.mocktaleacademy"
+              to="https://play.google.com/store/apps/details?id=com.planprep4u.app"
               className="btn btn-lg bg-white text-blue-600 hover:bg-gray-100 font-bold shadow-xl"
             >
               📱 Download App
@@ -417,11 +417,11 @@ const HomePage: React.FC = () => {
             <div className="mt-8 text-center">
               <p className="text-gray-600 mb-4">Or reach us directly at:</p>
               <a
-                href="mailto:mocktaleacademy@gmail.com"
+                href="mailto:admin@planprep4u.com"
                 className="inline-flex items-center justify-center text-blue-600 hover:text-blue-700 font-semibold"
               >
                 <EnvelopeIcon className="w-5 h-5 mr-2" />
-                mocktaleacademy@gmail.com
+                admin@planprep4u.com
               </a>
             </div>
           </div>
@@ -436,7 +436,7 @@ const HomePage: React.FC = () => {
             <span className="gradient-text">Gujarat Govt Exams</span>?
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of students who have transformed their exam preparation with MockTale Academy
+            Join thousands of students who have transformed their exam preparation with PlanPrep4u
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -462,9 +462,9 @@ const HomePage: React.FC = () => {
             {/* Logo & Description */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
-                <img src={MockTaleLogoPng} alt="MockTale Academy" className="h-16 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500" />
+                <img src={MockTaleLogoPng} alt="PlanPrep4u" className="h-16 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500" />
                 <div className="ml-3">
-                  <div className="text-lg font-bold text-white">MockTale Academy</div>
+                  <div className="text-lg font-bold text-white">PlanPrep4u</div>
                   <div className="text-sm text-gray-400">Practice Relentlessly. Perform Flawlessly.</div>
                 </div>
               </div>
@@ -502,7 +502,7 @@ const HomePage: React.FC = () => {
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li className="flex items-center">
                   <EnvelopeIcon className="w-4 h-4 mr-2" />
-                  mocktaleacademy@gmail.com
+                  admin@planprep4u.com
                 </li>
               </ul>
             </div>
@@ -510,7 +510,7 @@ const HomePage: React.FC = () => {
 
           {/* Copyright */}
           <div className="pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-            <p>© 2025 MockTale Academy. All rights reserved.</p>
+            <p>© 2025 PlanPrep4u. All rights reserved.</p>
             <div className="mt-2 flex items-center justify-center gap-4 text-xs">
               <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <span className="text-gray-600">•</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MockTaleLogo from '../../assets/MockTale.jpg';
+import MockTaleLogo from '../../assets/planprep4u-logo.jpg';
 
 const AuthLayout: React.FC = () => {
   return (
@@ -13,13 +13,13 @@ const AuthLayout: React.FC = () => {
                 <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg">
                   <img
                     src={MockTaleLogo}
-                    alt="MockTale Logo"
+                    alt="PlanPrep4u Logo"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <h1 className="text-3xl font-bold text-primary-600 mb-2">
-                MockTale Academy
+                PlanPrep4u
               </h1>
               <p className="text-gray-600">
                 Your Gateway to Educational Excellence

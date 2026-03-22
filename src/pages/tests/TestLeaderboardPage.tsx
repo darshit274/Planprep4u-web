@@ -98,7 +98,7 @@ const TestLeaderboardPage: React.FC = () => {
             time_taken_seconds: entry.timeTaken || 120,
             percentile: entry.percentile,
             completion_date: entry.completionDate || new Date().toISOString(),
-            is_current_user: entry.userId === JSON.parse(sessionStorage.getItem("mocktail_user") || "{}").uuid,
+            is_current_user: entry.userId === JSON.parse(sessionStorage.getItem("planprep4u_user") || "{}").uuid,
             user: {
               uuid: entry.userId?.toString() || `user-${index + 1}`,
               username: entry.name || `User ${index + 1}`,

@@ -53,7 +53,7 @@ const TermsConditionsPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Welcome to <strong className="text-primary-600">MockTale Academy</strong>. These Terms and Conditions ("Terms") govern your access to and use of our online educational platform for Gujarat competitive Exam preparation. By registering, accessing, or using our services, you agree to be bound by these Terms.
+              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. These Terms and Conditions ("Terms") govern your access to and use of our online educational platform for Gujarat competitive Exam preparation. By registering, accessing, or using our services, you agree to be bound by these Terms.
             </p>
             <p className="text-gray-700 leading-relaxed">
               <strong>IMPORTANT:</strong> If you do not agree to these Terms, please do not use our platform. Your continued use constitutes acceptance of any modifications to these Terms.
@@ -109,7 +109,7 @@ const TermsConditionsPage: React.FC = () => {
               <div className="space-y-4 text-gray-700">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Eligibility</h3>
-                  <p className="mb-2">You must be at least 13 years old to use MockTale Academy. By creating an account, you represent that:</p>
+                  <p className="mb-2">You must be at least 13 years old to use PlanPrep4u. By creating an account, you represent that:</p>
                   <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>You are legally capable of entering into binding contracts</li>
                     <li>All registration information you provide is accurate and current</li>
@@ -149,7 +149,7 @@ const TermsConditionsPage: React.FC = () => {
               <div className="space-y-4 text-gray-700">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Permitted Use</h3>
-                  <p>MockTale Academy grants you a limited, non-exclusive, non-transferable license to:</p>
+                  <p>PlanPrep4u grants you a limited, non-exclusive, non-transferable license to:</p>
                   <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
                     <li>Access and use our platform for personal educational purposes</li>
                     <li>Take mock tests and practice quizzes</li>
@@ -195,7 +195,7 @@ const TermsConditionsPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Content</h3>
                   <p className="mb-3">
-                    All content on MockTale Academy, including but not limited to questions, solutions, study materials, PDFs, videos, images, text, graphics, logos, and software, is owned by or licensed to MockTale Academy and protected by:
+                    All content on PlanPrep4u, including but not limited to questions, solutions, study materials, PDFs, videos, images, text, graphics, logos, and software, is owned by or licensed to PlanPrep4u and protected by:
                   </p>
                   <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Copyright laws of India and international treaties</li>
@@ -237,7 +237,7 @@ const TermsConditionsPage: React.FC = () => {
               <div className="space-y-4 text-gray-700">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Subscription Plans</h3>
-                  <p className="mb-2">MockTale Academy offers:</p>
+                  <p className="mb-2">PlanPrep4u offers:</p>
                   <ul className="list-disc list-inside space-y-1 ml-4">
                     <li><strong>Free Content:</strong> Limited access to select quizzes and materials</li>
                     <li><strong>Paid Subscriptions:</strong> Full access to premium test series and content</li>
@@ -316,7 +316,7 @@ const TermsConditionsPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">No Guarantee of Results</h3>
                   <p>
-                    MockTale Academy provides educational content and practice materials. We do <strong>NOT guarantee</strong>:
+                    PlanPrep4u provides educational content and practice materials. We do <strong>NOT guarantee</strong>:
                   </p>
                   <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
                     <li>Passing of any government examination</li>
@@ -357,7 +357,7 @@ const TermsConditionsPage: React.FC = () => {
             <div className="p-8">
               <div className="text-gray-700">
                 <p className="mb-3">
-                  To the maximum extent permitted by law, MockTale Academy and its affiliates shall not be liable for:
+                  To the maximum extent permitted by law, PlanPrep4u and its affiliates shall not be liable for:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>Any indirect, incidental, special, or consequential damages</li>
@@ -450,7 +450,7 @@ const TermsConditionsPage: React.FC = () => {
             <div className="p-8">
               <div className="text-gray-700 space-y-3">
                 <p>
-                  MockTale Academy does <strong>not represent, affiliate with, or claim any association with any government entity or examination authority</strong>.
+                  PlanPrep4u does <strong>not represent, affiliate with, or claim any association with any government entity or examination authority</strong>.
                 </p>
                 <p className="mt-3">
                   This platform is an independent educational service created solely for practice and self-assessment purposes.
@@ -470,18 +470,18 @@ const TermsConditionsPage: React.FC = () => {
               If you have any questions or concerns regarding these Terms & Conditions, please contact us.
             </p>
             <a
-              href="mailto:mocktaleacademy@gmail.com"
+              href="mailto:admin@planprep4u.com"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <EnvelopeIcon className="h-6 w-6" />
-              mocktaleacademy@gmail.com
+              admin@planprep4u.com
             </a>
           </div>
         </div>
 
         {/* Footer Note */}
         <div className="mt-8 text-center text-gray-600 text-sm">
-          <p>© 2025 MockTale Academy. All rights reserved.</p>
+          <p>© 2025 PlanPrep4u. All rights reserved.</p>
           <p className="mt-2">By using our platform, you acknowledge that you have read and agree to these Terms.</p>
         </div>
 

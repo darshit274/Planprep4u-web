@@ -53,13 +53,13 @@ const SourcesDisclaimer: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Welcome to <strong className="text-primary-600">MockTale Academy</strong>.
+              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>.
               Transparency and trust are important to us. This page explains the
               information sources used in the app and clearly outlines our
               disclaimer regarding government-related examinations.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              MockTale Academy is an independent educational platform created
+              PlanPrep4u is an independent educational platform created
               solely for exam preparation and self-practice. Please review the
               sections below to understand our sources and limitations.
             </p>
@@ -79,7 +79,7 @@ const SourcesDisclaimer: React.FC = () => {
             <div className="p-8 space-y-4 text-gray-700 leading-relaxed">
               <p>
                 <strong>
-                  MockTale Academy does NOT represent, affiliate with, authorize,
+                  PlanPrep4u does NOT represent, affiliate with, authorize,
                   or claim any association with any government entity,
                   department, or examination authority.
                 </strong>
@@ -194,7 +194,7 @@ const SourcesDisclaimer: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-8 text-center text-gray-600 text-sm">
-          <p>© 2025 MockTale Academy. All rights reserved.</p>
+          <p>© 2025 PlanPrep4u. All rights reserved.</p>
           <p className="mt-2">
             This page is provided to ensure transparency and compliance with
             Google Play policies.

@@ -53,10 +53,10 @@ const PrivacySecurityPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Welcome to <strong className="text-primary-600">MockTale Academy</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our educational platform for Gujarat competitive exam preparation.
+              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our educational platform for Gujarat competitive exam preparation.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              By accessing or using MockTale Academy, you agree to this Privacy Policy. If you do not agree with the terms, please discontinue use of our services.
+              By accessing or using PlanPrep4u, you agree to this Privacy Policy. If you do not agree with the terms, please discontinue use of our services.
             </p>
           </div>
         </div>
@@ -175,7 +175,7 @@ const PrivacySecurityPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">We DO NOT sell your data</h3>
                   <p className="text-gray-700 mb-4">
-                    MockTale Academy does not sell, rent, or trade your personal information to third parties for marketing purposes.
+                    PlanPrep4u does not sell, rent, or trade your personal information to third parties for marketing purposes.
                   </p>
                 </div>
 
@@ -275,7 +275,7 @@ const PrivacySecurityPage: React.FC = () => {
             </div>
             <div className="p-8">
               <p className="text-gray-700 leading-relaxed">
-                MockTale Academy is intended for users preparing for government exams. While we do not specifically target children under 13,
+                PlanPrep4u is intended for users preparing for government exams. While we do not specifically target children under 13,
                 if we learn that we have collected personal information from a child under 13 without parental consent, we will take steps to
                 delete that information promptly. Parents or guardians who believe their child has provided us with information should contact us immediately.
               </p>
@@ -298,7 +298,7 @@ const PrivacySecurityPage: React.FC = () => {
                 <li>Displaying a prominent notice on our platform</li>
               </ul>
               <p className="text-gray-700">
-                Your continued use of MockTale Academy after changes become effective constitutes acceptance of the updated policy.
+                Your continued use of PlanPrep4u after changes become effective constitutes acceptance of the updated policy.
               </p>
             </div>
           </div>
@@ -310,7 +310,7 @@ const PrivacySecurityPage: React.FC = () => {
             </div>
             <div className="p-8">
               <p className="text-gray-700 leading-relaxed mb-4">
-                MockTale Academy does <strong>not represent, affiliate with, or claim any association with any government entity or examination authority</strong>.
+                PlanPrep4u does <strong>not represent, affiliate with, or claim any association with any government entity or examination authority</strong>.
               </p>
               <p className="text-gray-700">
                 This platform is an independent educational service created solely for practice and self-assessment purposes.
@@ -330,11 +330,11 @@ const PrivacySecurityPage: React.FC = () => {
               please don't hesitate to contact us.
             </p>
             <a
-              href="mailto:mocktaleacademy@gmail.com"
+              href="mailto:admin@planprep4u.com"
               className="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <EnvelopeIcon className="h-6 w-6" />
-              mocktaleacademy@gmail.com
+              admin@planprep4u.com
             </a>
             <p className="text-white/70 text-sm mt-6">
               We typically respond within 24-48 hours
@@ -344,7 +344,7 @@ const PrivacySecurityPage: React.FC = () => {
 
         {/* Footer Note */}
         <div className="mt-8 text-center text-gray-600 text-sm">
-          <p>© 2025 MockTale Academy. All rights reserved.</p>
+          <p>© 2025 PlanPrep4u. All rights reserved.</p>
           <p className="mt-2">Your trust is important to us. We are committed to protecting your privacy.</p>
         </div>
 

@@ -71,7 +71,7 @@ const TestHistoryDetailPage: React.FC = () => {
       }
       if (leaderboardResponse.data.success) {
         const data = leaderboardResponse?.data?.data;
-        const userUuid = leaderboardResponse?.data?.metadata?.currentUserData?.uuid || JSON.parse(sessionStorage.getItem("mocktail_user") || "{}").uuid;
+        const userUuid = leaderboardResponse?.data?.metadata?.currentUserData?.uuid || JSON.parse(sessionStorage.getItem("planprep4u_user") || "{}").uuid;
         const myRank = data.find(
           (item) =>
             item.userId === userUuid

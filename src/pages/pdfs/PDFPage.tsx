@@ -95,7 +95,7 @@ const PDFPage: React.FC = () => {
       category: 'Question Papers',
       type: 'Question Papers',
       subject: 'Physics',
-      author: 'MockTail Team',
+      author: 'PlanPrep4u Team',
       pages: 92,
       size: '8.3 MB',
       downloadCount: 3421,
