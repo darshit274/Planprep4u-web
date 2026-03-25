@@ -40,8 +40,8 @@ const ContactPage: React.FC = () => {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                    <a href="mailto:admin@planprep4u.com" className="text-primary-600 hover:underline">
-                      admin@planprep4u.com
+                    <a href="mailto:planprep4uofficial@gmail.com" className="text-primary-600 hover:underline">
+                      planprep4uofficial@gmail.com
                     </a>
                   </div>
                 </div>
@@ -127,11 +127,11 @@ const ContactPage: React.FC = () => {
             You can also reach us directly at our email address
           </p>
           <a
-            href="mailto:admin@planprep4u.com"
+            href="mailto:planprep4uofficial@gmail.com"
             className="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-gray-900 bg-white rounded-full hover:bg-gray-100 transition-colors shadow-lg"
           >
             <EnvelopeIcon className="w-5 h-5 mr-2" />
-            admin@planprep4u.com
+            planprep4uofficial@gmail.com
           </a>
         </div>
       </section>

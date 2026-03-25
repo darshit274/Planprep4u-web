@@ -470,11 +470,11 @@ const TermsConditionsPage: React.FC = () => {
               If you have any questions or concerns regarding these Terms & Conditions, please contact us.
             </p>
             <a
-              href="mailto:admin@planprep4u.com"
+              href="mailto:planprep4uofficial@gmail.com"
               className="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <EnvelopeIcon className="h-6 w-6" />
-              admin@planprep4u.com
+              planprep4uofficial@gmail.com
             </a>
           </div>
         </div>

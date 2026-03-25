@@ -244,11 +244,11 @@ const HomePage: React.FC = () => {
             <div className="mt-8 text-center">
               <p className="text-gray-600 mb-4">Or reach us directly at:</p>
               <a
-                href="mailto:admin@planprep4u.com"
+                href="mailto:planprep4uofficial@gmail.com"
                 className="inline-flex items-center justify-center text-primary-600 hover:text-primary-700 font-semibold"
               >
                 <EnvelopeIcon className="w-5 h-5 mr-2" />
-                admin@planprep4u.com
+                planprep4uofficial@gmail.com
               </a>
             </div>
           </div>
@@ -321,7 +321,7 @@ const HomePage: React.FC = () => {
           {/* Contact row */}
           <div className="mb-6 flex items-center gap-2 text-primary-300 text-sm">
             <EnvelopeIcon className="w-4 h-4" />
-            <span>admin@planprep4u.com</span>
+            <span>planprep4uofficial@gmail.com</span>
           </div>
 
           {/* Copyright */}

@@ -316,11 +316,11 @@ const AppComingSoonPage: React.FC = () => {
           <div className="mt-12 text-center">
             <p className="text-primary-100 mb-4">Have questions or suggestions?</p>
             <a
-              href="mailto:admin@planprep4u.com"
+              href="mailto:planprep4uofficial@gmail.com"
               className="inline-flex items-center text-white hover:text-primary-200 transition-colors"
             >
               <EnvelopeIcon className="w-5 h-5 mr-2" />
-              <span className="font-semibold">admin@planprep4u.com</span>
+              <span className="font-semibold">planprep4uofficial@gmail.com</span>
             </a>
           </div>
         </div>

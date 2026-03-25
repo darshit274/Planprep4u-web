@@ -228,7 +228,7 @@ const RefundPolicyPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">How to Request a Refund</h3>
                   <ol className="list-decimal list-inside space-y-2 text-gray-700 ml-4">
-                    <li>Send an email to <strong>admin@planprep4u.com</strong> with subject "Refund Request"</li>
+                    <li>Send an email to <strong>planprep4uofficial@gmail.com</strong> with subject "Refund Request"</li>
                     <li>Include: Your registered email, order/transaction ID, reason for refund</li>
                     <li>Our team will review your request within <strong>24-48 hours</strong></li>
                     <li>You will receive an email confirming approval or denial</li>
@@ -329,7 +329,7 @@ const RefundPolicyPage: React.FC = () => {
 
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">If You Experience Technical Issues:</h3>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
-                  <li>Contact our support team immediately at <strong>admin@planprep4u.com</strong></li>
+                  <li>Contact our support team immediately at <strong>planprep4uofficial@gmail.com</strong></li>
                   <li>Provide detailed information about the issue (screenshots, error messages, etc.)</li>
                   <li>Our team will investigate within <strong>24-48 hours</strong></li>
                   <li>If the issue is on our end, we will fix it as soon as possible</li>
@@ -384,11 +384,11 @@ const RefundPolicyPage: React.FC = () => {
               If you believe you were charged incorrectly due to a technical error on our end, contact our support team immediately.
             </p>
             <a
-              href="mailto:admin@planprep4u.com?subject=Billing%20Error%20Report"
+              href="mailto:planprep4uofficial@gmail.com?subject=Billing%20Error%20Report"
               className="inline-flex items-center gap-2 bg-white text-red-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <EnvelopeIcon className="h-6 w-6" />
-              admin@planprep4u.com
+              planprep4uofficial@gmail.com
             </a>
             <p className="text-white/70 text-sm mt-6">
               Include: Transaction ID, registered email, and detailed description of the error

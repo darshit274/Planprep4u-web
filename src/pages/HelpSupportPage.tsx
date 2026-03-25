@@ -151,7 +151,7 @@ const HelpSupportPage: React.FC = () => {
         {/* Quick Contact Cards */}
         <div className="grid gap-6 mb-12">
           <a
-            href="mailto:admin@planprep4u.com"
+            href="mailto:planprep4uofficial@gmail.com"
             className="group bg-gradient-to-br from-primary-500 to-primary-400 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all hover:scale-105"
           >
             <div className="flex items-start gap-4">
@@ -161,7 +161,7 @@ const HelpSupportPage: React.FC = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-2">Email Support</h3>
                 <p className="text-white/90 mb-2">Get detailed help via email</p>
-                <p className="text-lg font-semibold">admin@planprep4u.com</p>
+                <p className="text-lg font-semibold">planprep4uofficial@gmail.com</p>
                 <p className="text-sm text-white/70 mt-2">Response time: 24-48 hours</p>
               </div>
             </div>
@@ -387,7 +387,7 @@ const HelpSupportPage: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="mailto:admin@planprep4u.com"
+                href="mailto:planprep4uofficial@gmail.com"
                 className="inline-flex items-center gap-3 bg-white text-secondary-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
               >
                 <EnvelopeIcon className="h-6 w-6" />
