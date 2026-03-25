@@ -125,7 +125,7 @@ const TestHistoryDetailPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/2 mb-4"></div>
@@ -142,7 +142,7 @@ const TestHistoryDetailPage: React.FC = () => {
 
   if (error || !result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center py-12">
             <DocumentTextIcon className="mx-auto h-12 w-12 text-gray-400" />
@@ -153,7 +153,7 @@ const TestHistoryDetailPage: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={() => navigate("/test-history")}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
               >
                 Back to Test History
               </button>
@@ -165,7 +165,7 @@ const TestHistoryDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center mb-6">
@@ -198,7 +198,7 @@ const TestHistoryDetailPage: React.FC = () => {
 
           {/* Overall Score */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white mb-4">
+            <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 text-white mb-4">
               <div>
                 <div className="text-4xl font-bold">{result.percentage}%</div>
               </div>
@@ -247,21 +247,21 @@ const TestHistoryDetailPage: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 mb-6">
             {/* Total Questions */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-blue-700">
+            <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-primary-700">
                 {result.totalQuestions}
               </div>
-              <div className="text-xs sm:text-sm text-blue-600 font-medium">
+              <div className="text-xs sm:text-sm text-primary-600 font-medium">
                 Total Questions
               </div>
             </div>
 
             {/* Attempted */}
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-purple-700">
+            <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-secondary-700">
                 {result.attempted}
               </div>
-              <div className="text-xs sm:text-sm text-purple-600 font-medium">
+              <div className="text-xs sm:text-sm text-secondary-600 font-medium">
                 Attempted
               </div>
             </div>
@@ -300,7 +300,7 @@ const TestHistoryDetailPage: React.FC = () => {
           </div>
 
           {/* Marks & Accuracy Section */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-6">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 sm:p-6 mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Marks Breakdown */}
               <div>
@@ -334,15 +334,15 @@ const TestHistoryDetailPage: React.FC = () => {
                   <span className="text-sm font-medium text-gray-700">
                     Final Score:
                   </span>
-                  <span className="text-xl font-bold text-blue-600">
+                  <span className="text-xl font-bold text-primary-600">
                     {result.finalScore.toFixed(2)}
                   </span>
                 </div>
               </div>
 
               {/* Accuracy */}
-              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-blue-300">
-                <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-1">
+              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-primary-300">
+                <div className="text-3xl sm:text-4xl font-bold text-primary-600 mb-1">
                   {result.accuracy}%
                 </div>
                 <div className="text-xs sm:text-sm text-gray-600 font-medium">
@@ -370,7 +370,7 @@ const TestHistoryDetailPage: React.FC = () => {
                   navigate(`/test-history/${sessionId}/solutions`);
                 }
               }}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
             >
               <DocumentTextIcon className="h-5 w-5" />
               View Solutions

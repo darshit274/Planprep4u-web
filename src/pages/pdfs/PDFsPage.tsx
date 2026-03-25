@@ -78,9 +78,9 @@ const PDFsPage: React.FC = () => {
 
   const categories = [
     { value: 'all', label: 'All Categories', icon: FolderIcon, count: 0, color: 'bg-gray-100 text-gray-800' },
-    { value: 'notes', label: 'Study Notes', icon: DocumentTextIcon, count: 0, color: 'bg-blue-100 text-blue-800' },
+    { value: 'notes', label: 'Study Notes', icon: DocumentTextIcon, count: 0, color: 'bg-primary-100 text-primary-800' },
     { value: 'books', label: 'Reference Books', icon: BookOpenIcon, count: 0, color: 'bg-emerald-100 text-emerald-800' },
-    { value: 'papers', label: 'Question Papers', icon: AcademicCapIcon, count: 0, color: 'bg-purple-100 text-purple-800' },
+    { value: 'papers', label: 'Question Papers', icon: AcademicCapIcon, count: 0, color: 'bg-secondary-100 text-secondary-800' },
     { value: 'guides', label: 'Study Guides', icon: DocumentArrowDownIcon, count: 0, color: 'bg-amber-100 text-amber-800' },
   ];
 
@@ -422,8 +422,8 @@ const PDFsPage: React.FC = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="text-center p-3 bg-blue-50 rounded-lg">
-            <DocumentIcon className="w-4 h-4 text-blue-600 mx-auto mb-1" />
+          <div className="text-center p-3 bg-primary-50 rounded-lg">
+            <DocumentIcon className="w-4 h-4 text-primary-600 mx-auto mb-1" />
             <p className="text-sm font-semibold text-gray-900">{pdf.fileSize}</p>
             <p className="text-xs text-gray-500">Size</p>
           </div>
@@ -432,8 +432,8 @@ const PDFsPage: React.FC = () => {
             <p className="text-sm font-semibold text-gray-900">{pdf.downloadCount}</p>
             <p className="text-xs text-gray-500">Downloads</p>
           </div>
-          <div className="text-center p-3 bg-purple-50 rounded-lg">
-            <EyeIcon className="w-4 h-4 text-purple-600 mx-auto mb-1" />
+          <div className="text-center p-3 bg-secondary-50 rounded-lg">
+            <EyeIcon className="w-4 h-4 text-secondary-600 mx-auto mb-1" />
             <p className="text-sm font-semibold text-gray-900">{pdf.view_count || 0}</p>
             <p className="text-xs text-gray-500">Views</p>
           </div>
@@ -462,7 +462,7 @@ const PDFsPage: React.FC = () => {
               Uploaded {new Date(pdf.uploadDate || '').toLocaleDateString()}
             </div>
             {pdf.isPremium && !pdf.hasAccess && pdf.preview_pages && pdf.preview_pages > 0 && (
-              <div className="text-xs text-blue-600 mt-1">
+              <div className="text-xs text-primary-600 mt-1">
                 Preview {pdf.preview_pages} pages free
               </div>
             )}
@@ -542,7 +542,7 @@ const PDFsPage: React.FC = () => {
                 onClick={() => setViewMode('grid')}
                 className={cn(
                   'p-2 rounded-md transition-colors',
-                  viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-gray-900'
+                  viewMode === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-600 hover:text-gray-900'
                 )}
               >
                 <Squares2X2Icon className="w-4 h-4" />
@@ -551,7 +551,7 @@ const PDFsPage: React.FC = () => {
                 onClick={() => setViewMode('list')}
                 className={cn(
                   'p-2 rounded-md transition-colors',
-                  viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-gray-900'
+                  viewMode === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-600 hover:text-gray-900'
                 )}
               >
                 <ListBulletIcon className="w-4 h-4" />
@@ -593,7 +593,7 @@ const PDFsPage: React.FC = () => {
                   className={cn(
                     'flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
                     selectedCategory === category.value
-                      ? 'bg-blue-100 text-blue-700 border-2 border-blue-200'
+                      ? 'bg-primary-100 text-primary-700 border-2 border-primary-200'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-transparent'
                   )}
                 >

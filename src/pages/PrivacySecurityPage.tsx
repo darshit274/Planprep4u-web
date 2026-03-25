@@ -17,9 +17,9 @@ const PrivacySecurityPage: React.FC = () => {
   const lastUpdated = "January 2025";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-primary-50 to-secondary-50">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-purple-600 text-white">
+      <div className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
           <button
             onClick={() => navigate(-1)}
@@ -63,7 +63,7 @@ const PrivacySecurityPage: React.FC = () => {
 
         {/* Key Points Grid */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-primary-500 to-primary-500 text-white rounded-2xl p-6 shadow-lg">
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
               <LockClosedIcon className="h-7 w-7" />
             </div>
@@ -71,7 +71,7 @@ const PrivacySecurityPage: React.FC = () => {
             <p className="text-white/90 text-sm">Your data is encrypted and stored securely on our servers</p>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-secondary-500 to-pink-500 text-white rounded-2xl p-6 shadow-lg">
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
               <EyeIcon className="h-7 w-7" />
             </div>
@@ -93,7 +93,7 @@ const PrivacySecurityPage: React.FC = () => {
 
           {/* Section 1 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6">
+            <div className="bg-gradient-to-r from-primary-500 to-primary-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <ServerIcon className="h-7 w-7" />
                 Information We Collect
@@ -136,7 +136,7 @@ const PrivacySecurityPage: React.FC = () => {
 
           {/* Section 2 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-pink-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <LockClosedIcon className="h-7 w-7" />
                 How We Use Your Information
@@ -153,8 +153,8 @@ const PrivacySecurityPage: React.FC = () => {
                   <li><strong>Security:</strong> Protect against fraud, abuse, and unauthorized access</li>
                   <li><strong>Legal Compliance:</strong> Meet legal obligations and enforce our terms of service</li>
                 </ul>
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mt-6">
-                  <p className="text-blue-900 font-medium">
+                <div className="bg-primary-50 border-l-4 border-primary-500 p-4 mt-6">
+                  <p className="text-primary-900 font-medium">
                     <strong>Note:</strong> We will never use your information for purposes not disclosed in this policy without your explicit consent.
                   </p>
                 </div>
@@ -240,7 +240,7 @@ const PrivacySecurityPage: React.FC = () => {
 
           {/* Section 5 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-primary-500 p-6">
               <h2 className="text-2xl font-bold text-white">Data Security & Retention</h2>
             </div>
             <div className="p-8">
@@ -270,7 +270,7 @@ const PrivacySecurityPage: React.FC = () => {
 
           {/* Section 6 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-6">
+            <div className="bg-gradient-to-r from-pink-500 to-secondary-500 p-6">
               <h2 className="text-2xl font-bold text-white">Children's Privacy</h2>
             </div>
             <div className="p-8">
@@ -321,7 +321,7 @@ const PrivacySecurityPage: React.FC = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="mt-12 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="mt-12 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl shadow-2xl overflow-hidden">
           <div className="p-8 text-white text-center">
             <EnvelopeIcon className="h-16 w-16 mx-auto mb-4 opacity-90" />
             <h2 className="text-3xl font-bold mb-4">Questions About Privacy?</h2>

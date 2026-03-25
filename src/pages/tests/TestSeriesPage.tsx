@@ -199,12 +199,12 @@ const TestSeriesPage: React.FC = () => {
                 </div>
 
                 {/* Category Icon */}
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <AcademicCapIcon className="w-6 h-6 text-white" />
                 </div>
 
                 {/* Title and Description */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
                   {series.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -244,7 +244,7 @@ const TestSeriesPage: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
+                        className="bg-gradient-to-r from-primary-500 to-secondary-500 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${series.completionRate}%` }}
                       ></div>
                     </div>

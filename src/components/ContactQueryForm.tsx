@@ -130,7 +130,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
               name="full_name"
               value={formData.full_name}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors ${
                 errors.full_name ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Enter your full name"
@@ -151,7 +151,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
               name="mobile_number"
               value={formData.mobile_number}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors ${
                 errors.mobile_number ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="9876543210 or +91 9876543210"
@@ -173,7 +173,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors ${
               errors.email ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="your.email@example.com"
@@ -194,7 +194,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
             rows={isCompact ? 4 : 6}
             value={formData.query_message}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none ${
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none ${
               errors.query_message ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Please describe your query in detail..."
@@ -211,7 +211,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+          className={`w-full bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
             isSubmitting ? 'animate-pulse' : ''
           }`}
         >

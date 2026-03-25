@@ -228,7 +228,7 @@ const TestLeaderboardPage: React.FC = () => {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading leaderboard...</p>
         </div>
       </div>
@@ -242,7 +242,7 @@ const TestLeaderboardPage: React.FC = () => {
           <p className="text-gray-600">No leaderboard data found.</p>
           <button
             onClick={() => navigate(-1)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             Go Back
           </button>
@@ -265,7 +265,7 @@ const TestLeaderboardPage: React.FC = () => {
         </button>
         <div className="flex-1 text-center">
           <div className="flex items-center justify-center mb-2">
-            <TrophyIcon className="h-8 w-8 text-purple-600 mr-2" />
+            <TrophyIcon className="h-8 w-8 text-secondary-600 mr-2" />
             <h1 className="text-2xl font-bold text-gray-900">Score Card</h1>
           </div>
           <p className="text-gray-600">{leaderboardData.category.name}</p>
@@ -274,7 +274,7 @@ const TestLeaderboardPage: React.FC = () => {
               {leaderboardData.total_participants} participants
             </p>
             {leaderboardData.dataSource === 'demo' && (
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                 Demo Data
               </span>
             )}
@@ -289,7 +289,7 @@ const TestLeaderboardPage: React.FC = () => {
 
       {/* Your Performance Card */}
       {userEntry && (
-        <div className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-2xl p-6 text-white mb-8">
+        <div className="bg-gradient-to-r from-secondary-500 to-primary-600 rounded-2xl p-6 text-white mb-8">
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Your Performance</h3>
             <div className="grid grid-cols-3 gap-4">
@@ -326,7 +326,7 @@ const TestLeaderboardPage: React.FC = () => {
             <p className="text-gray-500 mb-6">Be the first to take a test in this series and claim the top spot!</p>
             <button
               onClick={() => navigate(`/tests/quiz/${uuid}`)}
-              className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              className="px-6 py-3 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors"
             >
               Take Test Now
             </button>
@@ -337,7 +337,7 @@ const TestLeaderboardPage: React.FC = () => {
               <div
                 key={entry.user_id}
                 className={`p-6 transition-colors ${entry.is_current_user
-                  ? 'bg-blue-50 border-l-4 border-blue-500'
+                  ? 'bg-primary-50 border-l-4 border-primary-500'
                   : 'hover:bg-gray-50'
                   }`}
               >
@@ -352,17 +352,17 @@ const TestLeaderboardPage: React.FC = () => {
 
                     {/* User Info */}
                     <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${entry.is_current_user ? 'bg-blue-100' : 'bg-gray-100'
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${entry.is_current_user ? 'bg-primary-100' : 'bg-gray-100'
                         }`}>
-                        <UserIcon className={`h-5 w-5 ${entry.is_current_user ? 'text-blue-600' : 'text-gray-600'
+                        <UserIcon className={`h-5 w-5 ${entry.is_current_user ? 'text-primary-600' : 'text-gray-600'
                           }`} />
                       </div>
                       <div>
-                        <p className={`font-medium ${entry.is_current_user ? 'text-blue-900' : 'text-gray-900'
+                        <p className={`font-medium ${entry.is_current_user ? 'text-primary-900' : 'text-gray-900'
                           }`}>
                           {entry.username}
                           {entry.is_current_user && (
-                            <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                            <span className="ml-2 px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">
                               You
                             </span>
                           )}
@@ -404,7 +404,7 @@ const TestLeaderboardPage: React.FC = () => {
       <div className="mt-8 flex justify-center space-x-4">
         <button
           onClick={() => navigate(`/tests/quiz/${uuid}`)}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
         >
           Retake Quiz
         </button>

@@ -91,7 +91,7 @@ const TestHistoryPage: React.FC = () => {
 
   const getPercentageColor = (percentage: number) => {
     if (percentage >= 80) return 'text-green-600 bg-green-50 border-green-200';
-    if (percentage >= 60) return 'text-blue-600 bg-blue-50 border-blue-200';
+    if (percentage >= 60) return 'text-primary-600 bg-primary-50 border-primary-200';
     if (percentage >= 40) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
     return 'text-red-600 bg-red-50 border-red-200';
   };
@@ -119,7 +119,7 @@ const TestHistoryPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-12">
             <BookOpenIcon className="mx-auto h-12 w-12 text-gray-400" />
@@ -128,7 +128,7 @@ const TestHistoryPage: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={fetchTestHistory}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
               >
                 <ArrowPathIcon className="h-4 w-4 mr-2" />
                 Try Again
@@ -141,13 +141,13 @@ const TestHistoryPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
             <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <AcademicCapIcon className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -197,7 +197,7 @@ const TestHistoryPage: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={() => navigate('/tests')}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
               >
                 Browse Test Series
               </button>
@@ -222,7 +222,7 @@ const TestHistoryPage: React.FC = () => {
                           <span className="text-xl">{getPerformanceEmoji(item.bestPercentage)}</span>
                         </h3>
                         {item.totalAttempts > 1 && (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                             {item.totalAttempts} attempts
                           </span>
                         )}
@@ -287,7 +287,7 @@ const TestHistoryPage: React.FC = () => {
                     {item.totalAttempts > 1 && (
                       <button
                         onClick={() => handleViewAllAttempts(item.testId)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-colors"
                       >
                         <span>View All Attempts ({item.totalAttempts})</span>
                         <ChevronRightIcon className="h-4 w-4" />
@@ -296,7 +296,7 @@ const TestHistoryPage: React.FC = () => {
                     <button
                       onClick={() => handleViewDetails(item.latestSessionId,item.testUuid)}
                       className={cn(
-                        "flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors",
+                        "flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors",
                         item.totalAttempts > 1 ? "flex-1" : "flex-[2]"
                       )}
                     >

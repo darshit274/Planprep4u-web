@@ -126,13 +126,13 @@ const TestSeriesCard = ({
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="text-center p-3 bg-blue-50 rounded-lg">
-          <PlayIcon className="h-5 w-5 text-blue-600 mx-auto mb-1" />
+        <div className="text-center p-3 bg-primary-50 rounded-lg">
+          <PlayIcon className="h-5 w-5 text-primary-600 mx-auto mb-1" />
           <p className="text-lg font-bold text-gray-900">{series.tests_count || series.total_tests || 0}</p>
           <p className="text-xs text-gray-500">Tests</p>
         </div>
-        <div className="text-center p-3 bg-purple-50 rounded-lg">
-          <ClockIcon className="h-5 w-5 text-purple-600 mx-auto mb-1" />
+        <div className="text-center p-3 bg-secondary-50 rounded-lg">
+          <ClockIcon className="h-5 w-5 text-secondary-600 mx-auto mb-1" />
           <p className="text-lg font-bold text-gray-900">{series.validity_days}</p>
           <p className="text-xs text-gray-500">Days</p>
         </div>
@@ -312,7 +312,7 @@ const TestsPage: React.FC = () => {
           <p className="text-gray-600 mb-6">Please try again later</p>
           <button
             onClick={handleRetry}
-            className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             Retry
           </button>

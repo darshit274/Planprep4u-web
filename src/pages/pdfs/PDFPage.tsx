@@ -152,7 +152,7 @@ const PDFPage: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
+                  className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -160,7 +160,7 @@ const PDFPage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
+                  className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
@@ -178,7 +178,7 @@ const PDFPage: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                    ? 'bg-primary-100 text-primary-700 border border-primary-200'
                     : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
                 }`}
               >
@@ -246,9 +246,9 @@ const PDFPage: React.FC = () => {
             {filteredPDFs.map((pdf) => (
               <div key={pdf.id} className="card-interactive group overflow-hidden">
                 {/* PDF Thumbnail */}
-                <div className="relative h-48 bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+                <div className="relative h-48 bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center">
                   <div className="w-16 h-20 bg-white rounded-lg shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <DocumentTextIcon className="w-8 h-8 text-blue-600" />
+                    <DocumentTextIcon className="w-8 h-8 text-primary-600" />
                   </div>
 
                   {/* Premium Badge */}
@@ -274,7 +274,7 @@ const PDFPage: React.FC = () => {
                       <EyeIcon className="w-4 h-4 mr-1" />
                       View
                     </Link>
-                    <button className="btn btn-sm bg-blue-600 text-white hover:bg-blue-700">
+                    <button className="btn btn-sm bg-primary-600 text-white hover:bg-primary-700">
                       <ArrowDownTrayIcon className="w-4 h-4 mr-1" />
                       Download
                     </button>
@@ -297,7 +297,7 @@ const PDFPage: React.FC = () => {
                   </div>
 
                   {/* Title and Description */}
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
                     {pdf.title}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
@@ -351,8 +351,8 @@ const PDFPage: React.FC = () => {
               <div key={pdf.id} className="card p-6 hover:shadow-lg transition-all duration-200">
                 <div className="flex items-center space-x-6">
                   {/* PDF Icon */}
-                  <div className="w-16 h-20 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <DocumentTextIcon className="w-8 h-8 text-blue-600" />
+                  <div className="w-16 h-20 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <DocumentTextIcon className="w-8 h-8 text-primary-600" />
                   </div>
 
                   {/* PDF Info */}
@@ -360,7 +360,7 @@ const PDFPage: React.FC = () => {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
-                          <h3 className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                          <h3 className="text-lg font-bold text-gray-900 hover:text-primary-600 transition-colors">
                             {pdf.title}
                           </h3>
                           <span className={`badge ${

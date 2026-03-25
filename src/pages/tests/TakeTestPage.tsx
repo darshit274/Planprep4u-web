@@ -585,7 +585,7 @@ const TakeTestPage: React.FC = () => {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading quiz questions...</p>
         </div>
       </div>
@@ -599,7 +599,7 @@ const TakeTestPage: React.FC = () => {
           <p className="text-gray-600">No quiz questions found.</p>
           <button
             onClick={() => navigate(-1)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             Go Back
           </button>
@@ -669,11 +669,11 @@ const TakeTestPage: React.FC = () => {
           </div>
 
           {/* Tips */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 sm:p-3 mb-4 sm:mb-6">
-            <p className="text-blue-900 font-medium text-xs sm:text-sm mb-1">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-2 sm:p-3 mb-4 sm:mb-6">
+            <p className="text-primary-900 font-medium text-xs sm:text-sm mb-1">
               💡 Tips:
             </p>
-            <ul className="text-blue-800 text-xs space-y-1 list-disc list-inside">
+            <ul className="text-primary-800 text-xs space-y-1 list-disc list-inside">
               <li>Answer only if you're confident</li>
               <li>Skip questions if unsure</li>
               <li>Review your answers before submitting</li>
@@ -734,7 +734,7 @@ const TakeTestPage: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 max-w-md mx-auto">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600">
                   {quizData.questions.length}
                 </div>
                 <div className="text-xs sm:text-sm text-gray-500">
@@ -760,7 +760,7 @@ const TakeTestPage: React.FC = () => {
                 <button
                   onClick={() => setLanguage("gujarati")}
                   className={`flex-1 px-4 sm:px-6 py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${language === "gujarati"
-                    ? "bg-blue-600 text-white shadow-md"
+                    ? "bg-primary-600 text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                 >
@@ -769,7 +769,7 @@ const TakeTestPage: React.FC = () => {
                 <button
                   onClick={() => setLanguage("english")}
                   className={`flex-1 px-4 sm:px-6 py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${language === "english"
-                    ? "bg-blue-600 text-white shadow-md"
+                    ? "bg-primary-600 text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                 >
@@ -792,7 +792,7 @@ const TakeTestPage: React.FC = () => {
 
             <button
               onClick={startQuiz}
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors text-sm sm:text-base"
             >
               Start Quiz
             </button>
@@ -923,21 +923,21 @@ const TakeTestPage: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 mb-4">
             {/* Total Questions */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-blue-700">
+            <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-primary-700">
                 {totalQuestions}
               </div>
-              <div className="text-xs sm:text-sm text-blue-600 font-medium">
+              <div className="text-xs sm:text-sm text-primary-600 font-medium">
                 Total Questions
               </div>
             </div>
 
             {/* Attempted */}
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-purple-700">
+            <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-secondary-700">
                 {answeredQuestions}
               </div>
-              <div className="text-xs sm:text-sm text-purple-600 font-medium">
+              <div className="text-xs sm:text-sm text-secondary-600 font-medium">
                 Attempted
               </div>
             </div>
@@ -980,7 +980,7 @@ const TakeTestPage: React.FC = () => {
           </div>
 
           {/* Marks & Accuracy Section */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-6">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 sm:p-6 mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Marks Breakdown */}
               <div>
@@ -1015,15 +1015,15 @@ const TakeTestPage: React.FC = () => {
                   <span className="text-sm font-medium text-gray-700">
                     Final Score:
                   </span>
-                  <span className="text-xl font-bold text-blue-600">
+                  <span className="text-xl font-bold text-primary-600">
                     {obtainedMarks}
                   </span>
                 </div>
               </div>
 
               {/* Accuracy */}
-              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-blue-300 pl-0 sm:pl-4 mt-4 sm:mt-0">
-                <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-1">
+              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-primary-300 pl-0 sm:pl-4 mt-4 sm:mt-0">
+                <div className="text-3xl sm:text-4xl font-bold text-primary-600 mb-1">
                   {accuracy}%
                 </div>
                 <div className="text-xs sm:text-sm text-gray-600 font-medium">
@@ -1070,7 +1070,7 @@ const TakeTestPage: React.FC = () => {
                   quizData.questions.length * 1.5;
                 setTimeRemaining(testDurationMinutes * 60);
               }}
-              className="px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm sm:text-base font-medium"
+              className="px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm sm:text-base font-medium"
             >
               Retake Quiz
             </button>
@@ -1085,7 +1085,7 @@ const TakeTestPage: React.FC = () => {
                   },
                 });
               }}
-              className="px-4 sm:px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm sm:text-base font-medium"
+              className="px-4 sm:px-6 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 text-sm sm:text-base font-medium"
             >
               Leaderboard
             </button>
@@ -1230,7 +1230,7 @@ const TakeTestPage: React.FC = () => {
         <div className="mb-6 sm:mb-8">
           <div className="bg-gray-200 rounded-full h-1.5 sm:h-2">
             <div
-              className="bg-blue-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
+              className="bg-primary-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${((currentQuestionIndex + 1) / quizData.questions.length) * 100
                   }%`,
@@ -1268,7 +1268,7 @@ const TakeTestPage: React.FC = () => {
             </button>
             <button
               onClick={handleNextQuestion}
-              className="flex-1 sm:flex-none px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm sm:text-base font-medium"
+              className="flex-1 sm:flex-none px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm sm:text-base font-medium"
             >
               {currentQuestionIndex === quizData.questions.length - 1
                 ? "Submit"
@@ -1292,10 +1292,10 @@ const TakeTestPage: React.FC = () => {
               {/* Language indicator - hidden on mobile */}
               <span
                 className={`hidden sm:inline-flex flex-shrink-0 px-3 py-1 text-xs font-medium rounded-full ${getLanguageIndicator(currentQuestion) === "both"
-                  ? "bg-purple-100 text-purple-800"
+                  ? "bg-secondary-100 text-secondary-800"
                   : getLanguageIndicator(currentQuestion) === "gujarati"
                     ? "bg-orange-100 text-orange-800"
-                    : "bg-blue-100 text-blue-800"
+                    : "bg-primary-100 text-primary-800"
                   }`}
               >
                 {getLanguageIndicator(currentQuestion) === "both"
@@ -1357,7 +1357,7 @@ const TakeTestPage: React.FC = () => {
                 onClick={() => setCurrentQuestionIndex(index)}
                 className={`w-8 h-8 rounded text-sm font-medium ${
                   index === currentQuestionIndex
-                    ? "bg-blue-600 text-white"
+                    ? "bg-primary-600 text-white"
                     : selectedAnswers[index]
                     ? "bg-green-100 text-green-800 border border-green-300"
                     : "bg-gray-100 text-gray-600 border border-gray-300"
@@ -1401,7 +1401,7 @@ const TakeTestPage: React.FC = () => {
 
                     if (isCurrentQuestion) {
                       statusClass =
-                        "border-blue-500 border-3 bg-blue-100 text-blue-800 ring-2 ring-blue-200";
+                        "border-primary-500 border-3 bg-primary-100 text-primary-800 ring-2 ring-primary-200";
                       statusText = "Current Question";
                     } else if (isMarkedForReview) {
                       // Marked for review - orange/yellow color
@@ -1459,7 +1459,7 @@ const TakeTestPage: React.FC = () => {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
                     <div className="flex items-center space-x-2 sm:space-x-3">
-                      <div className="w-5 h-5 rounded-lg bg-blue-100 border-2 border-blue-500 ring-1 ring-blue-200 flex-shrink-0"></div>
+                      <div className="w-5 h-5 rounded-lg bg-primary-100 border-2 border-primary-500 ring-1 ring-primary-200 flex-shrink-0"></div>
                       <span className="text-gray-700">Current</span>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-3">
@@ -1522,7 +1522,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <div
-                        className={`text-xl sm:text-2xl font-bold ${timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                        className={`text-xl sm:text-2xl font-bold ${timeRemaining < 300 ? "text-red-600" : "text-primary-600"
                           }`}
                       >
                         {formatTime(timeRemaining)}
@@ -1548,7 +1548,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 sm:h-3 rounded-full transition-all duration-500"
+                        className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 sm:h-3 rounded-full transition-all duration-500"
                         style={{
                           width: `${(Object.keys(selectedAnswers).length /
                             quizData.questions.length) *
@@ -1616,7 +1616,7 @@ const TakeTestPage: React.FC = () => {
               </p>
 
               {/* Current Progress Info */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">
                     Questions Answered:
@@ -1628,7 +1628,7 @@ const TakeTestPage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Time Remaining:</span>
-                  <span className="text-sm font-bold text-blue-600">
+                  <span className="text-sm font-bold text-primary-600">
                     {formatTime(timeRemaining)}
                   </span>
                 </div>
@@ -1638,7 +1638,7 @@ const TakeTestPage: React.FC = () => {
               <div className="flex gap-3">
                 <button
                   onClick={handleCancelExit}
-                  className="flex-1 px-4 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+                  className="flex-1 px-4 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
                   Continue Test
                 </button>
@@ -1665,7 +1665,7 @@ const TakeTestPage: React.FC = () => {
                     <span className="text-sm font-medium">Time Left</span>
                   </div>
                   <span
-                    className={`text-sm font-bold ${timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                    className={`text-sm font-bold ${timeRemaining < 300 ? "text-red-600" : "text-primary-600"
                       }`}
                   >
                     {formatTime(timeRemaining)}
@@ -1723,7 +1723,7 @@ const TakeTestPage: React.FC = () => {
                 </button>
                 <button
                   onClick={handleConfirmSubmit}
-                  className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+                  className="flex-1 px-4 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium"
                 >
                   Yes
                 </button>

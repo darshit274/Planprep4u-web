@@ -174,15 +174,15 @@ const PreviousYearsPapersPage: React.FC = () => {
 
         {/* Previous Attempt Info */}
         {test.hasAttempted && (
-          <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+          <div className="mb-4 p-3 bg-primary-50 rounded-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <CheckCircleIcon className="w-4 h-4 text-blue-600 mr-2" />
-                <span className="text-sm font-medium text-blue-900">Previously Attempted</span>
+                <CheckCircleIcon className="w-4 h-4 text-primary-600 mr-2" />
+                <span className="text-sm font-medium text-primary-900">Previously Attempted</span>
               </div>
               <div className="text-right">
-                <p className="text-sm font-bold text-blue-900">{test.bestScore}%</p>
-                <p className="text-xs text-blue-600">Best Score</p>
+                <p className="text-sm font-bold text-primary-900">{test.bestScore}%</p>
+                <p className="text-xs text-primary-600">Best Score</p>
               </div>
             </div>
           </div>
@@ -238,7 +238,7 @@ const PreviousYearsPapersPage: React.FC = () => {
             </p>
           </div>
           <div className="flex items-center space-x-3 mt-4 lg:mt-0">
-            <div className="flex items-center space-x-2 bg-purple-50 text-purple-700 px-3 py-2 rounded-lg">
+            <div className="flex items-center space-x-2 bg-secondary-50 text-secondary-700 px-3 py-2 rounded-lg">
               <DocumentTextIconSolid className="w-4 h-4" />
               <span className="font-medium">PYQ Papers</span>
             </div>
@@ -358,8 +358,8 @@ const PreviousYearsPapersPage: React.FC = () => {
       ) : pyqTests.length === 0 ? (
         // Empty State
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <DocumentTextIconSolid className="h-10 w-10 text-purple-600" />
+          <div className="w-20 h-20 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <DocumentTextIconSolid className="h-10 w-10 text-secondary-600" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
             {searchQuery ? 'No previous years papers found' : 'No previous years papers available'}
@@ -394,7 +394,7 @@ const PreviousYearsPapersPage: React.FC = () => {
               )}
             </p>
             <div className="flex items-center space-x-2 text-sm">
-              <span className="text-purple-600 font-medium">📄 Actual exam papers</span>
+              <span className="text-secondary-600 font-medium">📄 Actual exam papers</span>
             </div>
           </div>
 

@@ -17,9 +17,9 @@ const TermsConditionsPage: React.FC = () => {
   const lastUpdated = "January 2025";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-primary-50 to-primary-50">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
+      <div className="bg-gradient-to-r from-primary-600 to-primary-600 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
           <button
             onClick={() => navigate(-1)}
@@ -99,7 +99,7 @@ const TermsConditionsPage: React.FC = () => {
 
           {/* Section 1 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6">
+            <div className="bg-gradient-to-r from-primary-500 to-primary-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <UserGroupIcon className="h-7 w-7" />
                 1. Account Registration & User Responsibilities
@@ -139,7 +139,7 @@ const TermsConditionsPage: React.FC = () => {
 
           {/* Section 2 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-pink-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <ShieldCheckIcon className="h-7 w-7" />
                 2. Use of Services
@@ -262,9 +262,9 @@ const TermsConditionsPage: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
-                  <p className="text-blue-900 font-medium">
-                    <strong>Note:</strong> Refunds and cancellations are governed by our separate <a href="/refund-policy" className="underline hover:text-blue-700">Cancellation & Refund Policy</a>.
+                <div className="bg-primary-50 border-l-4 border-primary-500 p-4">
+                  <p className="text-primary-900 font-medium">
+                    <strong>Note:</strong> Refunds and cancellations are governed by our separate <a href="/refund-policy" className="underline hover:text-primary-700">Cancellation & Refund Policy</a>.
                   </p>
                 </div>
               </div>
@@ -273,7 +273,7 @@ const TermsConditionsPage: React.FC = () => {
 
           {/* Section 5 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-secondary-500 p-6">
               <h2 className="text-2xl font-bold text-white">5. Test Conduct & Academic Integrity</h2>
             </div>
             <div className="p-8">
@@ -351,7 +351,7 @@ const TermsConditionsPage: React.FC = () => {
 
           {/* Section 7 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
+            <div className="bg-gradient-to-r from-primary-500 to-primary-500 p-6">
               <h2 className="text-2xl font-bold text-white">7. Limitation of Liability</h2>
             </div>
             <div className="p-8">
@@ -422,7 +422,7 @@ const TermsConditionsPage: React.FC = () => {
 
           {/* Section 10 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-secondary-500 p-6">
               <h2 className="text-2xl font-bold text-white">10. Changes to Terms</h2>
             </div>
             <div className="p-8">
@@ -462,7 +462,7 @@ const TermsConditionsPage: React.FC = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="mt-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="mt-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl shadow-2xl overflow-hidden">
           <div className="p-8 text-white text-center">
             <EnvelopeIcon className="h-16 w-16 mx-auto mb-4 opacity-90" />
             <h2 className="text-3xl font-bold mb-4">Questions About Terms?</h2>
@@ -471,7 +471,7 @@ const TermsConditionsPage: React.FC = () => {
             </p>
             <a
               href="mailto:admin@planprep4u.com"
-              className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <EnvelopeIcon className="h-6 w-6" />
               admin@planprep4u.com

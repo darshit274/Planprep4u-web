@@ -272,7 +272,7 @@ const PaymentPage: React.FC = () => {
               <div className="border-t pt-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-base font-medium text-gray-900">Total Amount</span>
-                  <span className="text-2xl font-bold text-blue-600">₹{price}</span>
+                  <span className="text-2xl font-bold text-primary-600">₹{price}</span>
                 </div>
 
               </div>
@@ -289,18 +289,18 @@ const PaymentPage: React.FC = () => {
                   <div
                     key={method.id}
                     className={`border rounded-xl p-4 cursor-pointer transition-all duration-200 ${selectedPaymentMethod === method.id
-                      ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
+                      ? 'border-primary-500 bg-primary-50 ring-2 ring-primary-200'
                       : 'border-gray-200 hover:border-gray-300'
                       }`}
                     onClick={() => setSelectedPaymentMethod(method.id)}
                   >
                     <div className="flex items-center">
                       <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${selectedPaymentMethod === method.id
-                        ? 'bg-blue-100'
+                        ? 'bg-primary-100'
                         : 'bg-gray-100'
                         }`}>
                         <method.icon className={`h-5 w-5 ${selectedPaymentMethod === method.id
-                          ? 'text-blue-600'
+                          ? 'text-primary-600'
                           : 'text-gray-600'
                           }`} />
                       </div>
@@ -318,11 +318,11 @@ const PaymentPage: React.FC = () => {
                       </div>
 
                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedPaymentMethod === method.id
-                        ? 'border-blue-500'
+                        ? 'border-primary-500'
                         : 'border-gray-300'
                         }`}>
                         {selectedPaymentMethod === method.id && (
-                          <div className="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+                          <div className="w-2.5 h-2.5 rounded-full bg-primary-500"></div>
                         )}
                       </div>
                     </div>
@@ -344,7 +344,7 @@ const PaymentPage: React.FC = () => {
                 disabled={isProcessing || !isScriptLoaded}
                 className={`w-full py-3 px-6 rounded-lg font-medium text-white text-lg transition-all duration-200 ${isProcessing || !isScriptLoaded
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
+                  : 'bg-primary-600 hover:bg-primary-700 active:bg-primary-800'
                   }`}
               >
                 {isProcessing ? (

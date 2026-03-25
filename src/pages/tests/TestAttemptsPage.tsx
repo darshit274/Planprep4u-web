@@ -84,7 +84,7 @@ const TestAttemptsPage: React.FC = () => {
 
   const getPercentageColor = (percentage: number) => {
     if (percentage >= 80) return 'text-green-600 bg-green-50 border-green-200';
-    if (percentage >= 60) return 'text-blue-600 bg-blue-50 border-blue-200';
+    if (percentage >= 60) return 'text-primary-600 bg-primary-50 border-primary-200';
     if (percentage >= 40) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
     return 'text-red-600 bg-red-50 border-red-200';
   };
@@ -127,7 +127,7 @@ const TestAttemptsPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-12">
             <BookOpenIcon className="mx-auto h-12 w-12 text-gray-400" />
@@ -136,7 +136,7 @@ const TestAttemptsPage: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={() => navigate('/test-history')}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
               >
                 <ArrowLeftIcon className="h-4 w-4 mr-2" />
                 Back to History
@@ -151,7 +151,7 @@ const TestAttemptsPage: React.FC = () => {
   const sortedAttempts = getSortedAttempts();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <button
@@ -166,7 +166,7 @@ const TestAttemptsPage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
             <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <AcademicCapIcon className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -189,7 +189,7 @@ const TestAttemptsPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="recent">Most Recent</option>
               <option value="highest">Highest Score</option>
@@ -290,7 +290,7 @@ const TestAttemptsPage: React.FC = () => {
                   <div className="mt-4 pt-4 border-t border-gray-100 flex gap-3">
                     <button
                       onClick={() => handleViewDetails(attempt.sessionId)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
                     >
                       <span>View Details</span>
                       <ChevronRightIcon className="h-4 w-4" />

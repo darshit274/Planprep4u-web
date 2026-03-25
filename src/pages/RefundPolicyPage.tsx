@@ -80,7 +80,7 @@ const RefundPolicyPage: React.FC = () => {
             <p className="text-white/90 text-sm">Refunds only for billing/technical errors by us</p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-primary-500 to-primary-500 text-white rounded-2xl p-6 shadow-lg">
             <ArrowPathIcon className="h-12 w-12 mb-3 opacity-90" />
             <h3 className="font-bold text-lg mb-2">5-7 Business Days</h3>
             <p className="text-white/90 text-sm">Processing time if refund is approved</p>
@@ -92,7 +92,7 @@ const RefundPolicyPage: React.FC = () => {
 
           {/* Section 1 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6">
+            <div className="bg-gradient-to-r from-primary-500 to-secondary-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <CurrencyRupeeIcon className="h-7 w-7" />
                 1. When Refunds Are Granted
@@ -217,7 +217,7 @@ const RefundPolicyPage: React.FC = () => {
 
           {/* Section 3 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-secondary-500 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <ArrowPathIcon className="h-7 w-7" />
                 3. Refund Process & Timeline
@@ -248,14 +248,14 @@ const RefundPolicyPage: React.FC = () => {
 
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Processing Timeline</h3>
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
+                  <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-lg p-4">
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
                         <p className="text-gray-700"><strong>24-48 hours:</strong> Request review and approval</p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div className="w-10 h-10 bg-secondary-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
                         <p className="text-gray-700"><strong>2-3 business days:</strong> Refund initiated by us</p>
                       </div>
                       <div className="flex items-center gap-3">
@@ -297,14 +297,14 @@ const RefundPolicyPage: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-purple-50 border-l-4 border-purple-500 p-4">
+                <div className="bg-secondary-50 border-l-4 border-secondary-500 p-4">
                   <h4 className="font-semibold text-gray-900 mb-2">Account Closure</h4>
                   <p>
                     Once a refund is processed (for system errors only), your account will be immediately deactivated, and you will lose access to all content, test history, and progress data permanently.
                   </p>
                 </div>
 
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
+                <div className="bg-primary-50 border-l-4 border-primary-500 p-4">
                   <h4 className="font-semibold text-gray-900 mb-2">Free Trial Recommended</h4>
                   <p>
                     We strongly recommend using our free tests and trial content before purchasing a subscription. This allows you to evaluate the platform and content quality before making a commitment.
@@ -316,13 +316,13 @@ const RefundPolicyPage: React.FC = () => {
 
           {/* Section 5 */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
+            <div className="bg-gradient-to-r from-primary-500 to-primary-500 p-6">
               <h2 className="text-2xl font-bold text-white">5. Technical Issues & Service Disruptions</h2>
             </div>
             <div className="p-8">
               <div className="space-y-4 text-gray-700">
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-                  <p className="text-blue-900">
+                <div className="bg-primary-50 border-l-4 border-primary-500 p-4 mb-4">
+                  <p className="text-primary-900">
                     <strong>Our Commitment:</strong> If you experience technical issues caused by PlanPrep4u's systems, we will work to resolve them quickly.
                   </p>
                 </div>

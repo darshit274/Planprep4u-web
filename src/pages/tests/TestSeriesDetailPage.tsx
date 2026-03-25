@@ -242,8 +242,8 @@ const TestSeriesDetailPage: React.FC = () => {
         onClick={handleCardClick}
       >
         <div className="flex items-center">
-          <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-            <FolderIcon className="h-5 w-5 text-blue-600" />
+          <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <FolderIcon className="h-5 w-5 text-primary-600" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
@@ -270,7 +270,7 @@ const TestSeriesDetailPage: React.FC = () => {
                 </span>
               )}
               {isAccessible && isPaidSeries && !isFree && isQuestionHolder && !isCompleted && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-800">
                   <CheckCircleIcon className="h-3 w-3 mr-1" />
                   Unlocked
                 </span>
@@ -367,7 +367,7 @@ const TestSeriesDetailPage: React.FC = () => {
           <p className="text-gray-600 mb-6">Please try again later</p>
           <button
             onClick={fetchSeriesDetail}
-            className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             Retry
           </button>
@@ -409,7 +409,7 @@ const TestSeriesDetailPage: React.FC = () => {
 
             <button
               onClick={() => setSeriesExpanded(!seriesExpanded)}
-              className="text-sm font-medium text-blue-600 hover:underline"
+              className="text-sm font-medium text-primary-600 hover:underline"
             >
               {seriesExpanded ? "Read Less" : "Read More"}
             </button>
@@ -482,7 +482,7 @@ const TestSeriesDetailPage: React.FC = () => {
               !subscriptionAccess?.hasAccess && (
                 <button
                   onClick={handleStartFreeTest}
-                  className="flex items-center px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="flex items-center px-4 py-2 text-primary-600 border border-primary-600 rounded-lg hover:bg-primary-50 transition-colors"
                 >
                   <GiftIcon className="h-4 w-4 mr-1" />
                   Try Free
@@ -503,7 +503,7 @@ const TestSeriesDetailPage: React.FC = () => {
             ) : (
               <button
                 onClick={handlePurchase}
-                className="flex items-center px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center px-6 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
               >
                 <LockClosedIcon className="h-4 w-4 mr-2" />
                 Enroll Now

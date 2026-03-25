@@ -67,7 +67,7 @@ const AppComingSoonPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
@@ -79,7 +79,7 @@ const AppComingSoonPage: React.FC = () => {
       <header className="relative z-10 bg-white/10 backdrop-blur-md border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center group bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl group-hover:opacity-30 transition-opacity">
+            <Link to="/" className="flex items-center group bg-gradient-to-r from-primary-400 to-primary-500 rounded-2xl group-hover:opacity-30 transition-opacity">
               <img
                 src={MockTaleLogoPng}
                 alt="PlanPrep4u"
@@ -109,12 +109,12 @@ const AppComingSoonPage: React.FC = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
             PlanPrep4u
             <br />
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-300 via-primary-300 to-secondary-300 bg-clip-text text-transparent">
               Mobile App
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-primary-100 mb-12 max-w-3xl mx-auto leading-relaxed">
             Your ultimate companion for Gujarat competitive Exam preparation.
             <br />Practice on-the-go with our powerful mobile app!
           </p>
@@ -128,7 +128,7 @@ const AppComingSoonPage: React.FC = () => {
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {String(timeLeft.days).padStart(2, '0')}
                 </div>
-                <div className="text-blue-200 text-sm uppercase tracking-wider">Days</div>
+                <div className="text-primary-200 text-sm uppercase tracking-wider">Days</div>
               </div>
 
               {/* Hours */}
@@ -136,7 +136,7 @@ const AppComingSoonPage: React.FC = () => {
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {String(timeLeft.hours).padStart(2, '0')}
                 </div>
-                <div className="text-blue-200 text-sm uppercase tracking-wider">Hours</div>
+                <div className="text-primary-200 text-sm uppercase tracking-wider">Hours</div>
               </div>
 
               {/* Minutes */}
@@ -144,7 +144,7 @@ const AppComingSoonPage: React.FC = () => {
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {String(timeLeft.minutes).padStart(2, '0')}
                 </div>
-                <div className="text-blue-200 text-sm uppercase tracking-wider">Minutes</div>
+                <div className="text-primary-200 text-sm uppercase tracking-wider">Minutes</div>
               </div>
 
               {/* Seconds */}
@@ -152,7 +152,7 @@ const AppComingSoonPage: React.FC = () => {
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {String(timeLeft.seconds).padStart(2, '0')}
                 </div>
-                <div className="text-blue-200 text-sm uppercase tracking-wider">Seconds</div>
+                <div className="text-primary-200 text-sm uppercase tracking-wider">Seconds</div>
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ const AppComingSoonPage: React.FC = () => {
                   <BellIcon className="w-8 h-8 text-white mr-2" />
                   <h3 className="text-2xl font-bold text-white">Get Notified</h3>
                 </div>
-                <p className="text-blue-100 mb-6">
+                <p className="text-primary-100 mb-6">
                   Be the first to know when we launch! Enter your email below.
                 </p>
                 <form onSubmit={handleNotifyMe} className="space-y-4">
@@ -182,7 +182,7 @@ const AppComingSoonPage: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email address"
-                      className="w-full px-6 py-4 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                      className="w-full px-6 py-4 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
                       disabled={isSubmitting}
                     />
                     {error && (
@@ -192,11 +192,11 @@ const AppComingSoonPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-white text-blue-600 font-bold py-4 px-8 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-white text-primary-600 font-bold py-4 px-8 rounded-xl hover:bg-primary-50 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -210,7 +210,7 @@ const AppComingSoonPage: React.FC = () => {
                     )}
                   </button>
                 </form>
-                <p className="text-xs text-blue-200 mt-4">
+                <p className="text-xs text-primary-200 mt-4">
                   We'll only send you updates about the app launch. No spam, promise!
                 </p>
               </div>
@@ -222,12 +222,12 @@ const AppComingSoonPage: React.FC = () => {
                   <CheckCircleIcon className="w-16 h-16 text-green-300" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">You're All Set!</h3>
-                <p className="text-blue-100 mb-6">
+                <p className="text-primary-100 mb-6">
                   Thank you for subscribing! We'll notify you as soon as our mobile app launches.
                 </p>
                 <Link
                   to="/"
-                  className="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-xl hover:bg-blue-50 transition-all duration-200"
+                  className="inline-block bg-white text-primary-600 font-bold py-3 px-8 rounded-xl hover:bg-primary-50 transition-all duration-200"
                 >
                   Back to Home
                 </Link>
@@ -292,13 +292,13 @@ const AppComingSoonPage: React.FC = () => {
           {/* Meanwhile Section */}
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/30 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-4">Meanwhile, Keep Preparing!</h3>
-            <p className="text-blue-100 mb-6">
+            <p className="text-primary-100 mb-6">
               Don't wait for the app! Start your preparation journey today on our web platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/register"
-                className="inline-flex items-center justify-center bg-white text-blue-600 font-bold py-3 px-8 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg"
+                className="inline-flex items-center justify-center bg-white text-primary-600 font-bold py-3 px-8 rounded-xl hover:bg-primary-50 transition-all duration-200 shadow-lg"
               >
                 Get Started Now
                 <ArrowRightIcon className="w-5 h-5 ml-2" />
@@ -314,10 +314,10 @@ const AppComingSoonPage: React.FC = () => {
 
           {/* Contact */}
           <div className="mt-12 text-center">
-            <p className="text-blue-100 mb-4">Have questions or suggestions?</p>
+            <p className="text-primary-100 mb-4">Have questions or suggestions?</p>
             <a
               href="mailto:admin@planprep4u.com"
-              className="inline-flex items-center text-white hover:text-blue-200 transition-colors"
+              className="inline-flex items-center text-white hover:text-primary-200 transition-colors"
             >
               <EnvelopeIcon className="w-5 h-5 mr-2" />
               <span className="font-semibold">admin@planprep4u.com</span>
@@ -329,7 +329,7 @@ const AppComingSoonPage: React.FC = () => {
       {/* Footer */}
       <footer className="relative z-10 bg-white/5 backdrop-blur-md border-t border-white/10 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-blue-100 text-sm">
+          <p className="text-primary-100 text-sm">
             © 2025 PlanPrep4u. All rights reserved.
           </p>
         </div>

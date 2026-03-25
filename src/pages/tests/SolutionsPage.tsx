@@ -246,7 +246,7 @@ const SolutionsPage: React.FC = () => {
           <p className="text-gray-600">No solutions found.</p>
           <button
             onClick={() => navigate(-1)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             Go Back
           </button>
@@ -424,7 +424,7 @@ const SolutionsPage: React.FC = () => {
                     checked={practiceMode}
                     onChange={(e) => setPracticeMode(e.target.checked)}
                   />
-                  <div className={`w-11 h-6 rounded-full transition-colors ${practiceMode ? 'bg-blue-600' : 'bg-gray-200'
+                  <div className={`w-11 h-6 rounded-full transition-colors ${practiceMode ? 'bg-primary-600' : 'bg-gray-200'
                     }`}>
                     <div className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${practiceMode ? 'translate-x-5' : 'translate-x-0.5'
                       } mt-0.5`} />
@@ -433,7 +433,7 @@ const SolutionsPage: React.FC = () => {
                 <span className="text-sm font-medium text-gray-700">
                   Practice Mode {practiceMode ? 'ON' : 'OFF'}
                 </span>
-                <ArrowPathIcon className={`h-4 w-4 ${practiceMode ? 'text-blue-600' : 'text-gray-400'
+                <ArrowPathIcon className={`h-4 w-4 ${practiceMode ? 'text-primary-600' : 'text-gray-400'
                   }`} />
               </div>
             </div>
@@ -458,8 +458,8 @@ const SolutionsPage: React.FC = () => {
           </div>
 
           {practiceMode && (
-            <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-sm text-blue-800">
+            <div className="mt-3 p-3 bg-primary-50 rounded-lg border border-primary-200">
+              <p className="text-sm text-primary-800">
                 <strong>Practice Mode:</strong> Click on any option to reattempt wrong answers.
                 Explanations will be revealed after you make your choice.
               </p>
@@ -601,7 +601,7 @@ const SolutionsPage: React.FC = () => {
               return (
                 <div
                   key={option}
-                  className={`p-4 rounded-lg border transition-all ${optionClass} ${isClickable ? 'cursor-pointer hover:bg-blue-50 hover:border-blue-300' : ''
+                  className={`p-4 rounded-lg border transition-all ${optionClass} ${isClickable ? 'cursor-pointer hover:bg-primary-50 hover:border-primary-300' : ''
                     }`}
                   onClick={() => {
                     if (isClickable) {
@@ -653,11 +653,11 @@ const SolutionsPage: React.FC = () => {
 
           {/* Practice Mode Controls - Reattempt feedback */}
           {practiceMode && hasReattempted[currentQuestionIndex] && (
-            <div className="bg-blue-50 rounded-lg p-4 mb-6 border border-blue-200">
+            <div className="bg-primary-50 rounded-lg p-4 mb-6 border border-primary-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-sm font-medium text-blue-900">Reattempt Complete</h4>
-                  <p className="text-sm text-blue-700">
+                  <h4 className="text-sm font-medium text-primary-900">Reattempt Complete</h4>
+                  <p className="text-sm text-primary-700">
                     {reattemptAnswers[currentQuestionIndex] === currentQuestion.correct_answer
                       ? '🎉 Great job! You got it right this time.'
                       : '🤔 That\'s still not correct, but you can see the explanation below.'}
@@ -665,7 +665,7 @@ const SolutionsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={() => resetQuestion(currentQuestionIndex)}
-                  className="flex items-center space-x-1 px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
+                  className="flex items-center space-x-1 px-3 py-1 text-xs font-medium text-primary-700 bg-primary-100 rounded-md hover:bg-primary-200 transition-colors"
                 >
                   <ArrowPathIcon className="h-3 w-3" />
                   <span>Try Again</span>
@@ -724,18 +724,18 @@ const SolutionsPage: React.FC = () => {
 
           {/* Explanation */}
           {currentQuestion?.explanation && (
-            <div className="bg-blue-50 rounded-lg border border-blue-200">
+            <div className="bg-primary-50 rounded-lg border border-primary-200">
               {/* Explanation Header - Always Visible */}
               <button
                 onClick={() => toggleExplanation(currentQuestionIndex)}
-                className="w-full p-4 flex items-center justify-between hover:bg-blue-100 transition-colors rounded-t-lg"
+                className="w-full p-4 flex items-center justify-between hover:bg-primary-100 transition-colors rounded-t-lg"
               >
                 <div className="flex items-center space-x-3">
-                  <LightBulbIcon className="h-6 w-6 text-blue-600 flex-shrink-0" />
-                  <h3 className="text-lg font-medium text-blue-900">
+                  <LightBulbIcon className="h-6 w-6 text-primary-600 flex-shrink-0" />
+                  <h3 className="text-lg font-medium text-primary-900">
                     View Explanation
                     {practiceMode && !hasReattempted[currentQuestionIndex] && !isCorrect && (
-                      <span className="text-sm font-normal text-blue-600 ml-2">
+                      <span className="text-sm font-normal text-primary-600 ml-2">
                         (Available after reattempt)
                       </span>
                     )}
@@ -743,14 +743,14 @@ const SolutionsPage: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   {practiceMode && !hasReattempted[currentQuestionIndex] && !isCorrect && (
-                    <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                    <span className="text-xs text-primary-600 bg-primary-100 px-2 py-1 rounded">
                       Locked
                     </span>
                   )}
                   {showExplanations[currentQuestionIndex] ? (
-                    <EyeSlashIcon className="h-5 w-5 text-blue-600" />
+                    <EyeSlashIcon className="h-5 w-5 text-primary-600" />
                   ) : (
-                    <EyeIcon className="h-5 w-5 text-blue-600" />
+                    <EyeIcon className="h-5 w-5 text-primary-600" />
                   )}
                 </div>
               </button>
@@ -758,19 +758,19 @@ const SolutionsPage: React.FC = () => {
               {/* Explanation Content - Expandable */}
               {showExplanations[currentQuestionIndex] &&
                 (!practiceMode || hasReattempted[currentQuestionIndex] || isCorrect) && (
-                  <div className="px-6 pb-6 border-t border-blue-200">
+                  <div className="px-6 pb-6 border-t border-primary-200">
                     <div className="pt-4">
                       <HTMLContent
                         content={language === 'gujarati' && currentQuestion?.explanation_gujarati
                           ? currentQuestion?.explanation_gujarati
                           : currentQuestion?.explanation || ''}
-                        className="text-blue-800 leading-relaxed"
+                        className="text-primary-800 leading-relaxed"
                       />
 
                       {/* Show additional context for practice mode */}
                       {practiceMode && hasReattempted[currentQuestionIndex] && (
-                        <div className="mt-4 p-3 bg-blue-100 rounded-lg">
-                          <div className="text-sm text-blue-700">
+                        <div className="mt-4 p-3 bg-primary-100 rounded-lg">
+                          <div className="text-sm text-primary-700">
                             <strong>Practice Summary:</strong>
                             <ul className="mt-2 space-y-1">
                               <li>• Original answer: {userAnswer || 'Not answered'}</li>
@@ -786,12 +786,12 @@ const SolutionsPage: React.FC = () => {
 
               {/* Locked state message for practice mode - only for wrong answers */}
               {practiceMode && !hasReattempted[currentQuestionIndex] && !isCorrect && showExplanations[currentQuestionIndex] && (
-                <div className="px-6 pb-6 border-t border-blue-200">
+                <div className="px-6 pb-6 border-t border-primary-200">
                   <div className="pt-4 text-center">
-                    <div className="text-blue-600 mb-2">
+                    <div className="text-primary-600 mb-2">
                       <LightBulbIcon className="h-8 w-8 mx-auto opacity-50" />
                     </div>
-                    <p className="text-blue-700 text-sm">
+                    <p className="text-primary-700 text-sm">
                       Reattempt the question above to unlock the explanation
                     </p>
                   </div>
@@ -822,7 +822,7 @@ const SolutionsPage: React.FC = () => {
                   key={index}
                   onClick={() => setCurrentQuestionIndex(index)}
                   className={`w-10 h-10 rounded text-sm font-medium flex-shrink-0 ${index === currentQuestionIndex
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : questionIsCorrect
                       ? 'bg-green-100 text-green-800 border border-green-300'
                       : questionUserAnswer
@@ -878,7 +878,7 @@ const SolutionsPage: React.FC = () => {
                     let statusClass = '';
 
                     if (isCurrentQuestion) {
-                      statusClass = 'border-blue-500 border-3 bg-blue-100 text-blue-800 ring-2 ring-blue-200';
+                      statusClass = 'border-primary-500 border-3 bg-primary-100 text-primary-800 ring-2 ring-primary-200';
                     } else if (practiceMode && hasReattemptedThis) {
                       if (isReattemptCorrect) {
                         statusClass = 'bg-green-100 text-green-800 border-2 border-green-300 hover:bg-green-200';
@@ -916,7 +916,7 @@ const SolutionsPage: React.FC = () => {
                 <h4 className="font-semibold text-gray-800 mb-4 text-sm">Legend:</h4>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
                   <div className="flex items-center space-x-3">
-                    <div className="w-5 h-5 rounded-lg bg-blue-100 border-2 border-blue-500 ring-1 ring-blue-200 flex-shrink-0"></div>
+                    <div className="w-5 h-5 rounded-lg bg-primary-100 border-2 border-primary-500 ring-1 ring-primary-200 flex-shrink-0"></div>
                     <span className="text-gray-700">Current</span>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -984,7 +984,7 @@ const SolutionsPage: React.FC = () => {
                     <div className="pt-4 border-t border-gray-200">
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">Questions Reattempted:</span>
-                        <span className="text-lg font-bold text-blue-600">
+                        <span className="text-lg font-bold text-primary-600">
                           {Object.values(hasReattempted).filter(Boolean).length}
                         </span>
                       </div>

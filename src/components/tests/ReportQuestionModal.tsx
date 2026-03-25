@@ -177,7 +177,7 @@ const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
             value={reportText}
             onChange={(e) => setReportText(e.target.value)}
             placeholder="Please describe the issue... (max 500 characters)"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none transition-all"
             rows={4}
             maxLength={500}
             disabled={isSubmitting}
@@ -201,7 +201,7 @@ const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
           <button
             onClick={handleCustomReport}
             disabled={reportText.length === 0 || isSubmitting}
-            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center">

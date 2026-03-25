@@ -434,7 +434,7 @@ const PDFViewerPage: React.FC = () => {
                   const url = URL.createObjectURL(blob);
                   window.open(url, '_blank');
                 }}
-                className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+                className="px-3 py-1 bg-primary-600 text-white text-sm rounded hover:bg-primary-700 transition-colors"
               >
                 Open in New Tab
               </button>
@@ -472,14 +472,14 @@ const PDFViewerPage: React.FC = () => {
       {!accessGranted && !isLoading && !error && (
         <div className="bg-gray-800 text-gray-300 p-6 text-center">
           <div className="max-w-md mx-auto">
-            <ShieldCheckIcon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+            <ShieldCheckIcon className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-white mb-2">Secure Access Required</h3>
             <p className="text-sm mb-4">
               Generating secure access token to protect this PDF from unauthorized access...
             </p>
             <button
               onClick={loadPDF}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
               Generate Secure Access
             </button>

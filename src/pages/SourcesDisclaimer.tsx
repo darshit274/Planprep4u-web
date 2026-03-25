@@ -14,10 +14,10 @@ const SourcesDisclaimer: React.FC = () => {
   const lastUpdated = "January 2025";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-primary-50 to-secondary-50">
 
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-purple-600 text-white">
+      <div className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
           <button
             onClick={() => navigate(-1)}
@@ -99,7 +99,7 @@ const SourcesDisclaimer: React.FC = () => {
 
           {/* Section 2: Government Sources */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-500 to-blue-600 p-6">
+            <div className="bg-gradient-to-r from-secondary-500 to-primary-600 p-6">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <GlobeAltIcon className="h-7 w-7" />
                 Official Government Information Sources

@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
         {
           'shadow-sm': !gradient,
           'shadow-md hover:-translate-y-0.5 transition-all duration-200': hover,
-          'cursor-pointer hover:border-blue-300 hover:shadow-lg': interactive,
+          'cursor-pointer hover:border-primary-300 hover:shadow-lg': interactive,
           'bg-gradient-to-br from-white to-gray-50': gradient,
         },
         className

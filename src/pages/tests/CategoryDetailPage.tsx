@@ -321,15 +321,15 @@ const CategoryDetailPage: React.FC = () => {
         <div className="flex items-center">
           {/* Icon */}
           <div
-            className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-3 ${isLocked ? 'bg-gray-200' : 'bg-blue-100'
+            className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-3 ${isLocked ? 'bg-gray-200' : 'bg-primary-100'
               }`}
           >
             {isLocked ? (
               <LockClosedIcon className="h-5 w-5 text-gray-500" />
             ) : isContainer ? (
-              <FolderIcon className="h-5 w-5 text-blue-600" />
+              <FolderIcon className="h-5 w-5 text-primary-600" />
             ) : (
-              <DocumentTextIcon className="h-5 w-5 text-blue-600" />
+              <DocumentTextIcon className="h-5 w-5 text-primary-600" />
             )}
           </div>
 
@@ -359,7 +359,7 @@ const CategoryDetailPage: React.FC = () => {
                 </span>
               )}
               {isCompleted && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold text-cyan-600 bg-cyan-100 border border-cyan-200">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold text-primary-600 bg-primary-100 border border-primary-200">
                   <LockClosedIcon className="h-3 w-3" />
                   COMPLETED
                 </span>
@@ -398,8 +398,8 @@ const CategoryDetailPage: React.FC = () => {
       <div className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-all duration-200">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
-            <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-              <PlayIcon className="h-6 w-6 text-blue-600" />
+            <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
+              <PlayIcon className="h-6 w-6 text-primary-600" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
@@ -453,7 +453,7 @@ const CategoryDetailPage: React.FC = () => {
             </button>
             <button
               onClick={handleReattempt}
-              className="flex-1 px-4 py-2.5 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-2.5 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
             >
               <PlayIcon className="h-5 w-5" />
               Re-attempt
@@ -462,7 +462,7 @@ const CategoryDetailPage: React.FC = () => {
         ) : (
           <button
             onClick={handleStartQuiz}
-            className="w-full mt-4 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-4 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
           >
             <PlayIcon className="h-5 w-5" />
             Start Quiz
@@ -561,7 +561,7 @@ const CategoryDetailPage: React.FC = () => {
                   setShowSubscriptionModal(false);
                   navigate(`/tests/series/${seriesUuid}`);
                 }}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl"
+                className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl"
               >
                 View Plans
               </button>
@@ -617,7 +617,7 @@ const CategoryDetailPage: React.FC = () => {
           <p className="text-gray-600 mb-6">Please try again later</p>
           <button
             onClick={fetchCategoryDetail}
-            className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             Retry
           </button>
@@ -703,7 +703,7 @@ const CategoryDetailPage: React.FC = () => {
       {subscriptionAccess.isPaidSeries && !subscriptionAccess.hasAccess && (
         <button
           onClick={() => navigate(`/tests/series/${seriesUuid}`)}
-          className="w-full mt-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group"
+          className="w-full mt-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group"
         >
           <LockOpenIcon className="h-5 w-5" />
           <span>Unlock All Tests in This Series</span>

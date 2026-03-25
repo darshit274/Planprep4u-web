@@ -105,11 +105,11 @@ const HelpSupportPage: React.FC = () => {
   ];
 
   const categories = [
-    { id: 'all', name: 'All FAQs', icon: BookOpenIcon, color: 'from-blue-500 to-cyan-500' },
-    { id: 'general', name: 'General', icon: QuestionMarkCircleIcon, color: 'from-purple-500 to-pink-500' },
+    { id: 'all', name: 'All FAQs', icon: BookOpenIcon, color: 'from-primary-500 to-primary-400' },
+    { id: 'general', name: 'General', icon: QuestionMarkCircleIcon, color: 'from-secondary-500 to-secondary-400' },
     { id: 'tests', name: 'Tests & Exams', icon: AcademicCapIcon, color: 'from-green-500 to-emerald-500' },
     { id: 'features', name: 'Features', icon: SparklesIcon, color: 'from-orange-500 to-red-500' },
-    { id: 'technical', name: 'Technical', icon: DocumentTextIcon, color: 'from-indigo-500 to-blue-500' },
+    { id: 'technical', name: 'Technical', icon: DocumentTextIcon, color: 'from-secondary-500 to-primary-500' },
   ];
 
   const toggleFaq = (id: number) => {
@@ -121,9 +121,9 @@ const HelpSupportPage: React.FC = () => {
     : faqs.filter(faq => faq.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-primary-50 to-secondary-50">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+      <div className="bg-gradient-to-r from-secondary-600 to-primary-600 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
           <button
             onClick={() => navigate(-1)}
@@ -152,7 +152,7 @@ const HelpSupportPage: React.FC = () => {
         <div className="grid gap-6 mb-12">
           <a
             href="mailto:admin@planprep4u.com"
-            className="group bg-gradient-to-br from-primary-500 to-cyan-500 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+            className="group bg-gradient-to-br from-primary-500 to-primary-400 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all hover:scale-105"
           >
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -188,7 +188,7 @@ const HelpSupportPage: React.FC = () => {
 
         {/* FAQ Section */}
         <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden mb-12">
-          <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-8 text-white">
+          <div className="bg-gradient-to-r from-secondary-500 to-primary-500 p-8 text-white">
             <div className="flex items-center gap-4 mb-4">
               <BookOpenIcon className="h-10 w-10" />
               <div>
@@ -240,7 +240,7 @@ const HelpSupportPage: React.FC = () => {
                     className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-start gap-4 flex-1">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0">
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0">
                         {faq.id}
                       </div>
                       <span className="font-semibold text-gray-900 text-lg pr-4">{faq.question}</span>
@@ -253,7 +253,7 @@ const HelpSupportPage: React.FC = () => {
                   </button>
 
                   {expandedFaq === faq.id && (
-                    <div className="px-6 pb-6 bg-gradient-to-br from-blue-50 to-purple-50">
+                    <div className="px-6 pb-6 bg-gradient-to-br from-primary-50 to-secondary-50">
                       <div className="pl-14">
                         <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
                       </div>
@@ -267,7 +267,7 @@ const HelpSupportPage: React.FC = () => {
 
         {/* Quick Tips Grid */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-primary-500 to-primary-400 text-white rounded-2xl p-6 shadow-lg">
             <LightBulbIcon className="h-12 w-12 mb-4 opacity-90" />
             <h3 className="text-xl font-bold mb-2">Pro Tip</h3>
             <p className="text-white/90">
@@ -275,7 +275,7 @@ const HelpSupportPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-secondary-500 to-secondary-400 text-white rounded-2xl p-6 shadow-lg">
             <TrophyIcon className="h-12 w-12 mb-4 opacity-90" />
             <h3 className="text-xl font-bold mb-2">Best Practice</h3>
             <p className="text-white/90">
@@ -304,7 +304,7 @@ const HelpSupportPage: React.FC = () => {
           <div className="p-8">
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-400 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                   1
                 </div>
                 <div>
@@ -314,7 +314,7 @@ const HelpSupportPage: React.FC = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-400 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                   2
                 </div>
                 <div>
@@ -363,14 +363,14 @@ const HelpSupportPage: React.FC = () => {
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
-            <ClockIcon className="h-12 w-12 text-purple-600 mb-4" />
+            <ClockIcon className="h-12 w-12 text-secondary-600 mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-3">Test History</h3>
             <p className="text-gray-700 mb-4">
               View all your completed tests, scores, and performance analytics in one place.
             </p>
             <button
               onClick={() => navigate('/test-history')}
-              className="text-purple-600 font-semibold hover:underline flex items-center gap-2"
+              className="text-secondary-600 font-semibold hover:underline flex items-center gap-2"
             >
               View History →
             </button>
@@ -378,7 +378,7 @@ const HelpSupportPage: React.FC = () => {
         </div>
 
         {/* Still Need Help Section */}
-        <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-gradient-to-br from-secondary-600 to-primary-600 rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-12 text-white text-center">
             <EnvelopeIcon className="h-20 w-20 mx-auto mb-6 opacity-90" />
             <h2 className="text-4xl font-bold mb-4">Still Need Help?</h2>
@@ -388,7 +388,7 @@ const HelpSupportPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="mailto:admin@planprep4u.com"
-                className="inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
+                className="inline-flex items-center gap-3 bg-white text-secondary-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
               >
                 <EnvelopeIcon className="h-6 w-6" />
                 Email Us

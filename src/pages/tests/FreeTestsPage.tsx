@@ -303,15 +303,15 @@ const FreeTestsPage: React.FC = () => {
 
         {/* Previous Attempt Info */}
         {test.hasAttempted && (
-          <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+          <div className="mb-4 p-3 bg-primary-50 rounded-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <CheckCircleIcon className="w-4 h-4 text-blue-600 mr-2" />
-                <span className="text-sm font-medium text-blue-900">Previously Attempted</span>
+                <CheckCircleIcon className="w-4 h-4 text-primary-600 mr-2" />
+                <span className="text-sm font-medium text-primary-900">Previously Attempted</span>
               </div>
               <div className="text-right">
-                <p className="text-sm font-bold text-blue-900">{test.bestScore}%</p>
-                <p className="text-xs text-blue-600">Best Score</p>
+                <p className="text-sm font-bold text-primary-900">{test.bestScore}%</p>
+                <p className="text-xs text-primary-600">Best Score</p>
               </div>
             </div>
           </div>

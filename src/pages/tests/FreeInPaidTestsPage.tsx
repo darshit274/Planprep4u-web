@@ -19,11 +19,11 @@ const FreeInPaidTestsPage: React.FC = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center p-4">
+      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 border border-primary-100">
         {/* Icon */}
         <div className="flex justify-center mb-6">
-          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+          <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
             <SparklesIcon className="h-10 w-10 text-white" />
           </div>
         </div>
@@ -34,9 +34,9 @@ const FreeInPaidTestsPage: React.FC = () => {
         </h1>
 
         {/* Description */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-6">
+        <div className="bg-primary-50 border border-primary-200 rounded-xl p-6 mb-6">
           <div className="flex items-start gap-3">
-            <InformationCircleIcon className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <InformationCircleIcon className="h-6 w-6 text-primary-600 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-gray-700 mb-3">
                 We've improved the way you discover free sample tests! Instead of a separate page,
@@ -79,7 +79,7 @@ const FreeInPaidTestsPage: React.FC = () => {
         {/* CTA Button */}
         <Link
           to="/tests"
-          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
         >
           <span>Browse Test Series</span>
           <ArrowRightIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
