@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 const resetPasswordSchema = z.object({
-  // token: z.string(),
+  otp: z.string().regex(/^\d{4}$/, 'OTP must be the 4-digit code from your email'),
   newPassword: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string(),
 }).refine((data) => data.newPassword === data.confirmPassword, {
@@ -47,7 +47,7 @@ const ResetPasswordPage: React.FC = () => {
 
       const response = await authService.resetPassword(
         email,
-        data.token,
+        data.otp,
         data.newPassword
       );
 
@@ -88,32 +88,34 @@ const ResetPasswordPage: React.FC = () => {
           Reset Password
         </h2>
         <p className="text-gray-600 text-sm">
-          Enter the reset token from your email and create a new password
+          Enter the OTP from your email and create a new password
         </p>
       </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-        {/* Token Field */}
-        {/* <div>
+        {/* OTP Field */}
+        <div>
           <label
-            htmlFor="token"
+            htmlFor="otp"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Reset Token
+            OTP
           </label>
           <input
-            {...register('token')}
+            {...register('otp')}
             type="text"
-            id="token"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
-            placeholder="Enter reset token from email"
+            inputMode="numeric"
+            maxLength={4}
+            id="otp"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors tracking-[0.4em] text-center"
+            placeholder="4-digit code"
           />
-          {errors.token && (
-            <p className="mt-1 text-sm text-red-600">{errors.token.message}</p>
+          {errors.otp && (
+            <p className="mt-1 text-sm text-red-600">{errors.otp.message}</p>
           )}
-        </div> */}
+        </div>
 
         {/* New Password Field */}
         <div>

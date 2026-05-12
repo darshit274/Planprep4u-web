@@ -56,11 +56,11 @@ const SourcesDisclaimer: React.FC = () => {
               Welcome to <strong className="text-primary-600">PlanPrep4u</strong>.
               Transparency and trust are important to us. This page explains the
               information sources used in the app and clearly outlines our
-              disclaimer regarding government-related examinations.
+              disclaimer regarding government Town Planner examinations.
             </p>
             <p className="text-gray-700 leading-relaxed">
               PlanPrep4u is an independent educational platform created
-              solely for exam preparation and self-practice. Please review the
+              solely for Town Planner exam preparation and self-practice. Please review the
               sections below to understand our sources and limitations.
             </p>
           </div>
@@ -108,7 +108,7 @@ const SourcesDisclaimer: React.FC = () => {
             <div className="p-8 text-gray-700">
               <p className="mb-6 font-medium text-gray-900">
                 Exam-related information such as syllabus structure, exam
-                patterns, and recruitment details is referred from publicly
+                patterns, and recruitment details for Town Planner posts is referred from publicly
                 available official government websites:
               </p>
 
@@ -143,15 +143,29 @@ const SourcesDisclaimer: React.FC = () => {
 
                 <li>
                   <p className="font-semibold text-gray-900">
-                    Gujarat Police Recruitment Board (GPRB)
+                    Gujarat Urban Development Mission (GUDM)
                   </p>
                   <a
-                    href="https://gprb.gujarat.gov.in"
+                    href="https://gudm.gujarat.gov.in"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary-600 hover:underline break-all"
                   >
-                    https://gprb.gujarat.gov.in
+                    https://gudm.gujarat.gov.in
+                  </a>
+                </li>
+
+                <li>
+                  <p className="font-semibold text-gray-900">
+                    Gujarat Infrastructure Development Board (GIDB)
+                  </p>
+                  <a
+                    href="https://gidb.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-600 hover:underline break-all"
+                  >
+                    https://gidb.org
                   </a>
                 </li>
               </ul>
@@ -168,24 +182,26 @@ const SourcesDisclaimer: React.FC = () => {
             </div>
             <div className="p-8 text-gray-700">
               <p className="mb-4 font-medium text-gray-900">
-                Educational Content Sources
+                Town Planner Exam Content Sources
               </p>
               <p className="mb-4">
                 Practice questions and explanations are prepared using commonly
-                available educational resources, including:
+                available Town Planning educational resources, including:
               </p>
 
               <ul className="list-disc list-inside space-y-2 ml-2">
-                <li>NCERT Textbooks</li>
-                <li>GCERT Textbooks</li>
-                <li>A Brief History of Modern India – Spectrum</li>
-                <li>Ancient India – R.S. Sharma</li>
-                <li>Medieval India – Satish Chandra</li>
-                <li>Indian Art & Culture – Nitin Singhania</li>
-                <li>Indian Polity – M. Laxmikant</li>
-                <li>Indian Economy – Ramesh Singh</li>
-                <li>Indian Economy – Vivek Singh</li>
-                <li>Bharatiya Arthatantra – Yuva Upanishad</li>
+                <li>Gujarat Town Planning & Urban Development Act (GTPUDA), 1976</li>
+                <li>General Development Control Regulations (GDCR)</li>
+                <li>Urban & Regional Planning – Lewis Keeble</li>
+                <li>Town Planning in Practice – Raymond Unwin</li>
+                <li>Introduction to Urban & Regional Planning – John Ratcliffe</li>
+                <li>Housing in India – Problems, Policy and Perspectives</li>
+                <li>Environmental Planning & Management – Various Authors</li>
+                <li>Transportation Planning – Michael Meyer & Eric Miller</li>
+                <li>Indian Polity – M. Laxmikant (for General Studies component)</li>
+                <li>NCERT Geography & Social Science Textbooks</li>
+                <li>GCERT Textbooks (Gujarat State Board)</li>
+                <li>ITPI (Institute of Town Planners, India) Study Materials</li>
               </ul>
             </div>
           </div>

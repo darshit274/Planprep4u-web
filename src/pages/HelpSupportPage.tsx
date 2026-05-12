@@ -33,13 +33,13 @@ const HelpSupportPage: React.FC = () => {
     {
       id: 1,
       question: 'How do I start taking practice tests?',
-      answer: 'Navigate to the "Tests" section from the sidebar menu. Browse available test series or categories for Gujarat competitive Exams (GPSC, GSSSB, etc.). Click on any test to view details, then click "Start Test". Choose your preferred language (English or Gujarati) and begin!',
+      answer: 'Navigate to the "Tests" section from the sidebar menu. Browse available test series or categories for government Town Planner exams (GPSC Town Planner, GSSSB Asst. Town Planner, etc.). Click on any test to view details, then click "Start Test". Choose your preferred language (English or Gujarati) and begin!',
       category: 'general',
     },
     {
       id: 2,
       question: 'What exams does PlanPrep4u cover?',
-      answer: 'We provide comprehensive preparation for Gujarat competitive Exams including GPSC (Gujarat Public Service Commission), GSSSB (Gujarat Subordinate Service Selection Board), GPSSB (Gujarat Panchayat Service Selection Board), Police Constable Bharti, PSI (Police Sub Inspector), Talati, and Junior Clerk examinations.',
+      answer: 'Currently we are focused on government exams for Town Planners — including GPSC Town Planner (Class 1 & 2), GSSSB Assistant Town Planner, Municipal Corporation Town Planner Bharti, GIDC Town Planner posts, and other urban development government roles. We are continuously adding more exam-specific content.',
       category: 'general',
     },
     {
@@ -69,7 +69,7 @@ const HelpSupportPage: React.FC = () => {
     {
       id: 7,
       question: 'Are there really free tests available?',
-      answer: 'Yes! PlanPrep4u offers numerous free resources including: free practice quizzes (especially for Maths and Reasoning), free Previous Year Question Papers (PYQPs) for all major Gujarat exams, free topic-wise tests, and sample full-length mock tests. Premium test series require a subscription for complete access.',
+      answer: 'Yes! PlanPrep4u offers numerous free resources including: free practice quizzes on Town Planning concepts and general aptitude, free Previous Year Question Papers (PYQPs) for Town Planner exams, free topic-wise tests on planning subjects, and sample full-length mock tests. Premium test series require a subscription for complete access.',
       category: 'general',
     },
     {
@@ -87,13 +87,13 @@ const HelpSupportPage: React.FC = () => {
     {
       id: 10,
       question: 'Can I download study materials and PDFs?',
-      answer: 'Yes! Visit the "PDFs" section from the sidebar menu. You can view and download: previous year question papers, topic-wise study notes, important formulas and shortcuts, current affairs updates, and exam pattern guides. All materials are available in both English and Gujarati.',
+      answer: 'Yes! Visit the "PDFs" section from the sidebar menu. You can view and download: previous year question papers for Town Planner exams, topic-wise study notes on planning subjects, important Town Planning Acts and GDCR summaries, and exam pattern guides. All materials are available in both English and Gujarati.',
       category: 'general',
     },
     {
       id: 11,
       question: 'What is negative marking and how is it calculated?',
-      answer: 'Negative marking mirrors actual Gujarat competitive Exam patterns. Typically, wrong answers deduct 0.25 to 0.33 marks per question (varies by exam type). Your final score = (Correct answers × Marks per question) - (Wrong answers × Negative marks per question). The results page shows your score breakdown clearly.',
+      answer: 'Negative marking mirrors actual government Town Planner exam patterns. Typically, wrong answers deduct 0.25 to 0.33 marks per question (varies by exam type). Your final score = (Correct answers × Marks per question) - (Wrong answers × Negative marks per question). The results page shows your score breakdown clearly.',
       category: 'tests',
     },
     {
@@ -319,7 +319,7 @@ const HelpSupportPage: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Browse Test Series</h3>
-                  <p className="text-gray-700">Explore available tests for your target exam (GPSC, GSSSB, Police, etc.). Start with free tests to get familiar.</p>
+                  <p className="text-gray-700">Explore available tests for your target exam (GPSC Town Planner, GSSSB Asst. Town Planner, Municipal, etc.). Start with free tests to get familiar.</p>
                 </div>
               </div>
 
@@ -352,7 +352,7 @@ const HelpSupportPage: React.FC = () => {
             <DocumentTextIcon className="h-12 w-12 text-primary-600 mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Materials</h3>
             <p className="text-gray-700 mb-4">
-              Access free PDFs, previous year papers, and study notes for all Gujarat competitive Exams.
+              Access free PDFs, previous year papers, and study notes for government Town Planner exams.
             </p>
             <button
               onClick={() => navigate('/pdfs')}

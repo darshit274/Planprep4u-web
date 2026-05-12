@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { logout } from '../../store/slices/authSlice';
-import MockTaleLogo from '../../assets/planprep4u-logo.jpg';
+import Planprep4uLogo from '../../assets/planprep4u-logo.jpg';
 import {
   HomeIcon,
   AcademicCapIcon,
@@ -130,7 +130,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({ children }) => {
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-lg overflow-hidden">
               <img
-                src={MockTaleLogo}
+                src={Planprep4uLogo}
                 alt="PlanPrep4u"
                 className="w-full h-full object-cover"
               />

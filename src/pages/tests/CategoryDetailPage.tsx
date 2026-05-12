@@ -104,6 +104,26 @@ const CategoryDetailPage: React.FC = () => {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [lockedTestName, setLockedTestName] = useState('');
 
+  // Per-category attempt summary used by the "Already attempted" badge + retake
+  // warning modal. Keyed by category UUID; populated on mount.
+  type AttemptInfo = { attempts: number; lastScore: number; lastSessionId: string; lastDate: string };
+  const [attemptSummary, setAttemptSummary] = useState<Record<string, AttemptInfo>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await api.get('/test-history/by-category-summary');
+        if (!cancelled && res.data?.success) {
+          setAttemptSummary(res.data.data || {});
+        }
+      } catch (err) {
+        // Non-fatal — badge just won't render.
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   // Get navigation data from location state
   const { categoryName, seriesUuid, seriesName } = location.state || {};
 
@@ -286,6 +306,22 @@ const CategoryDetailPage: React.FC = () => {
       }
     }
 
+    // If the user has already attempted this exact category, navigate directly
+    // to the most-recent analysis page. Retake button lives there. Per #6.
+    const prior = uuid ? attemptSummary[uuid] : undefined;
+    if (prior && prior.attempts > 0 && prior.lastSessionId) {
+      navigate(`/tests/results/${prior.lastSessionId}`, {
+        state: {
+          retakeCategoryUuid: uuid,
+          retakeCategoryName: category.name,
+          retakeSeriesUuid: seriesUuid,
+          retakeSeriesName: seriesName,
+          attempts: prior.attempts,
+        },
+      });
+      return;
+    }
+
     console.log('✅ Navigating to quiz page');
     navigate(`/tests/quiz/${uuid}`, {
       state: {
@@ -362,6 +398,15 @@ const CategoryDetailPage: React.FC = () => {
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold text-primary-600 bg-primary-100 border border-primary-200">
                   <LockClosedIcon className="h-3 w-3" />
                   COMPLETED
+                </span>
+              )}
+              {/* Per-category attempt badge (from /test-history/by-category-summary). */}
+              {attemptSummary[subcategory.uuid]?.attempts > 0 && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200">
+                  Attempted ×{attemptSummary[subcategory.uuid].attempts}
+                  {attemptSummary[subcategory.uuid].lastScore != null && (
+                    <> · last {Math.round(attemptSummary[subcategory.uuid].lastScore)}%</>
+                  )}
                 </span>
               )}
             </div>

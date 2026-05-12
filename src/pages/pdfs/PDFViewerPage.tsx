@@ -234,19 +234,14 @@ const PDFViewerPage: React.FC = () => {
       setError('');
       setSecurityWarning('');
       
-      // Step 1: Check if user is authenticated (temporarily disabled for testing)
+      // Step 1: Check if user is authenticated
       const authToken = sessionStorage.getItem('planprep4u_token');
-      const userData = sessionStorage.getItem('planprep4u_user');
-      
-      console.log('Auth token exists:', !!authToken);
-      console.log('User data exists:', !!userData);
-      
+
       if (!authToken) {
         throw new Error('Authentication required. Please log in first.');
       }
-      
-      // Step 2: Fetch PDF data using the configured API service (same as mobile app pattern)
-      console.log('Fetching PDF data from secure endpoint:', id);
+
+      // Step 2: Fetch PDF data using the configured API service
       
       const response = await api.get(`/pdfs/${id}/secure`);
       console.log('📡 API Response received:', response.status);

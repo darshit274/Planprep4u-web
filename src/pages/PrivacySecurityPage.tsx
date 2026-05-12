@@ -53,7 +53,7 @@ const PrivacySecurityPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our educational platform for Gujarat competitive exam preparation.
+              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our educational platform for government Town Planner exam preparation.
             </p>
             <p className="text-gray-700 leading-relaxed">
               By accessing or using PlanPrep4u, you agree to this Privacy Policy. If you do not agree with the terms, please discontinue use of our services.
@@ -275,7 +275,7 @@ const PrivacySecurityPage: React.FC = () => {
             </div>
             <div className="p-8">
               <p className="text-gray-700 leading-relaxed">
-                PlanPrep4u is intended for users preparing for government exams. While we do not specifically target children under 13,
+                PlanPrep4u is intended for users preparing for government Town Planner exams. While we do not specifically target children under 13,
                 if we learn that we have collected personal information from a child under 13 without parental consent, we will take steps to
                 delete that information promptly. Parents or guardians who believe their child has provided us with information should contact us immediately.
               </p>

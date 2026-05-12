@@ -53,7 +53,7 @@ const TermsConditionsPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. These Terms and Conditions ("Terms") govern your access to and use of our online educational platform for Gujarat competitive Exam preparation. By registering, accessing, or using our services, you agree to be bound by these Terms.
+              Welcome to <strong className="text-primary-600">PlanPrep4u</strong>. These Terms and Conditions ("Terms") govern your access to and use of our online educational platform for government Town Planner exam preparation. By registering, accessing, or using our services, you agree to be bound by these Terms.
             </p>
             <p className="text-gray-700 leading-relaxed">
               <strong>IMPORTANT:</strong> If you do not agree to these Terms, please do not use our platform. Your continued use constitutes acceptance of any modifications to these Terms.

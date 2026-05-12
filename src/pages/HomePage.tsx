@@ -16,8 +16,19 @@ import {
   EnvelopeIcon,
   QuestionMarkCircleIcon
 } from '@heroicons/react/24/outline';
-import MockTaleLogoPng from './../assets/planprep4u-logo.png';
+import Planprep4uPng from './../assets/planprep4u-logo.png';
 import ContactQueryForm from '../components/ContactQueryForm';
+
+// Public Telegram channel link. Hardcoded so it works without admin config;
+// admins can later override the displayed URL via the Settings → Platform tab
+// (footer of MainLayout reads /api/settings/public for that).
+const TELEGRAM_URL = 'https://t.me/planprep4u';
+
+const TelegramIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.7L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
+  </svg>
+);
 
 const HomePage: React.FC = () => {
   return (
@@ -29,7 +40,7 @@ const HomePage: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <img
-                src={MockTaleLogoPng}
+                src={Planprep4uPng}
                 alt="PlanPrep4u"
                 className="h-16 w-auto drop-shadow-sm transition-transform hover:scale-105"
               />
@@ -53,6 +64,16 @@ const HomePage: React.FC = () => {
 
             {/* Auth Buttons */}
             <div className="flex items-center gap-3">
+              <a
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 rounded-full transition-all duration-200 border border-sky-200"
+                title="Join our Telegram channel"
+              >
+                <TelegramIcon className="w-4 h-4" />
+                Telegram
+              </a>
               <Link
                 to="/login"
                 className="hidden sm:inline-flex items-center px-5 py-2 text-sm font-semibold text-primary-700 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 rounded-full transition-all duration-200 border border-primary-200"
@@ -83,7 +104,7 @@ const HomePage: React.FC = () => {
             {/* Tagline Badge */}
             <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary-100 text-primary-800 text-sm font-semibold mb-8 animate-fade-in border border-primary-200">
               <SparklesIcon className="w-4 h-4 mr-2" />
-              Practice Relentlessly. Perform Flawlessly.
+              India's First Mock Test Platform for Town Planners
             </div>
 
             {/* Main Heading */}
@@ -93,12 +114,12 @@ const HomePage: React.FC = () => {
 
             <p className="text-2xl md:text-3xl font-bold mb-6 animate-slide-up">
               <span className="gradient-text">Your Smart Companion</span>{' '}
-              for Gujarat Competitive Exam Preparation
+              for Government Town Planner Exam Preparation
             </p>
 
             {/* Key Features Pills */}
             <div className="flex flex-wrap items-center justify-center gap-3 text-sm md:text-base text-gray-700 mb-10 animate-fade-in">
-              {['Full-Length Mock Tests', 'Subject & Topic-Wise Practice', 'Real Exam Pattern', 'Gujarati & English'].map((f) => (
+              {['Full-Length Mock Tests', 'Subject & Topic-Wise Practice', 'Real Exam Pattern', 'English & Gujarati'].map((f) => (
                 <span key={f} className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm border border-primary-100">
                   <CheckCircleIcon className="w-4 h-4 text-primary-500 mr-2" />
                   {f}
@@ -122,7 +143,7 @@ const HomePage: React.FC = () => {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-primary-100 max-w-4xl mx-auto">
               <p className="text-sm text-gray-500 mb-3 font-medium">Exams Covered:</p>
               <div className="flex flex-wrap justify-center gap-2 text-xs md:text-sm">
-                {['GPSC', 'GSSSB', 'GPSSB', 'Police Constable', 'PSI', 'Talati', 'Junior Clerk', 'More...'].map((exam) => (
+                {['GPSC Town Planner', 'GSSSB Asst. Town Planner', 'Municipal Town Planner', 'GIDC Town Planner', 'Urban Development Posts', 'More...'].map((exam) => (
                   <span key={exam} className="px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full font-semibold border border-primary-100">
                     {exam}
                   </span>
@@ -145,13 +166,13 @@ const HomePage: React.FC = () => {
 
             <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-3xl p-8 md:p-12 shadow-lg border border-primary-100">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                PlanPrep4u is a powerful <strong className="text-primary-700">mock test platform</strong> built for aspirants preparing for various{' '}
-                <strong className="text-secondary-700">Gujarat competitive Exams</strong> like GPSC, GSSSB, GPSSB, Police-constable Bharti, PSI, Talati, Junior Clerk and more.
+                PlanPrep4u is a powerful <strong className="text-primary-700">mock test platform</strong> built exclusively for aspirants preparing for{' '}
+                <strong className="text-secondary-700">government Town Planner examinations</strong> — including GPSC Town Planner, GSSSB Assistant Town Planner, Municipal Corporation Town Planner, GIDC posts, and other urban development government roles.
               </p>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                We provide <strong>full-length tests</strong>, <strong>subject-wise practice</strong>, <strong>topic-wise revision</strong>,{' '}
-                <strong>free previous year question papers (PYQPs)</strong> to attempt and <strong>free quizzes</strong> of maths and reasoning in{' '}
-                <strong className="text-primary-600">Gujarati and English</strong> helping you master every corner of the syllabus.
+                We provide <strong>full-length mock tests</strong>, <strong>subject-wise practice</strong>, <strong>topic-wise revision</strong>,{' '}
+                <strong>free previous year question papers (PYQPs)</strong> and <strong>free quizzes</strong> covering Urban Planning, Town Planning Acts, GDCR, Transportation Planning, and more — in{' '}
+                <strong className="text-primary-600">English and Gujarati</strong> — helping you master every corner of the Town Planner exam syllabus.
               </p>
             </div>
           </div>
@@ -172,14 +193,14 @@ const HomePage: React.FC = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: LanguageIcon, title: 'Bilingual Language Support', color: 'from-primary-500 to-primary-600', desc: 'We offer tests in both <strong>Gujarati and English</strong> (where applicable), helping every aspirant prepare in their most comfortable language.' },
-              { icon: DocumentTextIcon, title: 'Real Exam Experience', color: 'from-secondary-500 to-secondary-600', desc: 'Our mock tests are crafted to closely mirror the actual exams - right from <strong>question pattern to time pressure</strong> - so you\'re always exam-ready.' },
-              { icon: ChartBarIcon, title: 'Instant Results & Smart Analytics', color: 'from-primary-400 to-primary-600', desc: 'Get your <strong>marks, rank, and percentile instantly</strong>. Track your performance and identify areas for improvement.' },
-              { icon: LightBulbIcon, title: 'Detailed Solutions & Explanations', color: 'from-[#c19e6b] to-[#a6834e]', desc: 'Every question includes a <strong>thorough explanation</strong> so you not only know the right answer, but also why it\'s right.' },
-              { icon: ArrowPathIcon, title: 'Practice Mode Option', color: 'from-[#db4d4b] to-[#c43a38]', desc: 'Attempt tests in <strong>Practice Mode</strong>, where solutions are hidden even after submission - so you can revisit and reattempt with full focus.' },
-              { icon: AcademicCapIcon, title: 'Full Syllabus Coverage', color: 'from-secondary-600 to-secondary-700', desc: 'Our <strong>subject-wise and topic-wise tests</strong> are designed to ensure complete coverage of the syllabus - making revision effective and structured.' },
-              { icon: PuzzlePieceIcon, title: 'Frequent Free Quizzes', color: 'from-[#88b7a5] to-[#6fa28f]', desc: 'Boost your speed and accuracy with our <strong>free quizzes in Maths and Reasoning</strong> - available in both English and Gujarati with solutions.' },
-              { icon: BookOpenIcon, title: 'Diverse & Curated Question Bank', color: 'from-primary-600 to-secondary-600', desc: 'Our content is <strong>carefully selected from various authentic materials</strong> to give you the broadest and most relevant practice.' },
+              { icon: LanguageIcon, title: 'Bilingual Language Support', color: 'from-primary-500 to-primary-600', desc: 'We offer tests in both <strong>English and Gujarati</strong>, helping every Town Planner aspirant prepare in their most comfortable language.' },
+              { icon: DocumentTextIcon, title: 'Real Exam Experience', color: 'from-secondary-500 to-secondary-600', desc: 'Our mock tests are crafted to closely mirror actual Town Planner exams — right from <strong>question pattern to time pressure</strong> — so you\'re always exam-ready.' },
+              { icon: ChartBarIcon, title: 'Instant Results & Smart Analytics', color: 'from-primary-400 to-primary-600', desc: 'Get your <strong>marks, rank, and percentile instantly</strong>. Track your performance across subjects and identify weak areas.' },
+              { icon: LightBulbIcon, title: 'Detailed Solutions & Explanations', color: 'from-[#c19e6b] to-[#a6834e]', desc: 'Every question includes a <strong>thorough explanation</strong> — so you understand the concept deeply, not just the answer.' },
+              { icon: ArrowPathIcon, title: 'Practice Mode Option', color: 'from-[#db4d4b] to-[#c43a38]', desc: 'Attempt tests in <strong>Practice Mode</strong> where solutions are hidden after submission — perfect for repeated revision without distractions.' },
+              { icon: AcademicCapIcon, title: 'Full Syllabus Coverage', color: 'from-secondary-600 to-secondary-700', desc: 'Covers <strong>Urban Planning, GDCR, Town Planning Acts, Transportation, Housing, Environment, GIS</strong> and all other Town Planner exam topics.' },
+              { icon: PuzzlePieceIcon, title: 'Frequent Free Quizzes', color: 'from-[#88b7a5] to-[#6fa28f]', desc: 'Boost speed and accuracy with <strong>free quizzes on planning concepts and general aptitude</strong> — in both English and Gujarati with solutions.' },
+              { icon: BookOpenIcon, title: 'Curated Town Planner Question Bank', color: 'from-primary-600 to-secondary-600', desc: 'Our content is <strong>carefully curated from authentic planning resources, PYQPs, and official syllabi</strong> to give you the most relevant practice.' },
             ].map(({ icon: Icon, title, color, desc }) => (
               <div key={title} className="card-hover p-8 group bg-white">
                 <div className={`w-14 h-14 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -205,10 +226,10 @@ const HomePage: React.FC = () => {
 
           <div className="max-w-3xl mx-auto space-y-4">
             {[
-              { q: 'Are the mock tests based on the latest exam pattern?', a: 'Yes, all mock tests are designed to reflect the <strong>latest pattern and difficulty level</strong> of Gujarat competitive Exams.' },
-              { q: 'What is the language of tests?', a: 'All tests are available in <strong>Gujarati, and in English wherever applicable</strong>. You can switch languages during the test.' },
-              { q: 'What is Practice Mode?', a: 'Practice Mode lets you <strong>attempt the test without seeing solutions</strong>—so you can revisit and learn without distractions.' },
-              { q: 'How soon do I get results?', a: '<strong>Instantly.</strong> As soon as you submit, you get marks, rank, percentile, and detailed performance analysis.' },
+              { q: 'Which Town Planner exams does PlanPrep4u cover?', a: 'Currently we are focused on <strong>government exams for Town Planners</strong> — including GPSC Town Planner (Class 1 & 2), GSSSB Assistant Town Planner, Municipal Corporation Town Planner, and GIDC recruitment posts. More exams will be added soon.' },
+              { q: 'Are the mock tests based on the latest exam pattern?', a: 'Yes, all mock tests are designed to reflect the <strong>latest syllabus and difficulty level</strong> of government Town Planner exams — including planning theory, acts & legislation, and technical subjects.' },
+              { q: 'What is Practice Mode?', a: 'Practice Mode lets you <strong>attempt tests without seeing solutions</strong> immediately — ideal for repeated revision and self-testing without distractions.' },
+              { q: 'How soon do I get results?', a: '<strong>Instantly.</strong> As soon as you submit, you get marks, rank, percentile, and a detailed subject-wise performance analysis.' },
             ].map(({ q, a }, i) => (
               <div key={i} className="card-hover p-6 bg-primary-50 border border-primary-100">
                 <div className="flex items-start">
@@ -259,11 +280,11 @@ const HomePage: React.FC = () => {
       <section className="section-spacing bg-primary-700">
         <div className="page-container text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Ace Your{' '}
-            <span className="text-accent-400">Gujarat Govt Exams</span>?
+            Ready to Crack Your{' '}
+            <span className="text-accent-400">Town Planner Govt Exam</span>?
           </h2>
           <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of students who have transformed their exam preparation with PlanPrep4u
+            Join aspirants who are preparing smarter with PlanPrep4u — the dedicated platform for government Town Planner exams
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/register" className="btn btn-lg bg-accent-500 hover:bg-accent-600 text-white font-bold shadow-xl">
@@ -283,14 +304,14 @@ const HomePage: React.FC = () => {
             {/* Logo & Description */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
-                <img src={MockTaleLogoPng} alt="PlanPrep4u" className="h-14 rounded-xl bg-white p-1" />
+                <img src={Planprep4uPng} alt="PlanPrep4u" className="h-14 rounded-xl bg-white p-1" />
                 <div className="ml-3">
                   <div className="text-lg font-bold text-white">PlanPrep4u</div>
                   <div className="text-sm text-primary-300">Test Series for Toppers</div>
                 </div>
               </div>
               <p className="text-primary-200 text-sm leading-relaxed">
-                Your trusted platform for Gujarat competitive Exam preparation. Comprehensive mock tests, study materials, and analytics to help you succeed.
+                India's dedicated mock test platform for government Town Planner exam preparation. Comprehensive tests, study materials, and analytics to help you succeed.
               </p>
             </div>
 
@@ -319,9 +340,21 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Contact row */}
-          <div className="mb-6 flex items-center gap-2 text-primary-300 text-sm">
-            <EnvelopeIcon className="w-4 h-4" />
-            <span>planprep4uofficial@gmail.com</span>
+          <div className="mb-6 flex flex-wrap items-center gap-3 text-primary-300 text-sm">
+            <div className="flex items-center gap-2">
+              <EnvelopeIcon className="w-4 h-4" />
+              <span>planprep4uofficial@gmail.com</span>
+            </div>
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-500/15 hover:bg-sky-500/25 text-sky-200 border border-sky-400/30 font-medium"
+              title="Join our Telegram channel"
+            >
+              <TelegramIcon className="w-4 h-4" />
+              Join us on Telegram
+            </a>
           </div>
 
           {/* Copyright */}

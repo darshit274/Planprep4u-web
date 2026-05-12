@@ -95,7 +95,6 @@ const ProfileEditPage: React.FC = () => {
             state: profile.state || '',
           };
           
-          console.log('Setting form data:', formData);
           profileForm.reset(formData);
           setHasChanges(false);
         } else {

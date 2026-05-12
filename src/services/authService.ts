@@ -94,8 +94,8 @@ class AuthService {
   }
 
   // Reset Password
-  async resetPassword(email: string, token: string, newPassword: string): Promise<ApiResponse<{ message: string }>> {
-    const response = await api.post('/users/resetPassword', { email, token, newPassword });
+  async resetPassword(email: string, otp: string, newPassword: string): Promise<ApiResponse<{ message: string }>> {
+    const response = await api.post('/users/resetPassword', { email, otp, newPassword });
     return response.data;
   }
 
@@ -113,8 +113,6 @@ class AuthService {
 
   // Update user profile - use base64 approach to avoid FormData issues
   async updateProfile(data: any): Promise<ApiResponse<User>> {
-    console.log('updateProfile called with:', { hasAvatar: !!data.avatar, dataType: typeof data });
-    
     const updatePayload: any = {
       fullName: data.fullName,
       email: data.email,
@@ -128,36 +126,27 @@ class AuthService {
     // Handle avatar as base64 string to avoid FormData issues
     if (data.avatar && data.avatar instanceof Blob) {
       try {
-        console.log('Converting blob to base64 for upload');
-        
-        // Convert blob to base64
         const reader = new FileReader();
         const base64Promise = new Promise<string>((resolve, reject) => {
           reader.onloadend = () => resolve(reader.result as string);
           reader.onerror = reject;
         });
         reader.readAsDataURL(data.avatar);
-        
+
         const base64String = await base64Promise;
         updatePayload.avatarBase64 = base64String;
-        
-        console.log('Avatar converted to base64, length:', base64String.length);
       } catch (error) {
         console.error('Failed to convert avatar to base64:', error);
         throw new Error('Failed to process avatar image');
       }
     }
-    
-    console.log('Sending JSON update with payload keys:', Object.keys(updatePayload));
-    
-    // Send as regular JSON
+
     const response = await api.put('/profile/profile', updatePayload);
     return response.data;
   }
 
   // Upload avatar - now uses updateProfile internally
   async uploadAvatar(formData: FormData): Promise<ApiResponse<User>> {
-    console.log('uploadAvatar called with FormData');
     const response = await api.put('/profile/profile', formData);
     return response.data;
   }

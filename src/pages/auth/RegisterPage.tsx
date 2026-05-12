@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { authService } from '../../services/authService';
 import { toast } from 'react-hot-toast';
 import { Eye, EyeOff } from 'lucide-react';
+import IntroVideoModal from '../../components/IntroVideoModal';
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -66,6 +67,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <div className="w-full">
+      <IntroVideoModal />
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">

@@ -8,7 +8,7 @@ import {
   EnvelopeIcon,
   ArrowRightIcon
 } from '@heroicons/react/24/outline';
-import MockTaleLogoPng from './../assets/planprep4u-logo.png';
+import Planprep4uLogoPng from './../assets/planprep4u-logo.png';
 
 const AppComingSoonPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -81,7 +81,7 @@ const AppComingSoonPage: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center group bg-gradient-to-r from-primary-400 to-primary-500 rounded-2xl group-hover:opacity-30 transition-opacity">
               <img
-                src={MockTaleLogoPng}
+                src={Planprep4uLogoPng}
                 alt="PlanPrep4u"
                 className="h-16 w-auto drop-shadow-lg transition-transform group-hover:scale-105"
               />
@@ -241,7 +241,7 @@ const AppComingSoonPage: React.FC = () => {
             <div className="flex items-center justify-center gap-4">
               {/* Facebook */}
               <a
-                href="https://www.facebook.com/people/MockTale-Academy/61570171356089/"
+                href="https://www.facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full border border-white/30 transition-all duration-200 hover:scale-110"
@@ -253,7 +253,7 @@ const AppComingSoonPage: React.FC = () => {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/mocktale_academy"
+                href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full border border-white/30 transition-all duration-200 hover:scale-110"
@@ -265,7 +265,7 @@ const AppComingSoonPage: React.FC = () => {
 
               {/* YouTube */}
               <a
-                href="https://www.youtube.com/@MockTaleAcademy"
+                href="https://www.youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full border border-white/30 transition-all duration-200 hover:scale-110"
@@ -277,7 +277,7 @@ const AppComingSoonPage: React.FC = () => {
 
               {/* Telegram */}
               <a
-                href="https://t.me/MockTale_Academy"
+                href="https://t.me"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full border border-white/30 transition-all duration-200 hover:scale-110"

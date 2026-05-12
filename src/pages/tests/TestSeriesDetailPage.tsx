@@ -55,6 +55,30 @@ const TestSeriesDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [seriesExpanded, setSeriesExpanded] = useState(false); // ✅ ADD THIS
 
+  // Per-category attempt summary (attempts count + last score + lastSessionId)
+  // used to render the "Attempted ×N" badge. When a user clicks an attempted
+  // test we navigate directly to its analysis page (no warning modal).
+  type AttemptInfo = { attempts: number; lastScore: number; lastSessionId: string; lastDate: string };
+  const [attemptSummary, setAttemptSummary] = useState<Record<string, AttemptInfo>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await api.get('/test-history/by-category-summary');
+        if (cancelled) return;
+        // Diagnostic log — visible in browser DevTools console. If you see
+        // {} the user has no prior attempts; if you see a 404, the backend
+        // hasn't been restarted with the new route.
+        console.log('[attempt-summary] keys:', Object.keys(res.data?.data || {}).length, res.data?.data);
+        if (res.data?.success) setAttemptSummary(res.data.data || {});
+      } catch (err: any) {
+        console.warn('[attempt-summary] fetch failed:', err?.response?.status, err?.message);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     if (uuid) {
       fetchSeriesDetail();
@@ -231,9 +255,24 @@ const TestSeriesDetailPage: React.FC = () => {
       e.stopPropagation();
       if (isCompleted) {
         handleViewResults(category.uuid, category.name);
-      } else {
-        handleCategorySelect(category);
+        return;
       }
+      // Already attempted? Go straight to the analysis screen for the most
+      // recent attempt — Retake is available from there. Per client point #6.
+      const prior = attemptSummary[category.uuid];
+      if (prior && prior.attempts > 0 && prior.lastSessionId) {
+        navigate(`/tests/results/${prior.lastSessionId}`, {
+          state: {
+            retakeCategoryUuid: category.uuid,
+            retakeCategoryName: category.name,
+            retakeSeriesUuid: uuid,
+            retakeSeriesName: series?.name || series?.title,
+            attempts: prior.attempts,
+          },
+        });
+        return;
+      }
+      handleCategorySelect(category);
     };
 
     return (
@@ -273,6 +312,17 @@ const TestSeriesDetailPage: React.FC = () => {
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-800">
                   <CheckCircleIcon className="h-3 w-3 mr-1" />
                   Unlocked
+                </span>
+              )}
+              {/* Already-attempted badge — shown on any card whose UUID appears
+                  in the user's attempt summary (works for both question-holder
+                  and container categories). */}
+              {attemptSummary[category.uuid]?.attempts > 0 && (
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                  Attempted ×{attemptSummary[category.uuid].attempts}
+                  {attemptSummary[category.uuid].lastScore != null && (
+                    <> · last {Math.round(attemptSummary[category.uuid].lastScore)}%</>
+                  )}
                 </span>
               )}
             </div>
@@ -512,6 +562,69 @@ const TestSeriesDetailPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Already-attempted banner — sums attempts across every category on
+          this series, plus any attempts keyed under the series UUID itself
+          (legacy sessions, where the backend falls back to TestSeries.uuid
+          when session_data.category_uuid is missing).
+          Per client point #6 (show analysis + indicate already attempted). */}
+      {(() => {
+        const perCategory = categories
+          .map((c) => ({ key: c.uuid, info: attemptSummary[c.uuid] }))
+          .filter((x) => x.info && x.info.attempts > 0);
+
+        // Series-level fallback: attempts the backend keyed under THIS series'
+        // UUID directly (legacy sessions without category_uuid in session_data).
+        const seriesLevel = uuid && attemptSummary[uuid]
+          ? [{ key: uuid, info: attemptSummary[uuid] }]
+          : [];
+
+        const attempted = [...perCategory, ...seriesLevel];
+        if (attempted.length === 0) return null;
+
+        const totalAttempts = attempted.reduce((s, x) => s + (x.info?.attempts || 0), 0);
+        const mostRecent = attempted
+          .map((x) => x.info!)
+          .sort((a, b) => new Date(b.lastDate).getTime() - new Date(a.lastDate).getTime())[0];
+        const distinctCategoryCount = perCategory.length;
+        return (
+          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+            <CheckCircleIcon className="h-6 w-6 text-amber-600 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-amber-900">
+                Already attempted in this series
+              </p>
+              <p className="text-sm text-amber-800">
+                You've taken <span className="font-semibold">{totalAttempts}</span>{' '}
+                test{totalAttempts === 1 ? '' : 's'} in this series
+                {distinctCategoryCount > 0 && (
+                  <> across <span className="font-semibold">{distinctCategoryCount}</span>{' '}
+                    {distinctCategoryCount === 1 ? 'category' : 'categories'}</>
+                )}.
+                {mostRecent?.lastDate && (
+                  <> Most recent: <span className="font-semibold">{new Date(mostRecent.lastDate).toLocaleString()}</span>.</>
+                )}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              {mostRecent?.lastSessionId && (
+                <button
+                  onClick={() => navigate(`/tests/results/${mostRecent.lastSessionId}`)}
+                  className="px-3 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm font-medium whitespace-nowrap"
+                >
+                  View latest analysis
+                </button>
+              )}
+              <button
+                onClick={() => navigate('/test-history')}
+                className="px-3 py-2 border border-amber-300 text-amber-900 rounded-lg hover:bg-amber-100 text-sm font-medium whitespace-nowrap"
+              >
+                Full history
+              </button>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Categories Section */}
       <div>
