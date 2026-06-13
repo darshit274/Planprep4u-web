@@ -13,12 +13,12 @@ import { toast } from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../services/api";
 import HTMLContent from "../../components/common/HTMLContent";
+import TestAnalysisCharts from "../../components/tests/TestAnalysisCharts";
 
 interface Question {
   id: number;
   uuid: string;
   question_text: string | null;
-  question_text_gujarati?: string | null;
   options: {
     A: string;
     B: string;
@@ -29,13 +29,8 @@ interface Question {
   option_b?: string | null;
   option_c?: string | null;
   option_d?: string | null;
-  option_a_gujarati?: string | null;
-  option_b_gujarati?: string | null;
-  option_c_gujarati?: string | null;
-  option_d_gujarati?: string | null;
   correct_answer: string;
   explanation?: string | null;
-  explanation_gujarati?: string | null;
   marks: number;
 }
 
@@ -52,10 +47,14 @@ interface QuizData {
   questions: Question[];
   metadata: {
     total_questions: number;
-    language: string;
     shuffled: boolean;
   };
 }
+
+// Option E is a deliberate "skip — don't want to attempt" choice. Picking E
+// scores 0 (no penalty); leaving a question completely blank applies the
+// category's negative_marks_per_wrong (server-enforced).
+const E_SKIP_LABEL = "Skip — I don't want to attempt";
 
 const TakeTestPage: React.FC = () => {
   const { uuid } = useParams<{ uuid: string }>();
@@ -67,8 +66,8 @@ const TakeTestPage: React.FC = () => {
   const [markedQuestions, setMarkedQuestions] = useState<{
     [key: number]: boolean;
   }>({});
-  const [language, setLanguage] = useState<"english" | "gujarati">("gujarati");
   const [quizData, setQuizData] = useState<QuizData | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{
@@ -96,69 +95,27 @@ const TakeTestPage: React.FC = () => {
     return text.replace(/\n/g, "<br>");
   };
 
-  // Smart language selection functions
-  const getQuestionText = (
-    question: Question,
-    selectedLanguage: "english" | "gujarati"
-  ): string => {
-    if (selectedLanguage === "gujarati") {
-      return (
-        question.question_text_gujarati ||
-        question.question_text ||
-        "No question available"
-      );
-    } else {
-      return (
-        question.question_text ||
-        question.question_text_gujarati ||
-        "No question available"
-      );
-    }
-  };
+  // English-only helpers (Gujarati removed per client request).
+  const getQuestionText = (question: Question): string =>
+    question.question_text || "No question available";
 
   const getOptionText = (
     question: Question,
-    option: "A" | "B" | "C" | "D",
-    selectedLanguage: "english" | "gujarati"
+    option: "A" | "B" | "C" | "D"
   ): string => {
-    const optionLower = option.toLowerCase() as "a" | "b" | "c" | "d";
-    const englishKey = `option_${optionLower}` as keyof Question;
-    const gujaratiKey = `option_${optionLower}_gujarati` as keyof Question;
-
-    if (selectedLanguage === "gujarati") {
-      return (
-        (question[gujaratiKey] as string) ||
-        (question[englishKey] as string) ||
-        question.options[option] ||
-        `No option ${option}`
-      );
-    } else {
-      return (
-        (question[englishKey] as string) ||
-        (question[gujaratiKey] as string) ||
-        question.options[option] ||
-        `No option ${option}`
-      );
-    }
-  };
-
-  const getLanguageIndicator = (
-    question: Question
-  ): "english" | "gujarati" | "both" => {
-    const hasEnglish = question.question_text || question.option_a;
-    const hasGujarati =
-      question.question_text_gujarati || question.option_a_gujarati;
-
-    if (hasEnglish && hasGujarati) return "both";
-    if (hasGujarati) return "gujarati";
-    return "english";
+    const key = `option_${option.toLowerCase()}` as keyof Question;
+    return (
+      (question[key] as string | undefined | null) ||
+      question.options[option] ||
+      `No option ${option}`
+    );
   };
 
   useEffect(() => {
     if (uuid) {
       fetchQuizQuestions();
     }
-  }, [uuid, language]);
+  }, [uuid]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -233,7 +190,6 @@ const TakeTestPage: React.FC = () => {
       try {
         response = await api.get(`/dynamic/categories/${uuid}/questions`, {
           params: {
-            language: language,
             shuffle: false, // Changed to false to maintain Excel order
           },
         });
@@ -276,7 +232,6 @@ const TakeTestPage: React.FC = () => {
                     `/dynamic/categories/${category.uuid}/questions`,
                     {
                       params: {
-                        language: language,
                         shuffle: false, // Changed to false to maintain Excel order
                       },
                     }
@@ -402,14 +357,71 @@ const TakeTestPage: React.FC = () => {
     }
   };
 
-  // State to store backend-calculated results
-  const [backendResults, setBackendResults] = useState<{
+  // Clear the response on the current question (does not advance).
+  const handleClearResponse = () => {
+    if (showResults) return;
+    setSelectedAnswers((prev) => {
+      const next = { ...prev };
+      delete next[currentQuestionIndex];
+      return next;
+    });
+  };
+
+  // Save & Next: answers are saved on click; this just advances.
+  const handleSaveAndNext = () => handleNextQuestion();
+
+  // Mark for Review & Next: toggle marked flag, then advance.
+  const handleMarkForReviewAndNext = () => {
+    handleMarkForReview();
+    if (!quizData) return;
+    if (currentQuestionIndex < quizData.questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  // Browser fullscreen toggle (best-effort; ignored if blocked).
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        setIsFullscreen(true);
+      } else {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    } catch (err) {
+      console.warn('Fullscreen toggle failed', err);
+    }
+  };
+
+  // Keep state in sync with the actual fullscreen status (user may press Esc).
+  useEffect(() => {
+    const sync = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', sync);
+    return () => document.removeEventListener('fullscreenchange', sync);
+  }, []);
+
+  // State to store backend-calculated results. The shape mirrors the /quiz/submit
+  // response plus the leaderboard rank we fetch right after.
+  type BackendResults = {
     score: number;
     percentage: number;
     finalScore: number;
     negativeMarkingEnabled: boolean;
     negativeMarks: number;
-  } | null>(null);
+    totalTimeSpent?: number;
+    sessionId?: string;
+    correctAnswers?: number;
+    wrongAnswers?: number;
+    unansweredQuestions?: number;
+    eSkippedAnswers?: number;
+    obtainedMarks?: number;
+    totalMarks?: number;
+    negativeMarksDeducted?: number;
+    myRank?: number;
+    totalParticipants?: number;
+  };
+  const [backendResults, setBackendResults] = useState<BackendResults | null>(null);
 
   const handleSubmitQuiz = async () => {
     setIsSubmitting(true);
@@ -453,8 +465,8 @@ const TakeTestPage: React.FC = () => {
       )
       // Use the simple quiz submission API
       const submitResponse = await api.post(`/quiz/submit`, {
-        userId: sessionStorage.getItem("mocktail_user")
-          ? JSON.parse(sessionStorage.getItem("mocktail_user")!).uuid
+        userId: sessionStorage.getItem("planprep4u_user")
+          ? JSON.parse(sessionStorage.getItem("planprep4u_user")!).uuid
           : `quiz-user-${Date.now()}`,
         testSeriesId: uuid, // Treat uuid as test series ID (to match leaderboard expectation)
         answers: answers,
@@ -474,8 +486,14 @@ const TakeTestPage: React.FC = () => {
           negativeMarkingEnabled: data.negativeMarkingEnabled || false,
           negativeMarks: data.negativeMarksDeducted || 0,
           totalTimeSpent: totalTimeSpent,
-          sessionId: data?.sessionId
-
+          sessionId: data?.sessionId,
+          // Additional fields used by the detailed analysis page navigation.
+          correctAnswers: data.correctAnswers || 0,
+          wrongAnswers: data.wrongAnswers || 0,
+          unansweredQuestions: data.unansweredQuestions || 0,
+          eSkippedAnswers: data.eSkippedAnswers || 0,
+          obtainedMarks: data.obtainedMarks || 0,
+          totalMarks: data.totalMarks || 0,
         });
 
         try {
@@ -483,7 +501,7 @@ const TakeTestPage: React.FC = () => {
 
           if (leaderboardResponse.data.success) {
             const dataLeaderboard = leaderboardResponse?.data?.data;
-            const userUuid = leaderboardResponse?.data?.metadata?.currentUserData?.uuid || JSON.parse(sessionStorage.getItem("mocktail_user") || "{}").uuid;
+            const userUuid = leaderboardResponse?.data?.metadata?.currentUserData?.uuid || JSON.parse(sessionStorage.getItem("planprep4u_user") || "{}").uuid;
             const myRank = dataLeaderboard.find(
               (item) =>
                 item.userId === userUuid
@@ -585,7 +603,7 @@ const TakeTestPage: React.FC = () => {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading quiz questions...</p>
         </div>
       </div>
@@ -599,7 +617,7 @@ const TakeTestPage: React.FC = () => {
           <p className="text-gray-600">No quiz questions found.</p>
           <button
             onClick={() => navigate(-1)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             Go Back
           </button>
@@ -669,11 +687,11 @@ const TakeTestPage: React.FC = () => {
           </div>
 
           {/* Tips */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 sm:p-3 mb-4 sm:mb-6">
-            <p className="text-blue-900 font-medium text-xs sm:text-sm mb-1">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-2 sm:p-3 mb-4 sm:mb-6">
+            <p className="text-primary-900 font-medium text-xs sm:text-sm mb-1">
               💡 Tips:
             </p>
-            <ul className="text-blue-800 text-xs space-y-1 list-disc list-inside">
+            <ul className="text-primary-800 text-xs space-y-1 list-disc list-inside">
               <li>Answer only if you're confident</li>
               <li>Skip questions if unsure</li>
               <li>Review your answers before submitting</li>
@@ -734,7 +752,7 @@ const TakeTestPage: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 max-w-md mx-auto">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600">
                   {quizData.questions.length}
                 </div>
                 <div className="text-xs sm:text-sm text-gray-500">
@@ -748,33 +766,6 @@ const TakeTestPage: React.FC = () => {
                 <div className="text-xs sm:text-sm text-gray-500">
                   Time Limit
                 </div>
-              </div>
-            </div>
-
-            {/* Language Selector */}
-            <div className="mb-6">
-              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-3 text-center">
-                Choose Language / ભાષા પસંદ કરો
-              </label>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
-                <button
-                  onClick={() => setLanguage("gujarati")}
-                  className={`flex-1 px-4 sm:px-6 py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${language === "gujarati"
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                >
-                  ગુજરાતી (Gujarati)
-                </button>
-                <button
-                  onClick={() => setLanguage("english")}
-                  className={`flex-1 px-4 sm:px-6 py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${language === "english"
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                >
-                  English
-                </button>
               </div>
             </div>
 
@@ -792,7 +783,7 @@ const TakeTestPage: React.FC = () => {
 
             <button
               onClick={startQuiz}
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors text-sm sm:text-base"
             >
               Start Quiz
             </button>
@@ -804,9 +795,14 @@ const TakeTestPage: React.FC = () => {
 
   // Results screen
   if (showResults) {
-    // Calculate detailed statistics
+    // Calculate detailed statistics. Option E is a deliberate skip — it is NOT
+    // an attempt, so it counts towards "Not Attempted" (correct + wrong +
+    // notAttempted must always equal totalQuestions).
     const totalQuestions = quizData.questions.length;
-    const answeredQuestions = Object.keys(selectedAnswers).length;
+    const eSkips =
+      backendResults?.eSkippedAnswers ??
+      Object.values(selectedAnswers).filter((v) => v === "E").length;
+    const answeredQuestions = Object.keys(selectedAnswers).length - eSkips;
     const correctAnswers = backendResults?.correctAnswers ?? score;
     // Wrong answers = attempted - correct (NOT defaulting to 0!)
     const wrongAnswers =
@@ -819,9 +815,11 @@ const TakeTestPage: React.FC = () => {
       backendResults?.totalMarks ??
       quizData.questions.reduce((sum, q) => sum + (q.marks || 1), 0);
 
-    // Calculate attempted marks (sum of marks for attempted questions only)
+    // Calculate attempted marks (sum of marks for attempted questions only;
+    // E-skips are not attempts)
     let attemptedMarks = 0;
-    Object.keys(selectedAnswers).forEach((index) => {
+    Object.entries(selectedAnswers).forEach(([index, option]) => {
+      if (option === "E") return;
       const question = quizData.questions[parseInt(index)];
       attemptedMarks += question?.marks || 1;
     });
@@ -923,21 +921,21 @@ const TakeTestPage: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 mb-4">
             {/* Total Questions */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-blue-700">
+            <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-primary-700">
                 {totalQuestions}
               </div>
-              <div className="text-xs sm:text-sm text-blue-600 font-medium">
+              <div className="text-xs sm:text-sm text-primary-600 font-medium">
                 Total Questions
               </div>
             </div>
 
             {/* Attempted */}
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-purple-700">
+            <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-3 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-secondary-700">
                 {answeredQuestions}
               </div>
-              <div className="text-xs sm:text-sm text-purple-600 font-medium">
+              <div className="text-xs sm:text-sm text-secondary-600 font-medium">
                 Attempted
               </div>
             </div>
@@ -980,7 +978,7 @@ const TakeTestPage: React.FC = () => {
           </div>
 
           {/* Marks & Accuracy Section */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-6">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 sm:p-6 mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Marks Breakdown */}
               <div>
@@ -1015,15 +1013,15 @@ const TakeTestPage: React.FC = () => {
                   <span className="text-sm font-medium text-gray-700">
                     Final Score:
                   </span>
-                  <span className="text-xl font-bold text-blue-600">
+                  <span className="text-xl font-bold text-primary-600">
                     {obtainedMarks}
                   </span>
                 </div>
               </div>
 
               {/* Accuracy */}
-              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-blue-300 pl-0 sm:pl-4 mt-4 sm:mt-0">
-                <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-1">
+              <div className="flex flex-col items-center justify-center border-l-0 sm:border-l-2 border-primary-300 pl-0 sm:pl-4 mt-4 sm:mt-0">
+                <div className="text-3xl sm:text-4xl font-bold text-primary-600 mb-1">
                   {accuracy}%
                 </div>
                 <div className="text-xs sm:text-sm text-gray-600 font-medium">
@@ -1039,6 +1037,25 @@ const TakeTestPage: React.FC = () => {
             </div>
           </div>
 
+          {/* Detailed analysis (charts) inline — replaces the old separate
+              "View Detailed Analysis" button. Per client point #5. */}
+          <TestAnalysisCharts
+            className="mb-6"
+            data={{
+              totalQuestions,
+              correct: correctAnswers,
+              incorrect: wrongAnswers,
+              unanswered: notAttempted,
+              eSkipped: backendResults?.eSkippedAnswers ?? 0,
+              obtainedMarks: obtainedMarksBeforeNegative,
+              negativeMarks,
+              finalScore: obtainedMarks,
+              timeSpentSeconds: backendResults?.totalTimeSpent ?? 0,
+              totalTimeAllowedSeconds:
+                ((quizData.category.test_duration_minutes ?? quizData.questions.length * 1.5)) * 60,
+            }}
+          />
+
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
             <button
@@ -1051,7 +1068,6 @@ const TakeTestPage: React.FC = () => {
                     markedQuestions: markedQuestions, // Pass marked questions data
                     score,
                     percentage,
-                    language: language,
                   },
                 });
               }}
@@ -1070,7 +1086,7 @@ const TakeTestPage: React.FC = () => {
                   quizData.questions.length * 1.5;
                 setTimeRemaining(testDurationMinutes * 60);
               }}
-              className="px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm sm:text-base font-medium"
+              className="px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm sm:text-base font-medium"
             >
               Retake Quiz
             </button>
@@ -1085,7 +1101,7 @@ const TakeTestPage: React.FC = () => {
                   },
                 });
               }}
-              className="px-4 sm:px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm sm:text-base font-medium"
+              className="px-4 sm:px-6 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 text-sm sm:text-base font-medium"
             >
               Leaderboard
             </button>
@@ -1117,7 +1133,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="flex-1">
                       <p className="font-medium text-gray-900 mb-2">
-                        {index + 1}. {getQuestionText(question, language)}
+                        {index + 1}. {getQuestionText(question)}
                       </p>
                       <div className="text-sm space-y-1">
                         <p>
@@ -1127,26 +1143,26 @@ const TakeTestPage: React.FC = () => {
                               isCorrect ? "text-green-600" : "text-red-600"
                             }
                           >
-                            {userAnswer
-                              ? `${userAnswer} - ${getOptionText(question, userAnswer as "A" | "B" | "C" | "D", language)}`
+                            {userAnswer === 'E'
+                              ? 'E — Skipped (no penalty)'
+                              : userAnswer
+                              ? `${userAnswer} - ${getOptionText(question, userAnswer as "A" | "B" | "C" | "D")}`
                               : "Not answered"}
                           </span>
                         </p>
-                        {!isCorrect && (
+                        {!isCorrect && userAnswer !== 'E' && (
                           <p>
                             <span className="text-gray-600">
                               Correct answer:
                             </span>{" "}
                             <span className="text-green-600">
-                              {question.correct_answer} - {getOptionText(question, question.correct_answer as "A" | "B" | "C" | "D", language)}
+                              {question.correct_answer} - {getOptionText(question, question.correct_answer as "A" | "B" | "C" | "D")}
                             </span>
                           </p>
                         )}
-                        {(question.explanation || question.explanation_gujarati) && (
+                        {question.explanation && (
                           <p className="text-gray-600 italic">
-                            {language === 'gujarati'
-                              ? (question.explanation_gujarati || question.explanation)
-                              : (question.explanation || question.explanation_gujarati)}
+                            {question.explanation}
                           </p>
                         )}
                       </div>
@@ -1161,10 +1177,101 @@ const TakeTestPage: React.FC = () => {
     );
   }
 
+  // Renders the question palette / navigator. Used both as a permanent right
+  // rail on lg+ screens and inside the existing mobile modal so the markup
+  // stays single-sourced.
+  const renderNavigatorPanel = (opts: { compactHeader?: boolean; onPick?: (i: number) => void } = {}) => {
+    const onPick = opts.onPick ?? ((i: number) => setCurrentQuestionIndex(i));
+    if (!quizData) return null;
+    // Option E is a deliberate skip — shown amber like "marked", never green.
+    const skippedCount = Object.values(selectedAnswers).filter((v) => v === "E").length;
+    const answeredCount = Object.keys(selectedAnswers).length - skippedCount;
+    const markedCount = Object.values(markedQuestions).filter((v) => v === true).length;
+    const remainingCount = quizData.questions.length - answeredCount - skippedCount;
+
+    return (
+      <div className="space-y-4">
+        {!opts.compactHeader && (
+          <h3 className="text-base font-semibold text-gray-900">SECTION: {quizData.category.name}</h3>
+        )}
+
+        {/* Question Grid */}
+        <div className="grid grid-cols-5 gap-2">
+          {quizData.questions.map((question, index) => {
+            const isCurrentQuestion = index === currentQuestionIndex;
+            const isSkipped = selectedAnswers[index] === 'E';
+            const isAnswered = selectedAnswers.hasOwnProperty(index) && !isSkipped;
+            const isMarkedForReview = markedQuestions[index] === true;
+
+            let statusClass = '';
+            if (isCurrentQuestion) {
+              statusClass = 'border-primary-500 bg-primary-100 text-primary-800 ring-2 ring-primary-200';
+            } else if (isMarkedForReview && isAnswered) {
+              statusClass = 'bg-purple-50 text-purple-700 border-2 border-purple-400 hover:bg-purple-100';
+            } else if (isMarkedForReview || isSkipped) {
+              statusClass = 'bg-amber-50 text-amber-700 border-2 border-amber-400 hover:bg-amber-100';
+            } else if (isAnswered) {
+              statusClass = 'bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100';
+            } else {
+              statusClass = 'bg-gray-50 text-gray-500 border-2 border-gray-200 hover:bg-gray-100';
+            }
+
+            return (
+              <button
+                key={question.id}
+                onClick={() => onPick(index)}
+                className={`h-9 rounded-md flex items-center justify-center text-xs font-semibold transition-all ${statusClass}`}
+                title={`Question ${index + 1}`}
+              >
+                {index + 1}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Compact legend */}
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[11px] text-gray-700">
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-3 h-3 rounded bg-green-50 border border-green-200" />
+            Answered
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-3 h-3 rounded bg-amber-50 border border-amber-400" />
+            Marked / Skipped
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-3 h-3 rounded bg-purple-50 border border-purple-400" />
+            Marked &amp; answered
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-3 h-3 rounded bg-gray-50 border border-gray-200" />
+            Not answered
+          </div>
+        </div>
+
+        {/* Compact stats */}
+        <div className="rounded-lg bg-gray-50 px-3 py-2 text-xs text-gray-700 grid grid-cols-3 text-center">
+          <div>
+            <div className="font-semibold text-green-700">{answeredCount}</div>
+            <div className="text-[10px]">Answered</div>
+          </div>
+          <div>
+            <div className="font-semibold text-amber-700">{markedCount}</div>
+            <div className="text-[10px]">Marked</div>
+          </div>
+          <div>
+            <div className="font-semibold text-orange-700">{remainingCount}</div>
+            <div className="text-[10px]">Remaining</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Quiz interface
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <div className="max-w-4xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6">
           {/* Top Row - Title and Back Button */}
@@ -1192,7 +1299,7 @@ const TakeTestPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom Row - Timer, Navigator, and Submit */}
+          {/* Bottom Row - Timer, Pause, Fullscreen, Navigator, and Submit */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 sm:gap-4">
             <div className="flex items-center justify-center sm:justify-start text-sm text-gray-600 py-2 sm:py-0">
               <ClockIcon className="h-4 w-4 mr-1 flex-shrink-0" />
@@ -1206,8 +1313,17 @@ const TakeTestPage: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               <button
+                onClick={toggleFullscreen}
+                className="flex-1 sm:flex-none px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300 text-sm font-medium"
+                title={isFullscreen ? 'Exit full screen' : 'Switch full screen'}
+              >
+                {isFullscreen ? 'Exit Full Screen' : 'Full Screen'}
+              </button>
+              {/* Navigator toggle — only on mobile/tablet. On lg+ the navigator
+                  lives as a permanent right rail, so this button isn't needed. */}
+              <button
                 onClick={() => setShowNavigator(true)}
-                className="flex-1 sm:flex-none p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300"
+                className="flex-1 sm:flex-none p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300 lg:hidden"
                 title="Question Navigator"
               >
                 <Squares2X2Icon className="h-5 w-5 mx-auto" />
@@ -1220,17 +1336,23 @@ const TakeTestPage: React.FC = () => {
                 {isSubmitting && (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 )}
-                {isSubmitting ? "Submitting..." : "Submit Quiz"}
+                {isSubmitting ? "Submitting..." : "Submit Test"}
               </button>
             </div>
           </div>
         </div>
 
+        {/* 2-column layout on lg+: question content (left) + permanent question
+            palette (right). Mobile/tablet stack everything; the palette is
+            still reachable via the toggle button which opens the modal below. */}
+        <div className="lg:flex lg:gap-6 lg:items-start">
+          <div className="lg:flex-1 lg:min-w-0">
+
         {/* Progress Bar */}
         <div className="mb-6 sm:mb-8">
           <div className="bg-gray-200 rounded-full h-1.5 sm:h-2">
             <div
-              className="bg-blue-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
+              className="bg-primary-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${((currentQuestionIndex + 1) / quizData.questions.length) * 100
                   }%`,
@@ -1247,33 +1369,36 @@ const TakeTestPage: React.FC = () => {
           >
             Previous
           </button>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 justify-end">
             <button
-              onClick={handleMarkForReview}
-              className={`flex-1 sm:flex-none px-3 sm:px-6 py-2 rounded-lg border font-medium transition-colors text-xs sm:text-base ${markedQuestions[currentQuestionIndex]
-                ? "bg-yellow-100 border-yellow-400 text-yellow-700 hover:bg-yellow-200"
-                : "bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
+              onClick={handleMarkForReviewAndNext}
+              className="px-3 sm:px-5 py-2 rounded-lg border font-medium transition-colors text-xs sm:text-sm bg-yellow-50 border-yellow-300 text-yellow-800 hover:bg-yellow-100"
             >
-              <span className="hidden sm:inline">
-                {markedQuestions[currentQuestionIndex]
-                  ? "Marked As Review"
-                  : "Mark As Review"}
-              </span>
-              <span className="sm:hidden">
-                {markedQuestions[currentQuestionIndex]
-                  ? "Marked"
-                  : "Mark Review"}
-              </span>
+              Mark for Review &amp; Next
             </button>
             <button
-              onClick={handleNextQuestion}
-              className="flex-1 sm:flex-none px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm sm:text-base font-medium"
+              onClick={handleClearResponse}
+              disabled={selectedAnswers[currentQuestionIndex] === undefined}
+              className="px-3 sm:px-5 py-2 rounded-lg border font-medium transition-colors text-xs sm:text-sm bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {currentQuestionIndex === quizData.questions.length - 1
-                ? "Submit"
-                : "Next"}
+              Clear Response
             </button>
+            {currentQuestionIndex === quizData.questions.length - 1 ? (
+              <button
+                onClick={handleReviewAndSubmit}
+                disabled={isSubmitting}
+                className="px-4 sm:px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium disabled:opacity-50"
+              >
+                Submit Test
+              </button>
+            ) : (
+              <button
+                onClick={handleSaveAndNext}
+                className="px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm font-medium"
+              >
+                Save &amp; Next
+              </button>
+            )}
           </div>
         </div>
 
@@ -1284,36 +1409,17 @@ const TakeTestPage: React.FC = () => {
               <div className="flex-1">
                 <HTMLContent
                   content={formatTextWithLineBreaks(
-                    getQuestionText(currentQuestion, language)
+                    getQuestionText(currentQuestion)
                   )}
                   className="text-sm sm:text-base lg:text-lg font-medium text-gray-900"
                 />
               </div>
-              {/* Language indicator - hidden on mobile */}
-              <span
-                className={`hidden sm:inline-flex flex-shrink-0 px-3 py-1 text-xs font-medium rounded-full ${getLanguageIndicator(currentQuestion) === "both"
-                  ? "bg-purple-100 text-purple-800"
-                  : getLanguageIndicator(currentQuestion) === "gujarati"
-                    ? "bg-orange-100 text-orange-800"
-                    : "bg-blue-100 text-blue-800"
-                  }`}
-              >
-                {getLanguageIndicator(currentQuestion) === "both"
-                  ? "Both"
-                  : getLanguageIndicator(currentQuestion) === "gujarati"
-                    ? "Gujarati"
-                    : "English"}
-              </span>
             </div>
           </div>
 
           <div className="space-y-2 sm:space-y-3">
-            {["A", "B", "C", "D"].map((option) => {
-              const optionText = getOptionText(
-                currentQuestion,
-                option as "A" | "B" | "C" | "D",
-                language
-              );
+            {(["A", "B", "C", "D"] as const).map((option) => {
+              const optionText = getOptionText(currentQuestion, option);
               const isSelected =
                 selectedAnswers[currentQuestionIndex] === option;
 
@@ -1345,33 +1451,56 @@ const TakeTestPage: React.FC = () => {
                 </button>
               );
             })}
+
+            {/* Option E — deliberate skip. Selecting E scores 0 (no penalty); leaving
+                the question completely blank applies the category's negative marking. */}
+            {(() => {
+              const isSelected = selectedAnswers[currentQuestionIndex] === 'E';
+              return (
+                <button
+                  onClick={() => handleAnswerSelect('E')}
+                  className={`w-full text-left p-2.5 sm:p-3 lg:p-4 rounded-lg border transition-all ${
+                    isSelected
+                      ? 'border-amber-500 bg-amber-50 text-amber-900'
+                      : 'border-amber-200 border-dashed hover:border-amber-400 hover:bg-amber-50/50'
+                  }`}
+                >
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <span
+                      className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full border-2 flex items-center justify-center text-xs font-medium flex-shrink-0 ${
+                        isSelected
+                          ? 'border-amber-500 bg-amber-500 text-white'
+                          : 'border-amber-300 text-amber-700'
+                      }`}
+                    >
+                      E
+                    </span>
+                    <div className="flex-1 min-w-0 text-xs sm:text-sm lg:text-base">
+                      <span className="font-medium">{E_SKIP_LABEL}</span>
+                      <span className="block text-[10px] sm:text-xs text-amber-700/80 mt-0.5">
+                        Marks 0 — no negative for this question
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              );
+            })()}
           </div>
         </div>
 
-        {/* Navigation */}
-        {/* <div className="flex items-center justify-center">
-          <div className="flex space-x-2">
-            {quizData.questions.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentQuestionIndex(index)}
-                className={`w-8 h-8 rounded text-sm font-medium ${
-                  index === currentQuestionIndex
-                    ? "bg-blue-600 text-white"
-                    : selectedAnswers[index]
-                    ? "bg-green-100 text-green-800 border border-green-300"
-                    : "bg-gray-100 text-gray-600 border border-gray-300"
-                }`}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        </div> */}
+          </div>{/* /lg:flex-1 left column */}
 
-        {/* Question Navigator Modal */}
+          {/* Permanent Question Palette — desktop only. On smaller screens the
+              user opens the modal via the toggle button. */}
+          <aside className="hidden lg:block lg:w-80 lg:shrink-0 lg:sticky lg:top-4 bg-white rounded-xl border border-gray-200 p-4 max-h-[calc(100vh-2rem)] overflow-y-auto">
+            {renderNavigatorPanel()}
+          </aside>
+        </div>{/* /lg:flex 2-col wrapper */}
+
+        {/* Question Navigator Modal — mobile/tablet only. On lg+ the rail is
+            always visible so the modal stays hidden even if state is set. */}
         {showNavigator && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4 lg:hidden">
             <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-100">
@@ -1392,7 +1521,9 @@ const TakeTestPage: React.FC = () => {
                 <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 sm:gap-3 mb-6 sm:mb-8">
                   {quizData.questions.map((question, index) => {
                     const isCurrentQuestion = index === currentQuestionIndex;
-                    const isAnswered = selectedAnswers.hasOwnProperty(index);
+                    const isSkipped = selectedAnswers[index] === "E";
+                    const isAnswered =
+                      selectedAnswers.hasOwnProperty(index) && !isSkipped;
                     const isMarkedForReview = markedQuestions[index] === true;
 
                     // Determine question status (priority order)
@@ -1401,7 +1532,7 @@ const TakeTestPage: React.FC = () => {
 
                     if (isCurrentQuestion) {
                       statusClass =
-                        "border-blue-500 border-3 bg-blue-100 text-blue-800 ring-2 ring-blue-200";
+                        "border-primary-500 border-3 bg-primary-100 text-primary-800 ring-2 ring-primary-200";
                       statusText = "Current Question";
                     } else if (isMarkedForReview) {
                       // Marked for review - orange/yellow color
@@ -1410,6 +1541,11 @@ const TakeTestPage: React.FC = () => {
                       statusText = isAnswered
                         ? "Marked for Review (Answered)"
                         : "Marked for Review";
+                    } else if (isSkipped) {
+                      // Option E — deliberate skip, shown amber like marked
+                      statusClass =
+                        "bg-amber-50 text-amber-700 border-2 border-amber-400 hover:bg-amber-100";
+                      statusText = "Skipped";
                     } else if (isAnswered) {
                       statusClass =
                         "bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100";
@@ -1436,22 +1572,6 @@ const TakeTestPage: React.FC = () => {
                   })}
                 </div>
 
-                <div className="mb-6 sm:mb-8">
-                  <h4 className="font-semibold text-gray-800 mb-3 sm:mb-4 text-sm sm:text-base">
-                    Language:
-                  </h4>
-                  <select
-                    value={language}
-                    onChange={(e) =>
-                      setLanguage(e.target.value as "english" | "gujarati")
-                    }
-                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                  >
-                    <option value="english">English</option>
-                    <option value="gujarati">Gujarati</option>
-                  </select>
-                </div>
-
                 {/* Legend */}
                 <div className="mb-6 sm:mb-8">
                   <h4 className="font-semibold text-gray-800 mb-3 sm:mb-4 text-sm sm:text-base">
@@ -1459,12 +1579,12 @@ const TakeTestPage: React.FC = () => {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
                     <div className="flex items-center space-x-2 sm:space-x-3">
-                      <div className="w-5 h-5 rounded-lg bg-blue-100 border-2 border-blue-500 ring-1 ring-blue-200 flex-shrink-0"></div>
+                      <div className="w-5 h-5 rounded-lg bg-primary-100 border-2 border-primary-500 ring-1 ring-primary-200 flex-shrink-0"></div>
                       <span className="text-gray-700">Current</span>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-3">
                       <div className="w-5 h-5 rounded-lg bg-amber-50 border-2 border-amber-400 flex-shrink-0"></div>
-                      <span className="text-gray-700">Marked Review</span>
+                      <span className="text-gray-700">Marked / Skipped</span>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-3">
                       <div className="w-5 h-5 rounded-lg bg-green-50 border-2 border-green-200 flex-shrink-0"></div>
@@ -1493,7 +1613,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <div className="text-xl sm:text-2xl font-bold text-green-600">
-                        {Object.keys(selectedAnswers).length}
+                        {Object.values(selectedAnswers).filter((v) => v !== "E").length}
                       </div>
                       <div className="text-xs sm:text-sm text-gray-600">
                         Answered
@@ -1522,7 +1642,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <div
-                        className={`text-xl sm:text-2xl font-bold ${timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                        className={`text-xl sm:text-2xl font-bold ${timeRemaining < 300 ? "text-red-600" : "text-primary-600"
                           }`}
                       >
                         {formatTime(timeRemaining)}
@@ -1548,7 +1668,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 sm:h-3 rounded-full transition-all duration-500"
+                        className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 sm:h-3 rounded-full transition-all duration-500"
                         style={{
                           width: `${(Object.keys(selectedAnswers).length /
                             quizData.questions.length) *
@@ -1616,7 +1736,7 @@ const TakeTestPage: React.FC = () => {
               </p>
 
               {/* Current Progress Info */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">
                     Questions Answered:
@@ -1628,7 +1748,7 @@ const TakeTestPage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Time Remaining:</span>
-                  <span className="text-sm font-bold text-blue-600">
+                  <span className="text-sm font-bold text-primary-600">
                     {formatTime(timeRemaining)}
                   </span>
                 </div>
@@ -1638,7 +1758,7 @@ const TakeTestPage: React.FC = () => {
               <div className="flex gap-3">
                 <button
                   onClick={handleCancelExit}
-                  className="flex-1 px-4 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+                  className="flex-1 px-4 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
                   Continue Test
                 </button>
@@ -1665,7 +1785,7 @@ const TakeTestPage: React.FC = () => {
                     <span className="text-sm font-medium">Time Left</span>
                   </div>
                   <span
-                    className={`text-sm font-bold ${timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                    className={`text-sm font-bold ${timeRemaining < 300 ? "text-red-600" : "text-primary-600"
                       }`}
                   >
                     {formatTime(timeRemaining)}
@@ -1678,7 +1798,7 @@ const TakeTestPage: React.FC = () => {
                     <span className="text-sm font-medium">Attempted</span>
                   </div>
                   <span className="text-sm font-bold text-gray-900">
-                    {Object.keys(selectedAnswers).length}
+                    {Object.values(selectedAnswers).filter((v) => v !== "E").length}
                   </span>
                 </div>
 
@@ -1689,7 +1809,7 @@ const TakeTestPage: React.FC = () => {
                   </div>
                   <span className="text-sm font-bold text-gray-900">
                     {quizData.questions.length -
-                      Object.keys(selectedAnswers).length}
+                      Object.values(selectedAnswers).filter((v) => v !== "E").length}
                   </span>
                 </div>
 
@@ -1723,7 +1843,7 @@ const TakeTestPage: React.FC = () => {
                 </button>
                 <button
                   onClick={handleConfirmSubmit}
-                  className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+                  className="flex-1 px-4 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium"
                 >
                   Yes
                 </button>
@@ -1766,7 +1886,7 @@ const TakeTestPage: React.FC = () => {
                           <span>{index + 1}.</span>
                           <span
                             dangerouslySetInnerHTML={{
-                              __html: getQuestionText(q, language),
+                              __html: getQuestionText(q),
                             }}
                           ></span>
                         </span>
