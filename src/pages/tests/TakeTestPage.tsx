@@ -67,7 +67,6 @@ const TakeTestPage: React.FC = () => {
     [key: number]: boolean;
   }>({});
   const [quizData, setQuizData] = useState<QuizData | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -120,7 +119,7 @@ const TakeTestPage: React.FC = () => {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (quizStarted && timeRemaining > 0 && !showResults && !isPaused) {
+    if (quizStarted && timeRemaining > 0 && !showResults) {
       timer = setInterval(() => {
         setTimeRemaining((prev) => {
           if (prev <= 1) {
@@ -144,7 +143,7 @@ const TakeTestPage: React.FC = () => {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [quizStarted, timeRemaining, showResults, isPaused]);
+  }, [quizStarted, timeRemaining, showResults]);
 
   // Handle browser navigation (back button, close tab, refresh) during quiz
   useEffect(() => {
@@ -378,12 +377,6 @@ const TakeTestPage: React.FC = () => {
     if (currentQuestionIndex < quizData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
-  };
-
-  // Pause / resume the timer.
-  const togglePause = () => {
-    if (showResults) return;
-    setIsPaused((p) => !p);
   };
 
   // Browser fullscreen toggle (best-effort; ignored if blocked).
@@ -802,9 +795,14 @@ const TakeTestPage: React.FC = () => {
 
   // Results screen
   if (showResults) {
-    // Calculate detailed statistics
+    // Calculate detailed statistics. Option E is a deliberate skip — it is NOT
+    // an attempt, so it counts towards "Not Attempted" (correct + wrong +
+    // notAttempted must always equal totalQuestions).
     const totalQuestions = quizData.questions.length;
-    const answeredQuestions = Object.keys(selectedAnswers).length;
+    const eSkips =
+      backendResults?.eSkippedAnswers ??
+      Object.values(selectedAnswers).filter((v) => v === "E").length;
+    const answeredQuestions = Object.keys(selectedAnswers).length - eSkips;
     const correctAnswers = backendResults?.correctAnswers ?? score;
     // Wrong answers = attempted - correct (NOT defaulting to 0!)
     const wrongAnswers =
@@ -817,9 +815,11 @@ const TakeTestPage: React.FC = () => {
       backendResults?.totalMarks ??
       quizData.questions.reduce((sum, q) => sum + (q.marks || 1), 0);
 
-    // Calculate attempted marks (sum of marks for attempted questions only)
+    // Calculate attempted marks (sum of marks for attempted questions only;
+    // E-skips are not attempts)
     let attemptedMarks = 0;
-    Object.keys(selectedAnswers).forEach((index) => {
+    Object.entries(selectedAnswers).forEach(([index, option]) => {
+      if (option === "E") return;
       const question = quizData.questions[parseInt(index)];
       attemptedMarks += question?.marks || 1;
     });
@@ -1183,9 +1183,11 @@ const TakeTestPage: React.FC = () => {
   const renderNavigatorPanel = (opts: { compactHeader?: boolean; onPick?: (i: number) => void } = {}) => {
     const onPick = opts.onPick ?? ((i: number) => setCurrentQuestionIndex(i));
     if (!quizData) return null;
-    const answeredCount = Object.keys(selectedAnswers).length;
+    // Option E is a deliberate skip — shown amber like "marked", never green.
+    const skippedCount = Object.values(selectedAnswers).filter((v) => v === "E").length;
+    const answeredCount = Object.keys(selectedAnswers).length - skippedCount;
     const markedCount = Object.values(markedQuestions).filter((v) => v === true).length;
-    const remainingCount = quizData.questions.length - answeredCount;
+    const remainingCount = quizData.questions.length - answeredCount - skippedCount;
 
     return (
       <div className="space-y-4">
@@ -1197,7 +1199,8 @@ const TakeTestPage: React.FC = () => {
         <div className="grid grid-cols-5 gap-2">
           {quizData.questions.map((question, index) => {
             const isCurrentQuestion = index === currentQuestionIndex;
-            const isAnswered = selectedAnswers.hasOwnProperty(index);
+            const isSkipped = selectedAnswers[index] === 'E';
+            const isAnswered = selectedAnswers.hasOwnProperty(index) && !isSkipped;
             const isMarkedForReview = markedQuestions[index] === true;
 
             let statusClass = '';
@@ -1205,7 +1208,7 @@ const TakeTestPage: React.FC = () => {
               statusClass = 'border-primary-500 bg-primary-100 text-primary-800 ring-2 ring-primary-200';
             } else if (isMarkedForReview && isAnswered) {
               statusClass = 'bg-purple-50 text-purple-700 border-2 border-purple-400 hover:bg-purple-100';
-            } else if (isMarkedForReview) {
+            } else if (isMarkedForReview || isSkipped) {
               statusClass = 'bg-amber-50 text-amber-700 border-2 border-amber-400 hover:bg-amber-100';
             } else if (isAnswered) {
               statusClass = 'bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100';
@@ -1234,7 +1237,7 @@ const TakeTestPage: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="inline-block w-3 h-3 rounded bg-amber-50 border border-amber-400" />
-            Marked
+            Marked / Skipped
           </div>
           <div className="flex items-center gap-2">
             <span className="inline-block w-3 h-3 rounded bg-purple-50 border border-purple-400" />
@@ -1307,20 +1310,8 @@ const TakeTestPage: React.FC = () => {
               >
                 {formatTime(timeRemaining)}
               </span>
-              {isPaused && (
-                <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">
-                  Paused
-                </span>
-              )}
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                onClick={togglePause}
-                className="flex-1 sm:flex-none px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300 text-sm font-medium"
-                title={isPaused ? 'Resume' : 'Pause'}
-              >
-                {isPaused ? 'Resume' : 'Pause'}
-              </button>
               <button
                 onClick={toggleFullscreen}
                 className="flex-1 sm:flex-none px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300 text-sm font-medium"
@@ -1530,7 +1521,9 @@ const TakeTestPage: React.FC = () => {
                 <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 sm:gap-3 mb-6 sm:mb-8">
                   {quizData.questions.map((question, index) => {
                     const isCurrentQuestion = index === currentQuestionIndex;
-                    const isAnswered = selectedAnswers.hasOwnProperty(index);
+                    const isSkipped = selectedAnswers[index] === "E";
+                    const isAnswered =
+                      selectedAnswers.hasOwnProperty(index) && !isSkipped;
                     const isMarkedForReview = markedQuestions[index] === true;
 
                     // Determine question status (priority order)
@@ -1548,6 +1541,11 @@ const TakeTestPage: React.FC = () => {
                       statusText = isAnswered
                         ? "Marked for Review (Answered)"
                         : "Marked for Review";
+                    } else if (isSkipped) {
+                      // Option E — deliberate skip, shown amber like marked
+                      statusClass =
+                        "bg-amber-50 text-amber-700 border-2 border-amber-400 hover:bg-amber-100";
+                      statusText = "Skipped";
                     } else if (isAnswered) {
                       statusClass =
                         "bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100";
@@ -1586,7 +1584,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-3">
                       <div className="w-5 h-5 rounded-lg bg-amber-50 border-2 border-amber-400 flex-shrink-0"></div>
-                      <span className="text-gray-700">Marked Review</span>
+                      <span className="text-gray-700">Marked / Skipped</span>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-3">
                       <div className="w-5 h-5 rounded-lg bg-green-50 border-2 border-green-200 flex-shrink-0"></div>
@@ -1615,7 +1613,7 @@ const TakeTestPage: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <div className="text-xl sm:text-2xl font-bold text-green-600">
-                        {Object.keys(selectedAnswers).length}
+                        {Object.values(selectedAnswers).filter((v) => v !== "E").length}
                       </div>
                       <div className="text-xs sm:text-sm text-gray-600">
                         Answered
@@ -1800,7 +1798,7 @@ const TakeTestPage: React.FC = () => {
                     <span className="text-sm font-medium">Attempted</span>
                   </div>
                   <span className="text-sm font-bold text-gray-900">
-                    {Object.keys(selectedAnswers).length}
+                    {Object.values(selectedAnswers).filter((v) => v !== "E").length}
                   </span>
                 </div>
 
@@ -1811,7 +1809,7 @@ const TakeTestPage: React.FC = () => {
                   </div>
                   <span className="text-sm font-bold text-gray-900">
                     {quizData.questions.length -
-                      Object.keys(selectedAnswers).length}
+                      Object.values(selectedAnswers).filter((v) => v !== "E").length}
                   </span>
                 </div>
 
