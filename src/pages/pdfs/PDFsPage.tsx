@@ -293,7 +293,7 @@ const PDFsPage: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-3">
-              {pdf.tags && pdf.tags.length > 0 && (
+              {Array.isArray(pdf.tags) && pdf.tags.length > 0 && (
                 <div className="flex items-center space-x-1">
                   {pdf.tags.slice(0, 2).map((tag, index) => (
                     <span key={index} className="badge bg-gray-100 text-gray-700 text-xs">
@@ -440,7 +440,7 @@ const PDFsPage: React.FC = () => {
         </div>
 
         {/* Tags */}
-        {pdf.tags && pdf.tags.length > 0 && (
+        {Array.isArray(pdf.tags) && pdf.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             <TagIcon className="w-4 h-4 text-gray-400 mt-0.5" />
             {pdf.tags.slice(0, 3).map((tag, index) => (
