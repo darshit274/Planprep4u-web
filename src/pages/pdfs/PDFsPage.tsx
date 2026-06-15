@@ -356,28 +356,35 @@ const PDFsPage: React.FC = () => {
   }
 
   // ─── PDF list view (category selected) ────────────────────────
+  const isLocked = (pdf: PDF) => pdf.isPremium && !pdf.hasAccess;
+
   const PDFCard = ({ pdf, isListView = false }: { pdf: PDF; isListView?: boolean }) => {
+    const locked = isLocked(pdf);
+
     if (isListView) {
       return (
-        <div className="card p-4 hover:shadow-lg transition-all duration-200 cursor-pointer" onClick={() => handlePreview(pdf)}>
+        <div
+          className={cn('card p-4 transition-all duration-200', locked ? 'opacity-70 cursor-default' : 'hover:shadow-lg cursor-pointer')}
+          onClick={() => !locked && handlePreview(pdf)}
+        >
           <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                <DocumentTextIcon className="w-6 h-6 text-red-600" />
+            <div className="flex-shrink-0 relative">
+              <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', locked ? 'bg-gray-100' : 'bg-red-100')}>
+                {locked
+                  ? <LockClosedIcon className="w-6 h-6 text-gray-400" />
+                  : <DocumentTextIcon className="w-6 h-6 text-red-600" />}
               </div>
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2 mb-1">
                 <h3 className="text-lg font-bold text-gray-900 truncate">{pdf.title}</h3>
                 {pdf.is_featured && <span className="badge badge-yellow"><StarIcon className="w-3 h-3 mr-1" />Featured</span>}
-                {pdf.isPremium && (
-                  <span className={cn('badge', pdf.hasAccess ? 'badge-green' : 'badge-blue')}>
-                    {pdf.hasAccess ? <><CheckCircleIcon className="w-3 h-3 mr-1" />Owned</> : <><SparklesIcon className="w-3 h-3 mr-1" />Premium</>}
-                  </span>
-                )}
+                {locked
+                  ? <span className="badge bg-gray-100 text-gray-500 border border-gray-200 text-xs"><LockClosedIcon className="w-3 h-3 mr-1" />Locked</span>
+                  : pdf.isPremium && <span className="badge badge-green"><CheckCircleIcon className="w-3 h-3 mr-1" />Owned</span>}
               </div>
-              <p className="text-sm text-gray-600 line-clamp-1 mb-2">{pdf.description}</p>
-              <div className="flex items-center space-x-4 text-xs text-gray-500">
+              <p className="text-sm text-gray-500 line-clamp-1 mb-2">{pdf.description}</p>
+              <div className="flex items-center space-x-4 text-xs text-gray-400">
                 <span className="flex items-center"><DocumentIcon className="w-3 h-3 mr-1" />{pdf.fileSize}</span>
                 <span className="flex items-center"><UserGroupIcon className="w-3 h-3 mr-1" />{pdf.downloadCount} downloads</span>
                 <span className="flex items-center"><ClockIcon className="w-3 h-3 mr-1" />{new Date(pdf.uploadDate || '').toLocaleDateString()}</span>
@@ -387,36 +394,16 @@ const PDFsPage: React.FC = () => {
               {Array.isArray(pdf.tags) && pdf.tags.length > 0 && (
                 <div className="flex items-center space-x-1">
                   {pdf.tags.slice(0, 2).map((tag, i) => (
-                    <span key={i} className="badge bg-gray-100 text-gray-700 text-xs">{tag}</span>
+                    <span key={i} className="badge bg-gray-100 text-gray-500 text-xs">{tag}</span>
                   ))}
-                  {pdf.tags.length > 2 && <span className="text-xs text-gray-500">+{pdf.tags.length - 2}</span>}
+                  {pdf.tags.length > 2 && <span className="text-xs text-gray-400">+{pdf.tags.length - 2}</span>}
                 </div>
               )}
-              {pdf.isPremium && !pdf.hasAccess && (
-                <div className="text-right mr-3">
-                  <div className="text-sm font-bold text-gray-900">
-                    ₹{pdf.discountedPrice || pdf.originalPrice}
-                  </div>
-                </div>
+              {!locked && (
+                <button onClick={e => { e.stopPropagation(); handlePreview(pdf); }} className="btn btn-primary btn-sm">
+                  <EyeIcon className="w-4 h-4 mr-1" />View
+                </button>
               )}
-              <div className="flex space-x-2">
-                {pdf.isPremium && !pdf.hasAccess ? (
-                  <>
-                    {pdf.preview_pages && pdf.preview_pages > 0 && (
-                      <button onClick={e => { e.stopPropagation(); handlePreview(pdf); }} className="btn btn-outline btn-sm">
-                        <EyeIcon className="w-4 h-4 mr-1" />Preview
-                      </button>
-                    )}
-                    <button onClick={e => { e.stopPropagation(); handlePurchase(); }} className="btn btn-primary btn-sm">
-                      <ShoppingCartIcon className="w-4 h-4 mr-1" />Unlock All
-                    </button>
-                  </>
-                ) : (
-                  <button onClick={e => { e.stopPropagation(); handlePreview(pdf); }} className="btn btn-primary btn-sm">
-                    <EyeIcon className="w-4 h-4 mr-1" />View
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         </div>
@@ -424,78 +411,68 @@ const PDFsPage: React.FC = () => {
     }
 
     return (
-      <div className="card-hover p-6 cursor-pointer group flex flex-col h-full" onClick={() => handlePreview(pdf)}>
+      <div
+        className={cn('p-6 rounded-xl border flex flex-col h-full transition-all duration-200', locked ? 'bg-gray-50 border-gray-200 cursor-default' : 'card-hover cursor-pointer group')}
+        onClick={() => !locked && handlePreview(pdf)}
+      >
         <div className="flex items-start justify-between mb-3 gap-2">
           <div className="flex items-start space-x-3 min-w-0 flex-1">
-            <div className="w-11 h-11 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center group-hover:bg-red-200 transition-colors">
-              <DocumentTextIcon className="w-6 h-6 text-red-600" />
+            <div className={cn('w-11 h-11 flex-shrink-0 rounded-xl flex items-center justify-center transition-colors', locked ? 'bg-gray-200' : 'bg-red-100 group-hover:bg-red-200')}>
+              {locked
+                ? <LockClosedIcon className="w-6 h-6 text-gray-400" />
+                : <DocumentTextIcon className="w-6 h-6 text-red-600" />}
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold text-gray-900 line-clamp-2 leading-snug mb-1">{pdf.title}</h3>
-              <p className="text-xs text-gray-500 line-clamp-2">{pdf.description}</p>
+              <h3 className={cn('text-base font-bold line-clamp-2 leading-snug mb-1', locked ? 'text-gray-500' : 'text-gray-900')}>{pdf.title}</h3>
+              <p className="text-xs text-gray-400 line-clamp-2">{pdf.description}</p>
             </div>
           </div>
           <div className="flex flex-col items-end space-y-1 flex-shrink-0">
             {pdf.is_featured && <span className="badge badge-yellow text-xs"><StarIcon className="w-3 h-3 mr-1" />Featured</span>}
-            {pdf.isPremium && (
-              <span className={cn('badge text-xs', pdf.hasAccess ? 'badge-green' : 'badge-blue')}>
-                {pdf.hasAccess ? <><CheckCircleIcon className="w-3 h-3 mr-1" />Owned</> : <><SparklesIcon className="w-3 h-3 mr-1" />Premium</>}
-              </span>
-            )}
-            {pdf.isPremium && !pdf.hasAccess && pdf.originalPrice && pdf.originalPrice > 0 && (
-              <div className="text-right">
-                {pdf.discountedPrice && <span className="text-xs text-gray-400 line-through mr-1">₹{pdf.originalPrice}</span>}
-                <span className="text-base font-bold text-gray-900">₹{pdf.discountedPrice || pdf.originalPrice}</span>
-              </div>
-            )}
+            {locked
+              ? <span className="badge bg-gray-100 text-gray-500 border border-gray-200 text-xs"><LockClosedIcon className="w-3 h-3 mr-1" />Locked</span>
+              : pdf.isPremium && <span className="badge badge-green text-xs"><CheckCircleIcon className="w-3 h-3 mr-1" />Owned</span>}
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="text-center p-3 bg-primary-50 rounded-lg">
-            <DocumentIcon className="w-4 h-4 text-primary-600 mx-auto mb-1" />
-            <p className="text-sm font-semibold text-gray-900">{pdf.fileSize}</p>
+        <div className={cn('grid grid-cols-3 gap-3 mb-4', locked && 'opacity-50')}>
+          <div className={cn('text-center p-3 rounded-lg', locked ? 'bg-gray-100' : 'bg-primary-50')}>
+            <DocumentIcon className={cn('w-4 h-4 mx-auto mb-1', locked ? 'text-gray-400' : 'text-primary-600')} />
+            <p className={cn('text-sm font-semibold', locked ? 'text-gray-600' : 'text-gray-900')}>{pdf.fileSize}</p>
             <p className="text-xs text-gray-500">Size</p>
           </div>
-          <div className="text-center p-3 bg-emerald-50 rounded-lg">
-            <UserGroupIcon className="w-4 h-4 text-emerald-600 mx-auto mb-1" />
-            <p className="text-sm font-semibold text-gray-900">{pdf.downloadCount}</p>
+          <div className={cn('text-center p-3 rounded-lg', locked ? 'bg-gray-100' : 'bg-emerald-50')}>
+            <UserGroupIcon className={cn('w-4 h-4 mx-auto mb-1', locked ? 'text-gray-400' : 'text-emerald-600')} />
+            <p className={cn('text-sm font-semibold', locked ? 'text-gray-600' : 'text-gray-900')}>{pdf.downloadCount}</p>
             <p className="text-xs text-gray-500">Downloads</p>
           </div>
-          <div className="text-center p-3 bg-secondary-50 rounded-lg">
-            <EyeIcon className="w-4 h-4 text-secondary-600 mx-auto mb-1" />
-            <p className="text-sm font-semibold text-gray-900">{pdf.view_count || 0}</p>
+          <div className={cn('text-center p-3 rounded-lg', locked ? 'bg-gray-100' : 'bg-secondary-50')}>
+            <EyeIcon className={cn('w-4 h-4 mx-auto mb-1', locked ? 'text-gray-400' : 'text-secondary-600')} />
+            <p className={cn('text-sm font-semibold', locked ? 'text-gray-600' : 'text-gray-900')}>{pdf.view_count || 0}</p>
             <p className="text-xs text-gray-500">Views</p>
           </div>
         </div>
 
         {Array.isArray(pdf.tags) && pdf.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            <TagIcon className="w-4 h-4 text-gray-400 mt-0.5" />
+          <div className={cn('flex flex-wrap gap-2 mb-4', locked && 'opacity-50')}>
+            <TagIcon className="w-4 h-4 text-gray-300 mt-0.5" />
             {pdf.tags.slice(0, 3).map((tag, i) => (
-              <span key={i} className="badge bg-gray-100 text-gray-700 text-xs">{tag}</span>
+              <span key={i} className="badge bg-gray-100 text-gray-400 text-xs">{tag}</span>
             ))}
-            {pdf.tags.length > 3 && <span className="text-xs text-gray-500 mt-1">+{pdf.tags.length - 3} more</span>}
+            {pdf.tags.length > 3 && <span className="text-xs text-gray-400 mt-1">+{pdf.tags.length - 3} more</span>}
           </div>
         )}
 
         <div className="flex items-center justify-between mt-auto">
-          <div className="text-xs text-gray-500 flex items-center">
+          <div className="text-xs text-gray-400 flex items-center">
             <ClockIcon className="w-3 h-3 mr-1" />
             Uploaded {new Date(pdf.uploadDate || '').toLocaleDateString()}
           </div>
           <div className="flex space-x-2">
-            {pdf.isPremium && !pdf.hasAccess ? (
-              <>
-                {pdf.preview_pages && pdf.preview_pages > 0 && (
-                  <button onClick={e => { e.stopPropagation(); handlePreview(pdf); }} className="btn btn-outline btn-sm">
-                    <EyeIcon className="w-4 h-4 mr-1" />Preview
-                  </button>
-                )}
-                <button onClick={e => { e.stopPropagation(); handlePurchase(); }} className="btn btn-primary">
-                  <ShoppingCartIcon className="w-4 h-4 mr-2" />Unlock All
-                </button>
-              </>
+            {locked ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-200 text-gray-500 text-sm font-medium cursor-default select-none">
+                <LockClosedIcon className="w-4 h-4" />Locked
+              </span>
             ) : (
               <button onClick={e => { e.stopPropagation(); handlePreview(pdf); }} className="btn btn-primary">
                 <EyeIcon className="w-4 h-4 mr-2" />
