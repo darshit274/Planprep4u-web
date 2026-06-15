@@ -115,16 +115,12 @@ const PaymentPage: React.FC = () => {
   const createPaymentOrder = async (): Promise<PaymentOrder> => {
     let requestBody;
 
-    if (type === 'pdf') {
-      requestBody = {
-        pdfId: seriesId,
-        planType: 'pdf_purchase'
-      };
+    if (type === 'pdf_folder') {
+      requestBody = { pdfFolderId: seriesId, planType: 'pdf_folder' };
+    } else if (type === 'pdf') {
+      requestBody = { pdfId: seriesId, planType: 'pdf_purchase' };
     } else {
-      requestBody = {
-        testSeriesId: seriesId,
-        planType: 'test_series'
-      };
+      requestBody = { testSeriesId: seriesId, planType: 'test_series' };
     }
 
     const response = await api.post('/payments/create-order', requestBody);
@@ -189,12 +185,12 @@ const PaymentPage: React.FC = () => {
             const verifyResult = await verifyPayment(response, orderData.data.subscriptionId);
             console.log('Payment verified:', verifyResult);
 
-            if (type === 'pdf') {
+            if (type === 'pdf_folder') {
+              toast.success('Payment successful! You now have access to all PDFs in this folder.');
+              setTimeout(() => { navigate('/pdfs'); }, 2000);
+            } else if (type === 'pdf') {
               toast.success('Payment successful! You now have access to this PDF.');
-              // Redirect back to PDF page
-              setTimeout(() => {
-                navigate('/pdfs');
-              }, 2000);
+              setTimeout(() => { navigate('/pdfs'); }, 2000);
             } else {
               toast.success('Payment successful! Your subscription is now active.');
               // Redirect back to test series page

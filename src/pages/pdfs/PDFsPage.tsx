@@ -239,16 +239,21 @@ const PDFsPage: React.FC = () => {
     navigate(`/pdfs/${pdf.id}`, { state: { pdfTitle: pdf.title, pdfCategory: pdf.category } });
   };
 
-  const handlePurchase = (pdf: PDF) => {
-    if (!pdf.isPremium || pdf.hasAccess) return;
+  const handlePurchase = () => {
+    if (!selectedCategory || !selectedCategory.isPremium) return;
+    // Purchase the ROOT FOLDER — one payment unlocks all PDFs inside it
     navigate('/payment', {
       state: {
-        type: 'pdf',
-        item: pdf,
-        amount: pdf.discountedPrice || pdf.originalPrice || 0,
-        currency: pdf.currency || 'INR',
-        title: `Purchase ${pdf.title}`,
-        description: pdf.description,
+        type: 'pdf_folder',
+        item: {
+          id: selectedCategory.id,
+          name: selectedCategory.name,
+          price: selectedCategory.price,
+        },
+        amount: selectedCategory.price,
+        currency: selectedCategory.currency || 'INR',
+        title: `Unlock ${selectedCategory.name}`,
+        description: `Get unlimited access to all PDFs in ${selectedCategory.name}`,
       },
     });
   };
@@ -402,8 +407,8 @@ const PDFsPage: React.FC = () => {
                         <EyeIcon className="w-4 h-4 mr-1" />Preview
                       </button>
                     )}
-                    <button onClick={e => { e.stopPropagation(); handlePurchase(pdf); }} className="btn btn-primary btn-sm">
-                      <ShoppingCartIcon className="w-4 h-4 mr-1" />Buy
+                    <button onClick={e => { e.stopPropagation(); handlePurchase(); }} className="btn btn-primary btn-sm">
+                      <ShoppingCartIcon className="w-4 h-4 mr-1" />Unlock All
                     </button>
                   </>
                 ) : (
@@ -487,8 +492,8 @@ const PDFsPage: React.FC = () => {
                     <EyeIcon className="w-4 h-4 mr-1" />Preview
                   </button>
                 )}
-                <button onClick={e => { e.stopPropagation(); handlePurchase(pdf); }} className="btn btn-primary">
-                  <ShoppingCartIcon className="w-4 h-4 mr-2" />Buy Now
+                <button onClick={e => { e.stopPropagation(); handlePurchase(); }} className="btn btn-primary">
+                  <ShoppingCartIcon className="w-4 h-4 mr-2" />Unlock All
                 </button>
               </>
             ) : (
@@ -612,6 +617,30 @@ const PDFsPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Folder purchase banner — shown only when folder is premium and user hasn't bought it */}
+      {selectedCategory.isPremium && pdfs.length > 0 && pdfs.some(p => !p.hasAccess) && (
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 mb-6">
+          <div className="flex items-start gap-3">
+            <SparklesIcon className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="font-semibold text-amber-900">
+                Unlock all {pdfs.length} PDFs for ₹{selectedCategory.price}
+              </p>
+              <p className="text-sm text-amber-700 mt-0.5">
+                One payment gives you permanent access to every PDF in {selectedCategory.name}.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handlePurchase}
+            className="flex-shrink-0 btn btn-primary"
+          >
+            <ShoppingCartIcon className="w-4 h-4 mr-2" />
+            Unlock All — ₹{selectedCategory.price}
+          </button>
+        </div>
+      )}
 
       {/* PDF list */}
       {pdfsLoading ? (
