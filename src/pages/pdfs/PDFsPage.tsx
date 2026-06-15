@@ -370,29 +370,27 @@ const PDFsPage: React.FC = () => {
     }
 
     return (
-      <div className="card-hover p-6 cursor-pointer group" onClick={() => handlePreview(pdf)}>
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center group-hover:bg-red-200 transition-colors">
+      <div className="card-hover p-6 cursor-pointer group flex flex-col h-full" onClick={() => handlePreview(pdf)}>
+        {/* Header */}
+        <div className="flex items-start justify-between mb-3 gap-2">
+          <div className="flex items-start space-x-3 min-w-0 flex-1">
+            <div className="w-11 h-11 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center group-hover:bg-red-200 transition-colors">
               <DocumentTextIcon className="w-6 h-6 text-red-600" />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center space-x-2 mb-1">
-                <h3 className="text-lg font-bold text-gray-900 truncate">{pdf.title}</h3>
-                {pdf.is_featured && (
-                  <div className="badge badge-yellow">
-                    <StarIcon className="w-3 h-3 mr-1" />
-                    Featured
-                  </div>
-                )}
-              </div>
-              <p className="text-sm text-gray-600 line-clamp-2">{pdf.description}</p>
+            <div className="min-w-0">
+              <h3 className="text-base font-bold text-gray-900 line-clamp-2 leading-snug mb-1">{pdf.title}</h3>
+              <p className="text-xs text-gray-500 line-clamp-2">{pdf.description}</p>
             </div>
           </div>
 
-          <div className="flex flex-col items-end space-y-1">
+          <div className="flex flex-col items-end space-y-1 flex-shrink-0">
+            {pdf.is_featured && (
+              <div className="badge badge-yellow text-xs">
+                <StarIcon className="w-3 h-3 mr-1" />Featured
+              </div>
+            )}
             {pdf.isPremium && (
-              <div className={cn('badge', pdf.hasAccess ? 'badge-green' : 'badge-blue')}>
+              <div className={cn('badge text-xs', pdf.hasAccess ? 'badge-green' : 'badge-blue')}>
                 {pdf.hasAccess ? (
                   <><CheckCircleIcon className="w-3 h-3 mr-1" />Owned</>
                 ) : (
@@ -400,21 +398,14 @@ const PDFsPage: React.FC = () => {
                 )}
               </div>
             )}
-            {pdf.isPremium && !pdf.hasAccess && (
+            {pdf.isPremium && !pdf.hasAccess && pdf.originalPrice > 0 && (
               <div className="text-right">
                 {pdf.discountedPrice && (
-                  <div className="flex items-center space-x-1">
-                    <span className="text-xs text-gray-500 line-through">
-                      ₹{pdf.originalPrice}
-                    </span>
-                    <span className="badge badge-red text-xs">
-                      -{pdf.discount_percentage}%
-                    </span>
-                  </div>
+                  <span className="text-xs text-gray-400 line-through mr-1">₹{pdf.originalPrice}</span>
                 )}
-                <div className="text-lg font-bold text-gray-900">
+                <span className="text-base font-bold text-gray-900">
                   ₹{pdf.discountedPrice || pdf.originalPrice}
-                </div>
+                </span>
               </div>
             )}
           </div>
