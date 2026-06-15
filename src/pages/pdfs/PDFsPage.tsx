@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   DocumentIcon,
@@ -179,6 +179,35 @@ const PDFsPage: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  const filteredAndSortedPdfs = useMemo(() => {
+    let result = [...pdfs];
+
+    // Access level filter (client-side)
+    if (selectedAccessLevel !== 'all') {
+      result = result.filter(pdf => pdf.access_level === selectedAccessLevel);
+    }
+
+    // Sort (client-side)
+    switch (sortBy) {
+      case 'oldest':
+        result.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+        break;
+      case 'popular':
+        result.sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
+        break;
+      case 'downloads':
+        result.sort((a, b) => (b.downloadCount || 0) - (a.downloadCount || 0));
+        break;
+      case 'name':
+        result.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      default: // newest
+        result.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    }
+
+    return result;
+  }, [pdfs, selectedAccessLevel, sortBy]);
 
   // Removed handleDownload function for security
 
@@ -650,31 +679,34 @@ const PDFsPage: React.FC = () => {
       </div>
 
       {/* Content */}
-      {pdfs.length === 0 ? (
+      {filteredAndSortedPdfs.length === 0 ? (
         <div className="text-center py-16">
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <DocumentTextIcon className="h-10 w-10 text-gray-400" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            {searchQuery ? 'No materials found' : 'No study materials available'}
+            No materials found
           </h3>
           <p className="text-gray-600 mb-8 max-w-md mx-auto">
             {searchQuery
-              ? `We couldn't find any study materials matching "${searchQuery}". Try adjusting your search or filters.`
-              : selectedCategory === 'all'
-              ? 'Study materials will be available soon. Check back later for new resources.'
-              : `No materials found in the ${categories.find(c => c.value === selectedCategory)?.label} category.`}
+              ? `No study materials match "${searchQuery}". Try adjusting your search or filters.`
+              : selectedAccessLevel !== 'all'
+              ? `No ${selectedAccessLevel === 'free' ? 'free' : 'premium'} materials match the current filters.`
+              : selectedCategory !== 'all'
+              ? `No materials found in the ${categories.find(c => c.value === selectedCategory)?.label} category.`
+              : 'Study materials will be available soon. Check back later.'}
           </p>
-          {searchQuery && (
+          {(searchQuery || selectedCategory !== 'all' || selectedAccessLevel !== 'all') && (
             <button
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');
                 setSelectedAccessLevel('all');
+                setSortBy('newest');
               }}
               className="btn btn-primary"
             >
-              Clear Search
+              Clear Filters
             </button>
           )}
         </div>
@@ -683,7 +715,7 @@ const PDFsPage: React.FC = () => {
           {/* Results Summary */}
           <div className="flex items-center justify-between mb-6">
             <p className="text-gray-600">
-              Showing <span className="font-semibold">{pdfs.length}</span> study materials
+              Showing <span className="font-semibold">{filteredAndSortedPdfs.length}</span> study materials
               {searchQuery && <span> for "{searchQuery}"</span>}
               {selectedCategory !== 'all' && (
                 <span> in {categories.find(c => c.value === selectedCategory)?.label}</span>
@@ -701,7 +733,7 @@ const PDFsPage: React.FC = () => {
               ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
               : 'space-y-4'
           )}>
-            {pdfs.map((pdf) => (
+            {filteredAndSortedPdfs.map((pdf) => (
               <PDFCard key={pdf.id} pdf={pdf} isListView={viewMode === 'list'} />
             ))}
           </div>
