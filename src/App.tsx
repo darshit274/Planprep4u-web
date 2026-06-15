@@ -38,7 +38,6 @@ import CategoryDetailPage from './pages/tests/CategoryDetailPage';
 import EnrolledSeriesPage from './pages/tests/EnrolledSeriesPage';
 import FreeInPaidTestsPage from './pages/tests/FreeInPaidTestsPage';
 import FreeTestsPage from './pages/tests/FreeTestsPage';
-import PreviousYearsPapersPage from './pages/tests/PreviousYearsPapersPage';
 import SolutionsPage from './pages/tests/SolutionsPage';
 import TakeTestPage from './pages/tests/TakeTestPage';
 import TestAttemptsPage from './pages/tests/TestAttemptsPage';
@@ -138,8 +137,6 @@ function AppContent() {
             <Route path="/free-tests" element={<FreeTestsPage />} />
             <Route path="/free-tests/take/:id" element={<TakeTestPage />} />
 
-            {/* Previous Years Papers Routes */}
-            <Route path="/previous-years-papers" element={<PreviousYearsPapersPage />} />
 
             {/* Free in Paid Series Routes */}
             <Route path="/free-in-paid-tests" element={<FreeInPaidTestsPage />} />

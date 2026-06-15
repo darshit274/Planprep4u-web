@@ -13,8 +13,7 @@ import {
   ClockIcon,
   Bars3Icon,
   XMarkIcon,
-  ArrowRightOnRectangleIcon,
-  DocumentDuplicateIcon
+  ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline';
 import {
   HomeIcon as HomeIconSolid,
@@ -23,8 +22,7 @@ import {
   UserCircleIcon as UserCircleIconSolid,
   BookOpenIcon as BookOpenIconSolid,
   GiftIcon as GiftIconSolid,
-  ClockIcon as ClockIconSolid,
-  DocumentDuplicateIcon as DocumentDuplicateIconSolid
+  ClockIcon as ClockIconSolid
 } from '@heroicons/react/24/solid';
 
 interface NavigationItem {
@@ -70,12 +68,6 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({ children }) => {
       href: '/free-tests',
       icon: BookOpenIcon,
       iconSolid: BookOpenIconSolid,
-    },
-    {
-      name: 'Previous Years Papers',
-      href: '/previous-years-papers',
-      icon: DocumentDuplicateIcon,
-      iconSolid: DocumentDuplicateIconSolid,
     },
     // Removed: "Free Samples" page - Free samples now shown inline in hierarchy with FREE badges
     // {
